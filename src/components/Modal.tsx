@@ -18,7 +18,9 @@ const ModalComponent = ({ active, setActive, url }) => {
                             <CopyLink url={url} />
                         </CopyLinkWrapper>
                     </TextInputContainer>
-                    <Button width="40px" height="40px" margin="25px 0 0px 10px">Go</Button>
+                    <Link href={`/${url}`}>
+                        <Button width="40px" height="40px" margin="25px 0 0px 10px">Go</Button>
+                    </Link>
                 </StyledRow>
             </StyledBlock>
         </Modal>
