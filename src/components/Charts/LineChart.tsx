@@ -31,7 +31,7 @@ const LineChartComponent = ({ data }) => {
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
             <LineChart>
                 {
-                    data.wallet > 0.1 &&
+                    data?.wallet > 0.1 &&
                     <LineWrapper flex={data.wallet}>
                         <Line
                             first={true}
@@ -46,7 +46,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.deposit > 0.1 &&
+                    data?.deposit > 0.1 &&
                     <LineWrapper flex={data.deposit}>
                         <Line
                             first={Object.values(dataObj).includes('wallet')}
@@ -61,7 +61,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.pool > 0.1 &&
+                    data?.pool > 0.1 &&
                     <LineWrapper flex={data.pool}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit'].includes(item)))}
@@ -76,7 +76,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.staking > 0.1 &&
+                    data?.staking > 0.1 &&
                     <LineWrapper flex={data.staking}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool'].includes(item)))}
@@ -91,7 +91,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.claimable > 0.1 &&
+                    data?.claimable > 0.1 &&
                     <LineWrapper flex={data.claimable}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking'].includes(item)))}
@@ -106,7 +106,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.nft > 0.1 &&
+                    data?.nft > 0.1 &&
                     <LineWrapper flex={data.nft}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking', 'claimable'].includes(item)))}
@@ -121,7 +121,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.investment > 0.1 &&
+                    data?.investment > 0.1 &&
                     <LineWrapper flex={data.investment}>
                         <Line
                             first={Object.values(dataObj).length == 1}
@@ -136,7 +136,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data.debt < -0.1 && (
+                    data?.debt < -0.1 && (
                         <BorrowedLineWrapper
                             width={data.debt}>
                             <Label

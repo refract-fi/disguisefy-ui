@@ -19,10 +19,10 @@ const DetailsPanelComponent = ({ loading, data }) => {
                     !loading && (
                         <div>
                             <Text variant="subtitle">{data?.disguise.name}</Text>
-                            <FlexRowCentered margin="5px 0 0 0">
+                            <StyledFlexRowCentered margin="5px 0 0 0">
                                 <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
-                            </FlexRowCentered>
+                            </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
                         </div>
                     )
@@ -35,7 +35,9 @@ const DetailsPanelComponent = ({ loading, data }) => {
                 <BatLoverImg src="batlover_img.svg" />
             </DetailsPanel>
             <LinksWrapper>
-                <Button width="85px" size="small">New</Button>
+                <Link href="/">
+                    <Button width="85px" size="small">New</Button>
+                </Link>
             </LinksWrapper>
         </Wrapper>
     );
@@ -92,17 +94,8 @@ const DetailsPanel = styled(FlexCol)`
     `};
 `;
 
-const Copysvg = styled.img`
-    width: 10px;
-    margin-left: 5px;
-    transition: 0.1s ease all;
-    &:hover{
-        opacity: 0.5;
-        cursor: pointer;
-    }
-    &:active{
-        opacity:0.2;
-    }
+const StyledFlexRowCentered = styled(FlexRowCentered)`
+    position: relative;
 `
 
 const Mobile = styled.div`
