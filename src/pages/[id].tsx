@@ -19,11 +19,14 @@ const Dashboard = () => {
     const getBalances = async () => {
         await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
             setData(response.data)
+            console.log(response.data)
         }).catch(function (error) {
             console.log(error);
         });
         await setLoading(false)
     }
+
+    
 
     useEffect(() => {
         if(id){
