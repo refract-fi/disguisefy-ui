@@ -18,8 +18,8 @@ const PrivacySelectComponent = ({ level, form, setForm }) => {
             <LevelButton active={level == 10} level={10} onClick={() => onLevelClick(10)}>
                 <HeroIcon src="irondude.svg" />
             </LevelButton>
-            <LevelButton disable={true} active={level == 20} level={20}
-                // onClick={() => onLevelClick(20)}
+            <LevelButton active={level == 20} level={20}
+                onClick={() => onLevelClick(20)}
             >
                 <HeroIcon src="spiderguy.svg" />
             </LevelButton>
@@ -60,11 +60,11 @@ const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
     `};
     ${props => props.level == 20 &&
         css`
-        /* background-color: ${({ theme }) => theme.level2}; */
-        background-color: ${({ theme }) => theme.disabled};
-        /* &:hover{
+        background-color: ${({ theme }) => theme.level2};
+        // background-color: ${({ theme }) => theme.disabled};
+        &:hover{
             background-color: ${({ theme }) => theme.level2Hover};
-        } */
+        }
     `};
     ${props => props.level == 30 &&
         css`

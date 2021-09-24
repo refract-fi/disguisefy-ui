@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { FlexRowSpaceBetween } from 'styles/components';
 import { CellRow } from '.';
-const CategoryBlockComponent = ({ title, categoryData, assetData, display }) => {
+const CategoryBlockComponent = ({ title, categoryData, assetData, display, preset }) => {
 
     const theme = useTheme();
 
@@ -17,7 +17,7 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display }) => 
                 assetData &&
                 Object.entries(assetData).sort((a: any, b: any) => b[1].percentage - a[1].percentage).map((asset, index) => {
                     return (
-                        <CellRow key={index} name={asset[0]} value={asset[1]} />
+                        <CellRow key={index} name={asset[0]} value={asset[1]} preset={preset} />
                     )
                 })
             }
