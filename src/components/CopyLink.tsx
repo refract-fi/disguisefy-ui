@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { FC, useState } from 'react';
+import styled, { css } from 'styled-components';
 import { Flex } from 'styles/components';
+import Image from 'next/image';
 
-const CopyLinkComponent = ({url}) => {
+
+const CopyLinkComponent: FC<{ url: string, variant?: string }> = ({ url, variant }) => {
     const [active, setActive] = useState(false);
 
     const onCopyClick = () => {
@@ -11,8 +13,18 @@ const CopyLinkComponent = ({url}) => {
 
     return (
         <CopyLink onClick={onCopyClick}>
-            <Icon className="copy" src="copy.svg" />
-            <Icon className="checkmark" src="checkmark.svg" />
+            {
+                variant == 'details' ?
+                    <>
+                        <Icon variant={variant} className="copy" src="copy-red.svg" />
+                        <Icon variant={variant} className="checkmark" src="checkmark-green.svg" />
+                    </>
+                    :
+                    <>
+                    <Icon variant={variant} className="copy" src="copy-red.svg" />
+                    <Icon variant={variant} className="checkmark" src="checkmark.svg" />
+                </>
+            }
         </CopyLink>
     );
 }
@@ -35,7 +47,7 @@ const CopyLink = styled(Flex)`
     }
 `;
 
-const Icon = styled.img`
+const Icon = styled.img<{ variant?: string }>`
     height: 20px;
     width: 20px;
     &.copy{
@@ -44,4 +56,12 @@ const Icon = styled.img`
     &.checkmark{
         display: none;
     }
+
+    ${props =>
+        props.variant == 'details' &&
+        css`
+            margin-left: 5px;
+            height: 15px;
+            width: 15px;
+    `}
 `

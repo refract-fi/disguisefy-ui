@@ -1,4 +1,4 @@
-import { Button, Text } from 'components';
+import { Button, CopyLink, Text } from 'components';
 import moment from 'moment';
 import React from 'react';
 import { Links, Menu } from 'sections/shared';
@@ -21,7 +21,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                             <Text variant="subtitle">{data?.disguise.name}</Text>
                             <FlexRowCentered margin="5px 0 0 0">
                                 <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
-                                <Copysvg onClick={() => onCopyClick()} src="copy.svg" />
+                                <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </FlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
                         </div>
