@@ -3,7 +3,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
-const CellRowComponent = ({ name, value }) => {
+const CellRowComponent = ({ name, value, asset }) => {
+    console.log(asset)
     return (
         <CellRow>
             <FlexCentered>
@@ -30,7 +31,7 @@ const CellRowComponent = ({ name, value }) => {
             </FlexCentered>
             {
                 value.percentage &&
-                <Text variant="cell">{(Math.abs(value.percentage) < 0.1) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))} %</Text>
+                <Text variant="cell">{(value.percentage < 0.1) ? '< 0.1' : value?.percentage.toFixed(1)} %</Text>
             }
         </CellRow>
     );
