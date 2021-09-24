@@ -6,6 +6,7 @@ type StyledButton = {
     readonly disable?: boolean
     readonly margin?: string
     readonly size?: string
+    readonly height?: string
 }
 
 const Button = styled.button<StyledButton>`
@@ -21,6 +22,7 @@ const Button = styled.button<StyledButton>`
     cursor: ${props => props.disable ? 'cursor' : 'pointer'};
     width: ${props => props.width ? props.width : undefined};
     transition: 0.2s ease all;
+    height: ${props => props.height && props.height};
 
     &:hover{
         background-color: ${props => props.disable ? props.theme.disabled : props.theme.hover};

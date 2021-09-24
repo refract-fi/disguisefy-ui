@@ -15,9 +15,9 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display }) => 
             </FlexRowSpaceBetween>
             {
                 assetData &&
-                Object.entries(assetData).sort((a: any, b: any) => b[1].percentage - a[1].percentage).map((asset, index) => {
+                Object.entries(assetData).sort((a: any, b: any) => b[1] - a[1]).map((asset, index) => {
                     return (
-                        <CellRow key={index} asset={asset} name={asset[0]} value={asset[1]} />
+                        <CellRow key={index} name={asset[0]} value={asset[1]} />
                     )
                 })
             }
@@ -34,7 +34,5 @@ const CategoryBlock = styled(Block) <{ display?: boolean }>`
     flex: 1;
     min-width: 31%;
     /* max-width: 80%; */
-    height: fit-content;
     min-width: 250px;
-    flex-flow: column wrap
 `

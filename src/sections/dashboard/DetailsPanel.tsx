@@ -35,9 +35,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                 <BatLoverImg src="batlover_img.svg" />
             </DetailsPanel>
             <LinksWrapper>
-                <Link href="/">
-                    <Button width="85px" size="small">New</Button>
-                </Link>
+                <Button width="85px" size="small">New</Button>
             </LinksWrapper>
         </Wrapper>
     );

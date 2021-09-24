@@ -11,5 +11,6 @@ import Label from './Charts/Label';
 import { ExitButton } from './Button';
 import { Bold } from './Text';
 import { Logo } from './Images' ;
+import CopyLink from './CopyLink';
 
-export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label};
+export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink};
