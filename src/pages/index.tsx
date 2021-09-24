@@ -46,7 +46,6 @@ export default function Home() {
     }
   }
 
-  console.log('yup')
   const onHelpClick = () => {
     setFormActive(false)
     setErrorMsg('')
