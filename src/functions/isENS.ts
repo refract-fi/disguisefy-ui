@@ -7,7 +7,7 @@ export const isENS = async (address) => {
       return null
     }
     if (!(address.includes('.'))) {
-      console.log("[ERROR - ENS WITHOUT DOT OR ADDRESS INVALID] Not a valid address")
+      console.log("[ERROR - ENS WITHOUT PERIOD OR ADDRESS INVALID] Not a valid address")
       return null
     }
     try {

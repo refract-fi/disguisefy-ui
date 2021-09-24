@@ -3,12 +3,14 @@ import React from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
+import { ResetButton } from './Button';
 
-const ModalComponent = ({ active, setActive, url }) => {
+const ModalComponent = ({ active, setActive, url, onResetClick }) => {
     return (
         <Modal active={active}>
             <StyledBlock>
                 <ExitButton onClick={() => setActive(false)} src="/exit.svg" />
+                <ResetButton onClick={() => onResetClick()}src="/reset.svg" />
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>

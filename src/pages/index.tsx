@@ -52,6 +52,20 @@ export default function Home() {
     setHelpActive(true)
   }
 
+  const onResetClick = () => {
+    setFormActive(false)
+    setForm({
+      address: null,
+      name: '',
+      duration: 3600,
+      preset: null,
+    })
+    setActive(false)
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+  }
+
 
   const postForm = async (resolvedAddress?: string) => {
     setAwaitingLink(true)
@@ -135,7 +149,7 @@ export default function Home() {
 
   return (
     <>
-      <Modal active={active} setActive={setActive} url={url} />
+      <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
       <Wrapper>
         <Content>
           <Text
@@ -148,6 +162,7 @@ export default function Home() {
           <TextInputWrapper>
             <TextInput
               placeholder="0x...*"
+              // value={form.address}
               onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
               width="100%"
             />
