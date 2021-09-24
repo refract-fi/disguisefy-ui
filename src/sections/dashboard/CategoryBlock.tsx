@@ -35,4 +35,5 @@ const CategoryBlock = styled(Block) <{ display?: boolean }>`
     min-width: 31%;
     /* max-width: 80%; */
     min-width: 250px;
+    height: fit-content;
 `
