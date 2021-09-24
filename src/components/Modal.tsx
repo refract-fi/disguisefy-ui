@@ -5,9 +5,6 @@ import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
 
 const ModalComponent = ({ active, setActive, url }) => {
-
-
-
     return (
         <Modal active={active}>
             <StyledBlock>
@@ -50,6 +47,13 @@ const StyledRow = styled(FlexRowSpaceBetween)`
 
 const CopyLinkWrapper = styled.div`
     position: absolute;
+    right: 10px;
+    top: 0;
+    margin-top: 25px;
+    z-index: 2;
+    height: 40px;
+    align-items: center;
+    display: flex;
 `
 
 const DisLogo = styled.img`
