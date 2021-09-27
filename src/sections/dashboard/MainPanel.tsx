@@ -3,14 +3,15 @@ import Spinner from 'components/Spinner';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Flex, FlexCol, FlexRow, FlexRowSpaceAround, FlexRowSpaceBetween, Tablet } from 'styles/components';
-import { CategoryBlock } from '.';
+import { CategoryBlock, RequestError } from '.';
 
 
 const MainPanelComponent = ({ data, loading }) => {
 
     let preset = data?.disguise?.preset
     return (
-        <MainPanel loading={loading}>
+        <MainPanel loading={loading} error={false}>
+            {/* <RequestError type="408" /> */}
             {
                 loading ? <Spinner /> : (
                     <>
@@ -77,13 +78,13 @@ const MainPanelComponent = ({ data, loading }) => {
 
 export default MainPanelComponent;
 
-const MainPanel = styled(FlexCol) <{ loading?: boolean }>`
+const MainPanel = styled(FlexCol) <{ loading?: boolean, error?: boolean }>`
     width: 100%;
     max-width: 1100px;
     min-height: 800px;
     grid-column: 5/13;
     justify-self: flex-start;
-    justify-content: ${props => props.loading && 'center'};
+    justify-content: ${props => (props.loading || props.error) && 'center'};
     align-items: center;
     border: 1px solid ${({ theme }) => theme.accent};
     padding: 10px 1.5%;
