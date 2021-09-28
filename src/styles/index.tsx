@@ -48,6 +48,7 @@ export function colors(darkMode: boolean): Colors {
     bg: "#263143",
     bg16: "#191F2A",
     bg100: "#EBF3FF",
+    accentBg: "#efd8d9",
 
     accent: "#EF4950",
     disabled: "#C4BFBF",

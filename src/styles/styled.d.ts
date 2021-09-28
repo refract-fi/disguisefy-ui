@@ -11,6 +11,7 @@ export interface Colors {
   bg: Color,
   bg16: Color,
   bg100: Color,
+  accentBg: Color,
 
   accent: Color,
   disabled: Color,

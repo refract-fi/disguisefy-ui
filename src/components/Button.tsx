@@ -95,17 +95,24 @@ const Button = styled.button<StyledButton>`
 export default Button
 
 export const ExitButton = styled.img`
-width: 25px;
-cursor: pointer;
-position: absolute;
-right: 10px;
-top: 10px;
+    width: 25px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    ${({ theme }) => theme.mediaWidth.sm`
+        width: 20px;
+    `};
 `
 
 export const ResetButton = styled.img`
-width: 25px;
-cursor: pointer;
-position: absolute;
-right: 40px;
-top: 10px;
+    width: 25px;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 10px;
+    ${({ theme }) => theme.mediaWidth.sm`
+        width: 20px;
+        right: 32px;
+    `};
 `

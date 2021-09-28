@@ -89,6 +89,7 @@ const DetailsPanel = styled(FlexCol)`
         width: 100%;
         margin-top: -10px;
         display: flex;
+        height: 130px;
         flex-direction: row;
         justify-content: space-between;
     `};

@@ -1,8 +1,9 @@
+import { Checkbox } from '@material-ui/core';
 import { Block, Button, ExitButton, Slider, Text, TextInput } from 'components';
 import Spinner from 'components/Spinner';
 import React, { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
-import { FlexColCentered } from 'styles/components';
+import { Flex, FlexColCentered, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import { PrivacySelect } from '.';
 
 type FormComponentProps = {
@@ -15,10 +16,11 @@ type FormComponentProps = {
     errorMsg: string
 }
 
-const FormComponent:FC<FormComponentProps> = ({form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg}) => {
+const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg }) => {
+    console.log(form)
     return (
         <FormWrapper>
-            <Block padding="25px 50px">
+            <StyledBlock>
                 <ExitButton onClick={() => setFormActive(false)} src="/exit.svg" />
                 <TextInput
                     value={form.name}
@@ -30,11 +32,26 @@ const FormComponent:FC<FormComponentProps> = ({form, setForm, setFormActive, dur
                 <PrivacySelect level={form.preset} form={form} setForm={setForm} />
                 <Text margin="20px 0 15px 0" variant="subtitle" color="black">Duration</Text>
                 <Slider durationValue={durationValue} duration={form.duration} form={form} setForm={setForm} />
-            </Block>
+                {/* <CheckboxWrapper margin="1rem 0 0.5rem 0">
+                    <Checkbox
+                        checked={form.isAssetGroupActive}
+                        onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, isAssetGroupActive: !form.isAssetGroupActive })}
+                    />
+                    <Text color="black" size="1.2rem">Group assets under </Text>
+                    <TextInput
+                        value={form.groupAssetsUnder}
+                        onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, groupAssetsUnder: event.target.value })}
+                        variant="group-assets"
+                        placeholder={form.groupAssetUnder}
+                    />
+                    <Text color="black" size="1.2rem" weight="bold">%</Text>
+                </CheckboxWrapper> */}
+            </StyledBlock>
             <ButtonWrapper>
                 <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
                 <Text color={"red"} margin="5px 0 0 0">{errorMsg && errorMsg}</Text>
             </ButtonWrapper>
+
         </FormWrapper>
     );
 }
@@ -60,6 +77,22 @@ const FormWrapper = styled.div`
   `};
   }
 `
+
+const StyledBlock = styled(Block)`
+  padding: 25px 50px;
+  ${({ theme }) => theme.mediaWidth.sm`
+        padding: 30px 25px 20px;
+  `};
+`
+
+const CheckboxWrapper = styled(Flex)`
+  align-items: center;
+  width: 100%;
+  .MuiCheckbox-colorSecondary.Mui-checked{
+    color: ${({ theme }) => theme.accent};
+  }
+`
+
 const ButtonWrapper = styled(FlexColCentered)`
   width: 100%;
   margin-top: 10px;
