@@ -7,29 +7,29 @@ import { Footer, Menu } from 'sections/shared';
 import styled from 'styled-components';
 import { FlexCentered, Grid } from 'styles/components';
 
-const Dashboard = () => {
+const Dashboard = ({data}) => {
 
-    const router = useRouter()
+    // const router = useRouter()
 
-    const { id } = router.query
+    // const { id } = router.query
 
-    const [data, setData] = useState();
+    // const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
 
-    const getBalances = async () => {
-        await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
-            setData(response.data)
-        }).catch(function (error) {
-            setLoading(false)
-        });
-        await setLoading(false)
-    }
+    // const getBalances = async () => {
+    //     await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
+    //         setData(response.data)
+    //     }).catch(function (error) {
+    //         setLoading(false)
+    //     });
+    //     await setLoading(false)
+    // }
 
-    useEffect(() => {
-        if(id){
-            getBalances()
-        }
-    }, [id])
+    // useEffect(() => {
+    //     if(id){
+    //         getBalances()
+    //     }
+    // }, [id])
     return (
         <Wrapper>
             <Menu />
@@ -40,6 +40,14 @@ const Dashboard = () => {
     );
 }
 
+export async function getServerSideProps(context) {
+    console.log(context)
+    let data = "moma"
+    console.log(data)
+    return {
+        props : {data}
+    }
+}
 
 
 export default Dashboard;

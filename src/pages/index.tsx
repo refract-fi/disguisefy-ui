@@ -8,7 +8,6 @@ import axios from 'axios';
 import { Form, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
-import { provider } from "utils/provider";
 
 export default function Home() {
 
