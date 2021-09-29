@@ -30,7 +30,7 @@ const CellRowComponent = ({ name, value, preset }) => {
             </FlexCentered>
             {
                 (value.percentage != null && preset == 10) &&
-                <Text variant="cell">{`${(Math.abs(value.percentage)) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))}%`}</Text>
+                <Text variant="cell">{(Math.abs(value.percentage) < 0.1) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))} %</Text>
             }
         </CellRow>
     );
