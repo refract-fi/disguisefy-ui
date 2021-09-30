@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
           <title>Disguisefy</title>
           <link rel="stylesheet" href="https://use.typekit.net/ukf1mgq.css" />
           <link rel="icon" type="image/png" href="/disguisefy_favicon.png" />
+          <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           <script defer data-domain="disguisefy.xyz" src="https://plausible.io/js/plausible.js"></script>
         </Head>
