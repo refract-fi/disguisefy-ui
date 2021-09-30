@@ -17,12 +17,20 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
 
     const getBalances = async () => {
-        await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
-            setData(response.data)
-        }).catch(function (error) {
-            setLoading(false)
-        });
-        await setLoading(false)
+        try{
+            const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${id}/balances`, {
+                headers:{
+                    "x-api-key": "K4QouFjJu7xawHQq"
+                }
+            })
+            console.log(res)
+            // setData(res.data)
+            // console.log(res.data)
+            // await setLoading(false)
+        }catch(e){   
+            console.log(e)
+            await setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -32,13 +40,31 @@ const Dashboard = () => {
     }, [id])
     return (
         <Wrapper>
-            <Menu />
+            {/* <Menu />
             <DetailsPanel data={data} loading={loading} />
             <MainPanel data={data} loading={loading} />
-            <Footer />
+            <Footer /> */}
         </Wrapper>
     );
 }
+
+// export async function getServerSideProps(context) {
+//     let {params} = context
+//     // Fetch data from external API
+//     const res = await axios.get(`https://api.disguisefy.xyz/disguises/${params.id}/balances`, {
+//         headers:{
+//             "x-api-key": "K4QouFjJu7xawHQq"
+//         }
+//     })
+//     console.log(res)
+//     const test = res.data
+//     return {
+//         props: {
+//             test
+//         } // will be passed to the page component as props
+//     }
+// }
+
 
 export default Dashboard;
 
