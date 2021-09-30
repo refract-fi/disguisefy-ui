@@ -1,0 +1,20 @@
+{
+    "short_name": "Disguisefy",
+    "description": "Share your assets without sharing your address or net worth.",
+    "icons": [
+        {
+            "src": "disguisefy_192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "disguisefy_512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#EF4950",
+    "skylink": "AQCiBK14Mrbjeo0PIpk_3O9JrtMez8m0JX0NxsoMypWC4A"
+}
