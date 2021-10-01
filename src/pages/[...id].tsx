@@ -7,41 +7,47 @@ import { Footer, Menu } from 'sections/shared';
 import styled from 'styled-components';
 import { FlexCentered, Grid } from 'styles/components';
 
-const Dashboard = ({data}) => {
+const Dashboard = () => {
     
+    const router = useRouter()
+
+    const { id } = router.query
+
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if(data){
-            setLoading(false)
-        }
-    }, [data])
+    console.log(id)
+
+    // useEffect(() => {
+    //     if(data){
+    //         setLoading(false)
+    //     }
+    // }, [data])
     return (
         <Wrapper>
-            <Menu />
+            {/* <Menu />
             <DetailsPanel data={data} loading={loading} />
             <MainPanel data={data} loading={loading} />
-            <Footer />
+            <Footer /> */}
         </Wrapper>
     );
 }
 
-export async function getServerSideProps(context) {
-    let {params} = context
+// export async function getServerSideProps(context) {
+//     let {params} = context
 
-    // Fetch data from external API
-    const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${params.id}/balances`, {
-        headers:{
-            "x-api-key": "K4QouFjJu7xawHQq"
-        }
-    })
-    const data = res.data
-    return {
-        props: {
-            data
-        } 
-    }
-}
+//     // Fetch data from external API
+//     const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${params.id}/balances`, {
+//         headers:{
+//             "x-api-key": "K4QouFjJu7xawHQq"
+//         }
+//     })
+//     const data = res.data
+//     return {
+//         props: {
+//             data
+//         } 
+//     }
+// }
 
 
 export default Dashboard;
