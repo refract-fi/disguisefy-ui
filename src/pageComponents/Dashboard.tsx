@@ -6,13 +6,16 @@ import { MainPanel, DetailsPanel } from 'sections/dashboard';
 import { Footer, Menu } from 'sections/shared';
 import styled from 'styled-components';
 import { FlexCentered, Grid } from 'styles/components';
-import {HashRouter, Route, Switch } from 'react-router-dom';
+import {useParams} from "react-router-dom";
+
 
 const Dashboard = () => {
     
-    const router = useRouter()
+    // const router = useRouter()
 
-    const { id } = router.query
+    const {id} = useParams()
+    console.log(id)
+    // const { id } = router.query
 
     const [loading, setLoading] = useState(true);
 
@@ -23,34 +26,13 @@ const Dashboard = () => {
     // }, [data])
     return (
         <Wrapper>
-            {/* <HashRouter>
-                
-            </HashRouter> */}
-            {/* <Menu />
-            <DetailsPanel data={data} loading={loading} />
-            <MainPanel data={data} loading={loading} />
-            <Footer /> */}
+            <Menu />
+            {/* <DetailsPanel data={data} loading={loading} />
+            <MainPanel data={data} loading={loading} /> */}
+            <Footer />
         </Wrapper>
     );
 }
-  
-
-// export async function getServerSideProps(context) {
-//     let {params} = context
-
-//     // Fetch data from external API
-//     const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${params.id}/balances`, {
-//         headers:{
-//             "x-api-key": "K4QouFjJu7xawHQq"
-//         }
-//     })
-//     const data = res.data
-//     return {
-//         props: {
-//             data
-//         } 
-//     }
-// }
 
 
 export default Dashboard;
