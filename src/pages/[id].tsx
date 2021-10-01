@@ -14,12 +14,14 @@ const Dashboard = () => {
     const { id } = router.query
 
     const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const getBalances = async () => {
         await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
             setData(response.data)
         }).catch(function (error) {
+            // console.log(error.response!.status)
+            setData(error.response!.status)
             setLoading(false)
         });
         await setLoading(false)

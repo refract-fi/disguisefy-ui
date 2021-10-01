@@ -16,7 +16,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
             <DisLogo src="disguisefy_logo.svg" />
             <DetailsPanel>
                 {
-                    !loading && (
+                    (!loading && data !== 404) && (
                         <div>
                             <Text variant="subtitle">{data?.disguise.name}</Text>
                             <StyledFlexRowCentered margin="5px 0 0 0">

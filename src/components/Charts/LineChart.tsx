@@ -100,7 +100,7 @@ const LineChartComponent = ({ data }) => {
                         />
                         <Label
                             type="top"
-                            name={"Yield"}
+                            name={"Claimable"}
                             percent={data.claimable.toFixed(2)}
                         />
                     </LineWrapper>

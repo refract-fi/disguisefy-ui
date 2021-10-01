@@ -61,7 +61,7 @@ export default function Home() {
       name: '',
       duration: 3600,
       preset: null,
-      groupAssetsUnder: 0,
+      groupAssetsUnder: 0.1,
       isAssetGroupActive: false,
     })
     setActive(false)
