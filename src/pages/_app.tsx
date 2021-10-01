@@ -17,7 +17,8 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <GlobalStyle />
         <Layout>
-          <Component {...pageProps} />
+          {typeof window === 'undefined' ? null : <Component {...pageProps} />}
+          {/* <Component {...pageProps} /> */}
         </Layout>
       </ThemeProvider>
     </>

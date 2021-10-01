@@ -6,6 +6,7 @@ import { MainPanel, DetailsPanel } from 'sections/dashboard';
 import { Footer, Menu } from 'sections/shared';
 import styled from 'styled-components';
 import { FlexCentered, Grid } from 'styles/components';
+import {HashRouter, Route, Switch } from 'react-router-dom';
 
 const Dashboard = () => {
     
@@ -15,8 +16,6 @@ const Dashboard = () => {
 
     const [loading, setLoading] = useState(true);
 
-    console.log(id)
-
     // useEffect(() => {
     //     if(data){
     //         setLoading(false)
@@ -24,6 +23,9 @@ const Dashboard = () => {
     // }, [data])
     return (
         <Wrapper>
+            <HashRouter>
+                
+            </HashRouter>
             {/* <Menu />
             <DetailsPanel data={data} loading={loading} />
             <MainPanel data={data} loading={loading} />
@@ -31,6 +33,7 @@ const Dashboard = () => {
         </Wrapper>
     );
 }
+  
 
 // export async function getServerSideProps(context) {
 //     let {params} = context
