@@ -32,7 +32,7 @@ const LineChartComponent = ({ data }) => {
             <LineChart>
                 {
                     data?.wallet > 0.1 &&
-                    <LineWrapper flex={data.wallet}>
+                    <LineWrapper flex={data?.wallet}>
                         <Line
                             first={true}
                             last={Object.values(dataObj).length == 1}
@@ -41,13 +41,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Wallet"}
-                            percent={data.wallet.toFixed(2)}
+                            percent={data?.wallet.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.deposit > 0.1 &&
-                    <LineWrapper flex={data.deposit}>
+                    <LineWrapper flex={data?.deposit}>
                         <Line
                             first={Object.values(dataObj).includes('wallet')}
                             last={!(Object.keys(dataObj).some(item => ['pool', 'staking', 'claimable', 'nft', 'investment'].includes(item)))}
@@ -56,13 +56,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Deposits"}
-                            percent={data.deposit.toFixed(2)}
+                            percent={data?.deposit.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.pool > 0.1 &&
-                    <LineWrapper flex={data.pool}>
+                    <LineWrapper flex={data?.pool}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit'].includes(item)))}
                             last={!(Object.keys(dataObj).some(item => ['staking', 'claimable', 'nft', 'investment'].includes(item)))}
@@ -71,13 +71,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Liquidity Pools"}
-                            percent={data.pool.toFixed(2)}
+                            percent={data?.pool.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.staking > 0.1 &&
-                    <LineWrapper flex={data.staking}>
+                    <LineWrapper flex={data?.staking}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool'].includes(item)))}
                             last={!(Object.keys(dataObj).some(item => ['claimable', 'nft', 'investment'].includes(item)))}
@@ -86,13 +86,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Staking"}
-                            percent={data.staking.toFixed(2)}
+                            percent={data?.staking.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.claimable > 0.1 &&
-                    <LineWrapper flex={data.claimable}>
+                    <LineWrapper flex={data?.claimable}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking'].includes(item)))}
                             last={!(Object.keys(dataObj).some(item => ['nft', 'investment'].includes(item)))}
@@ -101,13 +101,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Yield"}
-                            percent={data.claimable.toFixed(2)}
+                            percent={data?.claimable.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.nft > 0.1 &&
-                    <LineWrapper flex={data.nft}>
+                    <LineWrapper flex={data?.nft}>
                         <Line
                             first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking', 'claimable'].includes(item)))}
                             last={!(Object.values(dataObj).includes('investment'))}
@@ -116,13 +116,13 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"NFTs"}
-                            percent={data.nft.toFixed(2)}
+                            percent={data?.nft.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.investment > 0.1 &&
-                    <LineWrapper flex={data.investment}>
+                    <LineWrapper flex={data?.investment}>
                         <Line
                             first={Object.values(dataObj).length == 1}
                             last={true}
@@ -131,18 +131,18 @@ const LineChartComponent = ({ data }) => {
                         <Label
                             type="top"
                             name={"Investments"}
-                            percent={data.investment.toFixed(2)}
+                            percent={data?.investment.toFixed(2)}
                         />
                     </LineWrapper>
                 }
                 {
                     data?.debt < -0.1 && (
                         <BorrowedLineWrapper
-                            width={data.debt}>
+                            width={data?.debt}>
                             <Label
                                 type="bot"
                                 name={"Debt"}
-                                percent={Math.abs(data.debt.toFixed(2))}
+                                percent={Math.abs(data?.debt.toFixed(2))}
                             />
                             <BracketLine />
                             <BracketBox />

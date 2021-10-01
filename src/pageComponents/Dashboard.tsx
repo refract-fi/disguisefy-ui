@@ -10,25 +10,45 @@ import {useParams} from "react-router-dom";
 
 
 const Dashboard = () => {
-    
-    // const router = useRouter()
 
     const {id} = useParams()
-    console.log(id)
-    // const { id } = router.query
 
+    const [data, setData] = useState()
     const [loading, setLoading] = useState(true);
 
-    // useEffect(() => {
-    //     if(data){
-    //         setLoading(false)
-    //     }
-    // }, [data])
+    const getBalances = async () => {
+        try{
+            const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${id}/balances`, {
+                headers:{
+                    "x-api-key": "K4QouFjJu7xawHQq"
+                }
+            })
+            console.log(res)
+            setData(res.data)
+            // console.log(res.data)
+            await setLoading(false)
+        }catch(e){   
+            console.log(e)
+            await setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        if(id){
+            getBalances()
+            setLoading(false)
+        }
+    }, [id])
+
     return (
         <Wrapper>
             <Menu />
-            {/* <DetailsPanel data={data} loading={loading} />
-            <MainPanel data={data} loading={loading} /> */}
+            {/* <DetailsPanel 
+                data={data} 
+                loading={loading} /> */}
+            {/* <MainPanel 
+                data={data} 
+                loading={loading} /> */}
             <Footer />
         </Wrapper>
     );
