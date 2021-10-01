@@ -23,9 +23,9 @@ const Dashboard = () => {
     // }, [data])
     return (
         <Wrapper>
-            <HashRouter>
+            {/* <HashRouter>
                 
-            </HashRouter>
+            </HashRouter> */}
             {/* <Menu />
             <DetailsPanel data={data} loading={loading} />
             <MainPanel data={data} loading={loading} />
