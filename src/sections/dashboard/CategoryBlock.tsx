@@ -17,7 +17,7 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
                 assetData &&
                 Object.entries(assetData).sort((a: any, b: any) => b[1].percentage - a[1].percentage).map((asset, index) => {
                     return (
-                        <CellRow key={index} name={asset[0]} value={asset[1]} preset={preset} />
+                        <CellRow key={index} value={asset[1]} preset={preset} />
                     )
                 })
             }

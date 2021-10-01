@@ -3,7 +3,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
-const CellRowComponent = ({ name, value, preset }) => {
+const CellRowComponent = ({ value, preset }) => {
+
     return (
         <CellRow>
             <FlexCentered>
