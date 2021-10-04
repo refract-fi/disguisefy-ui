@@ -32,7 +32,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                 <PrivacySelect level={form.preset} form={form} setForm={setForm} />
                 <Text margin="20px 0 15px 0" variant="subtitle" color="black">Duration</Text>
                 <Slider durationValue={durationValue} duration={form.duration} form={form} setForm={setForm} />
-                <CheckboxRow>
+                {/* <CheckboxRow>
                     <CheckboxWrapper margin="1rem 0 0.5rem 0">
                         <Checkbox
                             checked={form.isAssetGroupActive}
@@ -54,7 +54,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                         />
                         <Text color="black" size="1.1rem">Ignore NFTs</Text>
                     </CheckboxWrapper>
-                </CheckboxRow>
+                </CheckboxRow> */}
             </StyledBlock>
             <ButtonWrapper>
                 <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
