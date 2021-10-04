@@ -70,7 +70,7 @@ const Wrapper = styled.div`
 `
 const DetailsPanel = styled(FlexCol)`
     position: relative;
-    height: 100px;
+    min-height: 100px;
     border: 1px dotted ${({ theme }) => theme.accent};
     padding: 20px;
     background-color: ${({ theme }) => theme.bg16};
@@ -78,20 +78,29 @@ const DetailsPanel = styled(FlexCol)`
     border-style: dashed none dashed dashed;
     z-index: 2;
     ${({ theme }) => theme.mediaWidth.lg`
-        height: 120px;
+        min-height: 120px;
         bottom: -20px;
         border-radius: 14px 14px 0 0;
         border-style: dashed dashed dashed dashed;
         width: 350px;
+        padding-bottom: 30px;
+    `};
+    ${({ theme }) => theme.mediaWidth.md`
+        padding-bottom: 20px;
+        // min-height: 120px;
     `};
     ${({ theme }) => theme.mediaWidth.sm`
         order: 2;
         width: 100%;
         margin-top: -10px;
         display: flex;
-        height: 130px;
+        min-height: 120px;
         flex-direction: row;
         justify-content: space-between;
+        padding-bottom: 30px;
+    `};
+    ${({ theme }) => theme.mediaWidth.xs`
+        padding-bottom: 30px;
     `};
 `;
 

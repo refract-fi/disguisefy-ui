@@ -11,7 +11,7 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
             <FlexRowSpaceBetween width="100%">
                 <Text variant="block-title" color="white" margin="0 0 5px 0">{title}</Text>
-                <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : categoryData?.toFixed(1)}%</Text>
+                <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : categoryData?.toFixed(2)}%</Text>
             </FlexRowSpaceBetween>
             {
                 assetData &&
