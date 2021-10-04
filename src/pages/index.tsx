@@ -19,6 +19,7 @@ export default function Home() {
     preset: null,
     groupAssetsUnder: 0.1,
     isAssetGroupActive: false,
+    ignoreNFTs: false
   })
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
@@ -63,6 +64,7 @@ export default function Home() {
       preset: null,
       groupAssetsUnder: 0.1,
       isAssetGroupActive: false,
+      ignoreNFTs: false
     })
     setActive(false)
     Array.from(document.querySelectorAll("input")).forEach(
