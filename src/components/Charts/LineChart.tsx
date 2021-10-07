@@ -192,7 +192,7 @@ const BorrowedLineWrapper = styled.div<{ width: number }>`
     width: ${props => props.width && `${props.width}%`};
     top: 35px;
     transform: translate(0, -100%); 
-    min-width: 10px;
+    min-width: 30px;
 `
 
 const BorrowedLine = styled.div<{}>`

@@ -7,6 +7,8 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
 
     const theme = useTheme();
 
+
+    console.log(assetData?.groupedAssets)
     return (
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
             <FlexRowSpaceBetween width="100%">
@@ -16,10 +18,17 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
             {
                 assetData &&
                 Object.entries(assetData).sort((a: any, b: any) => b[1].percentage - a[1].percentage).map((asset, index) => {
-                    return (
-                        <CellRow key={index} value={asset[1]} preset={preset} />
-                    )
+                    if(asset[0] != 'groupedAssets'){
+                        return (
+                            <CellRow key={index} value={asset[1]} preset={preset} />
+                        )
+                    }
                 })
+            }
+            {
+                assetData?.groupedAssets && (
+                    <CellRow value={assetData.groupedAssets} preset={preset} />
+                )
             }
         </CategoryBlock>
     );
