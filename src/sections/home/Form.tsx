@@ -17,7 +17,7 @@ type FormComponentProps = {
 }
 
 const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg }) => {
-    
+
     return (
         <FormWrapper>
             <StyledBlock>
@@ -45,7 +45,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                             variant="group-assets"
                             placeholder={0}
                             onFocus={() => {
-                                setForm({...form, isGroupAssetsUnder: true})
+                                setForm({ ...form, isGroupAssetsUnder: true })
                             }}
                         />
                         <Text color="black" size="1.1rem" weight="bold">%</Text>

@@ -38,7 +38,6 @@ const Menu = styled(FlexRowSpaceBetween)`
 `;
 
 const End = styled(FlexRowCentered)`
-
 `
 
 const StyledButton = styled(Button)`

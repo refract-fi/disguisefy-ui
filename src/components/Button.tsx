@@ -54,7 +54,7 @@ const Button = styled.button<StyledButton>`
     ${(props) =>
         props.size == 'small' &&
         css`
-            padding: 0.15rem 0.2rem;
+            padding: 0.25rem 0.2rem;
             font-size: 1.05rem;
             font-weight: normal;
             ${({ theme }) => theme.mediaWidth.md`

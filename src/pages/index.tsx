@@ -150,6 +150,8 @@ export default function Home() {
     getCurrentValue(form.duration)
   }, [form])
 
+  console.log(form)
+
   return (
     <>
       <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />

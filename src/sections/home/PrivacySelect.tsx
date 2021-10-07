@@ -40,16 +40,19 @@ const PrivacySelectComponent = ({ level, form, setForm }) => {
 export default PrivacySelectComponent;
 
 const PrivacySelect = styled(Flex)`
-  width: 100%;
+    width: 100%;
 `;
 
 const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
+    display: flex;
     flex: 1;
     border-radius: 0px;
     color: black;
-    border: ${props => props.active ? `2px solid ${props.theme.active}` : '2px solid #00000000'};
+    border: 3px solid #00000000;
     padding: 6px 0;
     margin: 0px;
+    align-items: center;
+    justify-content: center;
     ${props => props.level == 10 &&
         css`
         background-color: ${({ theme }) => theme.level1};
@@ -83,6 +86,18 @@ const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
         } */
         border-radius: 0px 8px 8px 0px;
     `};
+    ${props => (props.active && props.level == 10) &&
+        css`
+            border: ${props => `3px solid ${props.theme.level1Active}`};
+            background-color: ${({ theme }) => theme.level1Hover};
+        `    
+    }
+    ${props => (props.active && props.level == 20) &&
+        css`
+            border: ${props => `3px solid ${props.theme.level2Active}`};
+            background-color: ${({ theme }) => theme.level2Hover};
+        `    
+    }
 `
 
 const HeroIcon = styled.img`

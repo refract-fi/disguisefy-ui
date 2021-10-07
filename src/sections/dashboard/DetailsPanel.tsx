@@ -2,25 +2,24 @@ import { Button, CopyLink, Text } from 'components';
 import moment from 'moment';
 import React from 'react';
 import { Links, Menu } from 'sections/shared';
-import styled, { useTheme } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { Flex, FlexCol, FlexRowCentered } from 'styles/components';
 import Link from 'next/link';
 
 const DetailsPanelComponent = ({ loading, data }) => {
+
     const theme = useTheme()
-    const onCopyClick = () => {
-        navigator.clipboard.writeText(`disguisefy.xyz/${data?.disguise?.url}`)
-    }
+
     return (
         <Wrapper>
             <DisLogo src="disguisefy_logo.svg" />
-            <DetailsPanel>
+            <DetailsPanel name={data?.disguise.name}>
                 {
                     (!loading && data !== 404) && (
                         <div>
                             <Text variant="subtitle">{data?.disguise.name}</Text>
                             <StyledFlexRowCentered margin="5px 0 0 0">
-                                <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
+                                <Text color={theme.accent} variant="normal">{window.location.origin}/{data?.disguise?.url}</Text>
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
@@ -68,9 +67,9 @@ const Wrapper = styled.div`
         flex-direction: column;
     `};
 `
-const DetailsPanel = styled(FlexCol)`
+const DetailsPanel = styled(FlexCol)<{name: string}>`
     position: relative;
-    min-height: 100px;
+    min-height: fit-content;
     border: 1px dotted ${({ theme }) => theme.accent};
     padding: 20px;
     background-color: ${({ theme }) => theme.bg16};
@@ -78,28 +77,29 @@ const DetailsPanel = styled(FlexCol)`
     border-style: dashed none dashed dashed;
     z-index: 2;
     ${({ theme }) => theme.mediaWidth.lg`
-        min-height: 120px;
         bottom: -20px;
         border-radius: 14px 14px 0 0;
         border-style: dashed dashed dashed dashed;
         width: 350px;
+        padding: 10px 20px;
         padding-bottom: 30px;
     `};
     ${({ theme }) => theme.mediaWidth.md`
-        padding-bottom: 20px;
-        // min-height: 120px;
+        padding: 10px 20px;
+        padding-bottom: 30px;
     `};
     ${({ theme }) => theme.mediaWidth.sm`
         order: 2;
         width: 100%;
         margin-top: -10px;
         display: flex;
-        min-height: 120px;
         flex-direction: row;
         justify-content: space-between;
+        padding: 10px 20px;
         padding-bottom: 30px;
     `};
     ${({ theme }) => theme.mediaWidth.xs`
+        padding: 10px 20px;
         padding-bottom: 30px;
     `};
 `;
@@ -140,9 +140,12 @@ const LinksWrapper = styled.div`
     display: none;
     ${({ theme }) => theme.mediaWidth.lg`
         display: flex;
-        margin-top: 20px;
-        align-items: center;
-        height: fit-content;
+        // margin-top: 20px;
+        height: 100%;
+        padding-bottom: 10px;
+        padding-right: 15px;
+        align-items: flex-end;
+        // height: fit-content;
     `};
     ${({ theme }) => theme.mediaWidth.sm`
         display: none;

@@ -1,7 +1,7 @@
 import { Block, Bold, ExitButton, Logo, Text } from 'components';
 import React from 'react';
 import styled from 'styled-components';
-import { FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
+import { FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import Link from 'next/link';
 
 const HelpComponent = ({ setHelpActive }) => {
@@ -23,7 +23,7 @@ const HelpComponent = ({ setHelpActive }) => {
             details: 'Discloses stats with a deviation (in dev)'
         }
     ]
-    
+
     return (
         <Help>
             <StyledBlock>
@@ -34,7 +34,10 @@ const HelpComponent = ({ setHelpActive }) => {
                 {
                     levels.map((level) => {
                         return (
-                            <Text margin="2px 0 2px 0" variant="normal" width="100%" color="black"><Bold>- {level.name}:</Bold> {level.details}</Text>
+                            <LevelRow margin="2px 0 2px 0">
+                                <LevelName variant="normal" width="fit-content" color="black" weight="bold">- {level.name}:</LevelName>
+                                <Text align="justify" variant="normal" color="black">{level.details}</Text>
+                            </LevelRow>
                         )
                     })
                 }
@@ -45,7 +48,7 @@ const HelpComponent = ({ setHelpActive }) => {
                         <Link href="https://github.com/disguisefy" passHref={true}>
                             <Logo src="github_black.svg" />
                         </Link>
-                        <Link href="https://twitter.com/_Jabun" passHref={true}>
+                        <Link href="https://twitter.com/disguisefy" passHref={true}>
                             <Logo src="twitter_black.svg" marginLeft={true} />
                         </Link>
                         <Link href="https://discord.gg/Jn6aZEkvRd" passHref={true}>
@@ -88,6 +91,18 @@ const ZapperLogo = styled.img`
 const StyledRow = styled(FlexRowSpaceBetween) <{ margin?: string }>`
     width: 100%;
     margin-top: ${props => props.margin ? props.margin : '10px'};
+`
+
+const LevelRow = styled(FlexRow)`
+    justify-content: flex-start;
+    width: 100%;
+`
+
+const LevelName = styled(Text)`
+    min-width: 65px;
+    ${({ theme }) => theme.mediaWidth.sm`
+    min-width: 58px;
+    `};
 `
 
 const StyledBlock = styled(Block)`

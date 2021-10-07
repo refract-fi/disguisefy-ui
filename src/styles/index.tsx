@@ -58,16 +58,20 @@ export function colors(darkMode: boolean): Colors {
     red: "#C64343",
 
     level1: "#BEDD56",
-    level1Hover: "#a8c450",
+    level1Hover: "#b8e81c",
+    level1Active: "#607713",
 
     level2: "#DDAE56",
-    level2Hover: "#BA8F4A",
+    level2Hover: "#e89a1c",
+    level2Active: "#785113",
 
     level3: "#DD7A56",
     level3Hover: "#ba6749",
+    level3Active: "",
     
     level4: "#DD5656",
     level4Hover: "#ba4949",
+    level4Active: "",
 
     i1: "#BEA5E6",
     i2: "#7F59E5",
