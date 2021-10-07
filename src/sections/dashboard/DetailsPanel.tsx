@@ -19,7 +19,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         <div>
                             <Text variant="subtitle">{data?.disguise.name}</Text>
                             <StyledFlexRowCentered margin="5px 0 0 0">
-                                <Text color={theme.accent} variant="normal">{window.location.origin}/{data?.disguise?.url}</Text>
+                                <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
