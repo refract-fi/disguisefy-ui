@@ -1,6 +1,7 @@
 import { Block, Button, CopyLink, ExitButton, Text, TextInput } from 'components';
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import {Link} from 'react-router-dom';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
 import { ResetButton } from './Button';
@@ -14,13 +15,13 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`disguisefy.xyz/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`${window.location.origin}/#/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
                         <CopyLinkWrapper>
                             <CopyLink url={url} />
                         </CopyLinkWrapper>
                     </TextInputContainer>
-                    <Link href={`/${url}`}>
+                    <Link to={`/${url}`}>
                         <Button width="40px" height="40px" margin="25px 0 0px 10px">Go</Button>
                     </Link>
                 </StyledRow>

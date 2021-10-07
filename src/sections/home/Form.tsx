@@ -25,7 +25,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                 <TextInput
                     value={form.name}
                     width="100%"
-                    placeholder="Portfolio Name*"
+                    placeholder="Portfolio Name"
                     onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, name: event.target.value })}
                 />
                 <Text margin="20px 0 15px 0" variant="subtitle" color="black">Privacy Level</Text>

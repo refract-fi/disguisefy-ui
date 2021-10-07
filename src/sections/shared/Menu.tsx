@@ -2,7 +2,7 @@ import { Button, Logo } from 'components';
 import React from 'react';
 import styled from 'styled-components';
 import { Flex, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
-import Link from 'next/link';
+import {Link} from 'react-router-dom';
 
 const MenuComponent = () => {
     return (
@@ -12,7 +12,7 @@ const MenuComponent = () => {
                 {/* <Button variant="menu">Stats</Button> */}
             </Nav>
             <End>
-                <Link href="/">
+                <Link to="/">
                     <Button width="85px" size="small">New</Button>
                 </Link>
                 {/* <Links /> */}

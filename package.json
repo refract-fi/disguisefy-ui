@@ -2,7 +2,6 @@
   "name": "disguisefy-interface",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.disguisefy.xyz/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

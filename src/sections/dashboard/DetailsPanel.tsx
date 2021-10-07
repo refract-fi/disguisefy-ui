@@ -4,7 +4,7 @@ import React from 'react';
 import { Links, Menu } from 'sections/shared';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexCol, FlexRowCentered } from 'styles/components';
-import Link from 'next/link';
+import {Link} from 'react-router-dom';
 
 const DetailsPanelComponent = ({ loading, data }) => {
     const theme = useTheme()
@@ -20,7 +20,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         <div>
                             <Text variant="subtitle">{data?.disguise.name}</Text>
                             <StyledFlexRowCentered margin="5px 0 0 0">
-                                <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
+                                <Text color={theme.accent} variant="normal">{window.location.origin}/#/{data?.disguise?.url}</Text>
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
@@ -28,14 +28,14 @@ const DetailsPanelComponent = ({ loading, data }) => {
                     )
                 }
                 <Mobile>
-                    <Link href="/">
+                    <Link to="/">
                         <Button width="85px" size="small">New</Button>
                     </Link>
                 </Mobile>
                 <BatLoverImg src="batlover_img.svg" />
             </DetailsPanel>
             <LinksWrapper>
-                <Link href="/">
+                <Link to="/">
                     <Button width="85px" size="small">New</Button>
                 </Link>
             </LinksWrapper>

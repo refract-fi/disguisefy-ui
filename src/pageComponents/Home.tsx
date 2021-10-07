@@ -10,198 +10,196 @@ import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
 
 const Index = () => {
-    const [form, setForm] = useState({
-        address: null,
-        name: '',
-        duration: 3600,
-        preset: null,
-        groupAssetsUnder: 0.1,
-        isAssetGroupActive: false,
+  const [form, setForm] = useState({
+    address: null,
+    name: '',
+    duration: 3600,
+    preset: null,
+    groupAssetsUnder: 0.1,
+    isAssetGroupActive: false,
+  })
+  const [formActive, setFormActive] = useState(false)
+  const [durationValue, setDurationValue] = useState(0)
+  const [url, setUrl] = useState('')
+  const [active, setActive] = useState(false)
+  const [errorMsg, setErrorMsg] = useState(null)
+  const [helpActive, setHelpActive] = useState(false)
+  const [awaitingLink, setAwaitingLink] = useState(false)
+  const [awaitingENSResolve, setAwaitingENSResolve] = useState(false)
+
+  const onDisguiseClick = async () => {
+    setErrorMsg('')
+    setHelpActive(false)
+    if (isAddress(form.address)) {
+      setFormActive(true)
+    } else {
+      setAwaitingENSResolve(true)
+      let resolvedAddress = await isENS(form.address)
+      if (resolvedAddress) {
+        setForm({ ...form, address: resolvedAddress })
+        setAwaitingENSResolve(false)
+        setFormActive(true)
+      } else {
+        setErrorMsg('Not a valid address')
+        setAwaitingENSResolve(false)
+      }
+    }
+  }
+
+  const onHelpClick = () => {
+    setFormActive(false)
+    setErrorMsg('')
+    setHelpActive(true)
+  }
+
+  const onResetClick = () => {
+    setFormActive(false)
+    setForm({
+      address: null,
+      name: '',
+      duration: 3600,
+      preset: null,
+      groupAssetsUnder: 0,
+      isAssetGroupActive: false,
+    })
+    setActive(false)
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+  }
+
+
+  const postForm = async (resolvedAddress?: string) => {
+    setAwaitingLink(true)
+    try{
+      const res = await axios.post(`https://api.disguisefy.xyz/disguises/generate`, {
+        address: resolvedAddress ? resolvedAddress : form.address,
+        name: form.name,
+        duration: form.duration,
+        preset: form.preset
+      }, {
+        headers: {
+          "x-api-key": "K4QouFjJu7xawHQq"
+        }
       })
-      const [formActive, setFormActive] = useState(false)
-      const [durationValue, setDurationValue] = useState(0)
-      const [url, setUrl] = useState('')
-      const [active, setActive] = useState(false)
-      const [errorMsg, setErrorMsg] = useState(null)
-      const [helpActive, setHelpActive] = useState(false)
-      const [awaitingLink, setAwaitingLink] = useState(false)
-      const [awaitingENSResolve, setAwaitingENSResolve] = useState(false)
-    
-      const onDisguiseClick = async () => {
-        setErrorMsg('')
-        setHelpActive(false)
-        if (isAddress(form.address)) {
-          setFormActive(true)
-        } else {
-          setAwaitingENSResolve(true)
-          let resolvedAddress = await isENS(form.address)
-          if (resolvedAddress) {
-            setForm({ ...form, address: resolvedAddress })
-            setAwaitingENSResolve(false)
-            setFormActive(true)
-          } else {
-            setErrorMsg('Not a valid address')
-            setAwaitingENSResolve(false)
+      setUrl(res.data.url)
+      setAwaitingLink(false)
+      setActive(true)
+    }catch(e){
+      setAwaitingLink(false)
+      console.log(e);
+    }
+  }
+
+  const onFormSubmit = async () => {
+    setErrorMsg(null)
+    setAwaitingLink(true)
+    if (form.name.length > 36) {
+      console.log("[ERROR] Name is too long")
+      setErrorMsg("Name is too long")
+      setAwaitingLink(false)
+      return;
+    }
+    if (!form.preset) {
+      console.log("[ERROR] No Privacy Level Selected")
+      setErrorMsg("No Privacy Level Selected")
+      setAwaitingLink(false)
+      return;
+    }
+    if (isAddress(form.address)) {
+      postForm()
+    } else {
+      let resolvedAddress = await isENS(form.address)
+      if (resolvedAddress) {
+        postForm(resolvedAddress)
+      } else {
+        setErrorMsg('Not a valid address')
+        setAwaitingLink(false)
+      }
+    }
+  }
+
+  const getCurrentValue = (duration) => {
+    let value;
+    switch (duration) {
+      case 3600:
+        setDurationValue(0)
+        break;
+      case 86400:
+        setDurationValue(20)
+        break;
+      case 172800:
+        setDurationValue(40)
+        break;
+      case 604800:
+        setDurationValue(60)
+        break;
+      case 1209600:
+        setDurationValue(80)
+        break;
+      case 2592000:
+        setDurationValue(100)
+        break;
+      default:
+        return value
+    }
+  }
+  useEffect(() => {
+    getCurrentValue(form.duration)
+  }, [form])
+
+  return (
+    <>
+      <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
+      <Wrapper>
+        <Content>
+          <Text
+            variant="title"
+            align="center"
+            width="wide"
+            margin="0 0 10px 0">
+            Conceal your Wealth, Share your Choices
+          </Text>
+          <TextInputWrapper>
+            <TextInput
+              placeholder="0x...*"
+              onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
+              width="100%"
+            />
+            {
+              awaitingENSResolve &&
+              <SpinnerWrapper>
+                <Spinner variant="textinput" />
+              </SpinnerWrapper>
+            }
+          </TextInputWrapper>
+          <Button width="wide" margin="12px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
+          <Button variant="underline" onClick={() => onHelpClick()}>What is dis?</Button>
+          {
+            <ErrorText color={"red"}>{(errorMsg && !formActive) && errorMsg}</ErrorText>
           }
-        }
-      }
-    
-      const onHelpClick = () => {
-        setFormActive(false)
-        setErrorMsg('')
-        setHelpActive(true)
-      }
-    
-      const onResetClick = () => {
-        setFormActive(false)
-        setForm({
-          address: null,
-          name: '',
-          duration: 3600,
-          preset: null,
-          groupAssetsUnder: 0,
-          isAssetGroupActive: false,
-        })
-        setActive(false)
-        Array.from(document.querySelectorAll("input")).forEach(
-          input => (input.value = "")
-        );
-      }
-    
-    
-      const postForm = async (resolvedAddress?: string) => {
-        setAwaitingLink(true)
-        axios.post('/api/disguise', {
-          address: resolvedAddress ? resolvedAddress : form.address,
-          name: form.name,
-          duration: form.duration,
-          preset: form.preset
-        }).then(function (response) {
-          setUrl(response.data.url)
-          setAwaitingLink(false)
-          setActive(true)
-        }).catch(function (error) {
-          setAwaitingLink(false)
-          console.log(error);
-        });
-      }
-    
-      const onFormSubmit = async () => {
-        setErrorMsg(null)
-        setAwaitingLink(true)
-        if (!(!!form.name)) {
-          console.log("[ERROR] No Name Entered")
-          setErrorMsg("Enter a Portfolio Name")
-          setAwaitingLink(false)
-          return;
-        }
-        if (form.name.length > 36) {
-          console.log("[ERROR] Name is too long")
-          setErrorMsg("Name is too long")
-          setAwaitingLink(false)
-          return;
-        }
-        if (!form.preset) {
-          console.log("[ERROR] No Privacy Level Selected")
-          setErrorMsg("No Privacy Level Selected")
-          setAwaitingLink(false)
-          return;
-        }
-        if (isAddress(form.address)) {
-          postForm()
-        } else {
-          let resolvedAddress = await isENS(form.address)
-          if (resolvedAddress) {
-            postForm(resolvedAddress)
-          } else {
-            setErrorMsg('Not a valid address')
-            setAwaitingLink(false)
+          {
+            formActive && (
+              <Form
+                form={form}
+                setForm={setForm}
+                setFormActive={setFormActive}
+                durationValue={durationValue}
+                onFormSubmit={onFormSubmit}
+                awaitingLink={awaitingLink}
+                errorMsg={errorMsg}
+              />
+            )
           }
-        }
-      }
-    
-      const getCurrentValue = (duration) => {
-        let value;
-        switch (duration) {
-          case 3600:
-            setDurationValue(0)
-            break;
-          case 86400:
-            setDurationValue(20)
-            break;
-          case 172800:
-            setDurationValue(40)
-            break;
-          case 604800:
-            setDurationValue(60)
-            break;
-          case 1209600:
-            setDurationValue(80)
-            break;
-          case 2592000:
-            setDurationValue(100)
-            break;
-          default:
-            return value
-        }
-      }
-      useEffect(() => {
-        getCurrentValue(form.duration)
-      }, [form])
-    
-      return (
-        <>
-          <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
-          <Wrapper>
-            <Content>
-              <Text
-                variant="title"
-                align="center"
-                width="wide"
-                margin="0 0 10px 0">
-                Conceal your Wealth, Share your Choices
-              </Text>
-              <TextInputWrapper>
-                <TextInput
-                  placeholder="0x...*"
-                  // value={form.address}
-                  onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
-                  width="100%"
-                />
-                {
-                  awaitingENSResolve &&
-                  <SpinnerWrapper>
-                    <Spinner variant="textinput" />
-                  </SpinnerWrapper>
-                }
-              </TextInputWrapper>
-              <Button width="wide" margin="12px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
-              <Button variant="underline" onClick={() => onHelpClick()}>What is dis?</Button>
-              {
-                <ErrorText color={"red"}>{(errorMsg && !formActive) && errorMsg}</ErrorText>
-              }
-              {
-                formActive && (
-                  <Form
-                    form={form}
-                    setForm={setForm}
-                    setFormActive={setFormActive}
-                    durationValue={durationValue}
-                    onFormSubmit={onFormSubmit}
-                    awaitingLink={awaitingLink}
-                    errorMsg={errorMsg}
-                  />
-                )
-              }
-              {
-                helpActive && (
-                  <Help setHelpActive={setHelpActive} />
-                )
-              }
-            </Content>
-          </Wrapper>
-        </>
-      )
+          {
+            helpActive && (
+              <Help setHelpActive={setHelpActive} />
+            )
+          }
+        </Content>
+      </Wrapper>
+    </>
+  )
 }
 
 export default Index;
