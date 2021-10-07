@@ -26,7 +26,6 @@ const LineChartComponent = ({ data }) => {
         }
     }, [data])
 
-    console.log(data.debt)
     return (
         <Component>
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>

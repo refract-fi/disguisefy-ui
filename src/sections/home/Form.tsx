@@ -16,10 +16,8 @@ type FormComponentProps = {
     errorMsg: string
 }
 
-
 const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg }) => {
     
-    console.log(form)
     return (
         <FormWrapper>
             <StyledBlock>
