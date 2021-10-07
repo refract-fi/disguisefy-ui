@@ -79,7 +79,10 @@ export default function Home() {
       address: resolvedAddress ? resolvedAddress : form.address,
       name: form.name,
       duration: form.duration,
-      preset: form.preset
+      preset: form.preset,
+      isGroupAssetsUnder: form.isGroupAssetsUnder,
+      groupAssetsUnder: form.groupAssetsUnder,
+      ignoreNFTs: form.ignoreNFTs
     }).then(function (response) {
       setUrl(response.data.url)
       setAwaitingLink(false)
