@@ -17,7 +17,7 @@ const MainPanelComponent = ({ data, loading }) => {
                     <>
                         <Tablet>
                             <LineChart
-                                data={data.percentages}/>
+                                data={data?.percentages}/>
                         </Tablet>
                         <StyledFlex>
                             <CategoryBlock

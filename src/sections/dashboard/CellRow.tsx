@@ -3,34 +3,43 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
-const CellRowComponent = ({ name, value, preset }) => {
+const CellRowComponent = ({ value, preset }) => {
+
     return (
         <CellRow>
             <FlexCentered>
                 <IconWrapper>
-                {
-                    value?.tokens.map((token, index) => {
-                        if (index == 0) {
-                            return (
-                                <Circle>
-                                    <Logo src={token.img} />
-                                </Circle>
-                            )
-                        } else if (index == 1) {
-                            return (
-                                <Circle variant="small">
-                                    <Logo variant="small" src={token.img} />
-                                </Circle>
-                            )
-                        }
-                    })
-                }
+                    {
+                        value?.tokens?.length >= 1 &&
+                        value?.tokens?.map((token, index) => {
+                            if (index == 0) {
+                                return (
+                                    <Circle>
+                                        <Logo src={token.img} />
+                                    </Circle>
+                                )
+                            } else if (index == 1) {
+                                return (
+                                    <Circle variant="small">
+                                        <Logo variant="small" src={token.img} />
+                                    </Circle>
+                                )
+                            }
+                        })
+
+                    }
+                    {
+                        (!value.tokens || value?.tokens?.length == 0) &&
+                        <Circle>
+                            <Logo src={value.img} />
+                        </Circle>
+                    }
                 </IconWrapper>
-                <Text variant="cell">{name}</Text>
+                <Text variant="cell">{value.label}</Text>
             </FlexCentered>
             {
                 (value.percentage != null && preset == 10) &&
-                <Text variant="cell">{`${(Math.abs(value.percentage)) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))}%`}</Text>
+                <Text variant="cell">{(Math.abs(value.percentage) < 0.1) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))} %</Text>
             }
         </CellRow>
     );

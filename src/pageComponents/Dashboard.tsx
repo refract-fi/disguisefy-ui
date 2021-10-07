@@ -43,12 +43,12 @@ const Dashboard = () => {
     return (
         <Wrapper>
             <Menu />
-            {/* <DetailsPanel 
+            <DetailsPanel 
                 data={data} 
-                loading={loading} /> */}
-            {/* <MainPanel 
+                loading={loading} />
+            <MainPanel 
                 data={data} 
-                loading={loading} /> */}
+                loading={loading} />
             <Footer />
         </Wrapper>
     );
