@@ -35,8 +35,8 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                 <CheckboxRow>
                     <CheckboxWrapper margin="1rem 0 0.5rem 0">
                         <Checkbox
-                            checked={form.isAssetGroupActive}
-                            onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, isAssetGroupActive: !form.isAssetGroupActive })}
+                            checked={form.isGroupAssetsUnder}
+                            onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, isGroupAssetsUnder: !form.isGroupAssetsUnder })}
                         />
                         <Text color="black" size="1.1rem">Group assets under </Text>
                         <TextInput
