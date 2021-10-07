@@ -1,7 +1,7 @@
 import { Checkbox } from '@material-ui/core';
 import { Block, Button, ExitButton, Slider, Text, TextInput } from 'components';
 import Spinner from 'components/Spinner';
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { Flex, FlexColCentered, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import { PrivacySelect } from '.';
@@ -16,7 +16,9 @@ type FormComponentProps = {
     errorMsg: string
 }
 
+
 const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg }) => {
+    
     console.log(form)
     return (
         <FormWrapper>
@@ -43,7 +45,10 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                             value={form.groupAssetsUnder}
                             onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, groupAssetsUnder: event.target.value })}
                             variant="group-assets"
-                            placeholder={form.groupAssetUnder}
+                            placeholder={0}
+                            onFocus={() => {
+                                setForm({...form, isGroupAssetsUnder: true})
+                            }}
                         />
                         <Text color="black" size="1.1rem" weight="bold">%</Text>
                     </CheckboxWrapper>

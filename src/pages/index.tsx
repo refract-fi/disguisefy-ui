@@ -165,9 +165,13 @@ export default function Home() {
           <TextInputWrapper>
             <TextInput
               placeholder="0x...*"
-              // value={form.address}
               onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
               width="100%"
+              onKeyDown={(e) => {
+                if(e.code == "Enter"){
+                  onDisguiseClick()
+                }
+              }}
             />
             {
               awaitingENSResolve &&
