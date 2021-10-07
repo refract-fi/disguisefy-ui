@@ -33,11 +33,12 @@ export default function handler(req, res) {
         console.log(`[disguiseHandler Error]: method ${req.method} is not acceptable.`);
       }
     } catch (e) {
-      if(e.response.status == 404){
-        res.status(404).json({
-          "error": "Write custom error"
-        })
-      }
+      console.log(e)
+      // if(e.response.status == 404){
+      //   res.status(404).json({
+      //     "error": "Write custom error"
+      //   })
+      // }
     } finally {
       // could have better error handling
       resolve();
