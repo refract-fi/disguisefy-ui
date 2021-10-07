@@ -4,6 +4,7 @@ import axios from 'axios';
 // const API_KEY = process.env.REST_API_KEY;
 
 const API_URL = 'https://api.disguisefy.xyz';
+// const API_URL = 'http://localhost:3001';
 const API_KEY = 'K4QouFjJu7xawHQq';
 
 export default function handler(req, res) {
