@@ -18,7 +18,7 @@ export default function Home() {
     duration: 3600,
     preset: null,
     groupAssetsUnder: 0.1,
-    isAssetGroupActive: false,
+    isGroupAssetsUnder: false,
     ignoreNFTs: false
   })
   const [formActive, setFormActive] = useState(false)
@@ -63,7 +63,7 @@ export default function Home() {
       duration: 3600,
       preset: null,
       groupAssetsUnder: 0.1,
-      isAssetGroupActive: false,
+      isGroupAssetsUnder: false,
       ignoreNFTs: false
     })
     setActive(false)
