@@ -93,12 +93,6 @@ export default function Home() {
   const onFormSubmit = async () => {
     setErrorMsg(null)
     setAwaitingLink(true)
-    if (!(!!form.name)) {
-      console.log("[ERROR] No Name Entered")
-      setErrorMsg("Enter a Portfolio Name")
-      setAwaitingLink(false)
-      return;
-    }
     if (form.name.length > 36) {
       console.log("[ERROR] Name is too long")
       setErrorMsg("Name is too long")
