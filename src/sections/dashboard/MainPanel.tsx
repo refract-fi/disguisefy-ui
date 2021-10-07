@@ -9,6 +9,7 @@ import { CategoryBlock, RequestError } from '.';
 const MainPanelComponent = ({ data, loading }) => {
 
     let preset = data?.disguise?.preset
+
     return (
         <MainPanel loading={loading} error={data == 404 && true}>
 

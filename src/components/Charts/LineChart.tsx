@@ -26,6 +26,7 @@ const LineChartComponent = ({ data }) => {
         }
     }, [data])
 
+    console.log(data.debt)
     return (
         <Component>
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
@@ -136,7 +137,7 @@ const LineChartComponent = ({ data }) => {
                     </LineWrapper>
                 }
                 {
-                    data?.debt < -0.1 && (
+                    data?.debt > 0.1 && (
                         <BorrowedLineWrapper
                             width={Math.abs(data.debt)}>
                             <Label
@@ -191,6 +192,7 @@ const BorrowedLineWrapper = styled.div<{ width: number }>`
     width: ${props => props.width && `${props.width}%`};
     top: 35px;
     transform: translate(0, -100%); 
+    min-width: 10px;
 `
 
 const BorrowedLine = styled.div<{}>`

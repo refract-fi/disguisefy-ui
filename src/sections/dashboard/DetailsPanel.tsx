@@ -13,7 +13,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
     return (
         <Wrapper>
             <DisLogo src="disguisefy_logo.svg" />
-            <DetailsPanel name={data?.disguise.name}>
+            <DetailsPanel>
                 {
                     (!loading && data !== 404) && (
                         <div>
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
         flex-direction: column;
     `};
 `
-const DetailsPanel = styled(FlexCol)<{name: string}>`
+const DetailsPanel = styled(FlexCol)`
     position: relative;
     min-height: fit-content;
     border: 1px dotted ${({ theme }) => theme.accent};
@@ -76,6 +76,7 @@ const DetailsPanel = styled(FlexCol)<{name: string}>`
     border-radius: 14px 0 0 14px;
     border-style: dashed none dashed dashed;
     z-index: 2;
+    min-height: 90px;
     ${({ theme }) => theme.mediaWidth.lg`
         bottom: -20px;
         border-radius: 14px 14px 0 0;
