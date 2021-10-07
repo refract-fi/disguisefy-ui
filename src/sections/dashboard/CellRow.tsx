@@ -5,7 +5,6 @@ import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
 const CellRowComponent = ({ value, preset }) => {
 
-    console.log(value.label)
     return (
         <CellRow>
             <FlexCentered>
@@ -13,7 +12,7 @@ const CellRowComponent = ({ value, preset }) => {
                     {
                         value.label == "Grouped Assets" &&
                         <Circle>
-                            {/* <Logo src={token.img} /> */}
+                            <Logo src={"/coins.svg"} />
                         </Circle>
                     }
                     {
@@ -22,7 +21,9 @@ const CellRowComponent = ({ value, preset }) => {
                             if (index == 0) {
                                 return (
                                     <Circle>
-                                        <Logo src={token.img} />
+                                        <Logo onError={(e: any) => {
+                                            e.target.src = '/no_img.svg'
+                                        }} src={token.img} />
                                     </Circle>
                                 )
                             } else if (index == 1) {
@@ -44,8 +45,8 @@ const CellRowComponent = ({ value, preset }) => {
                 </IconWrapper>
                 {
                     value.label == 'Grouped Assets' ? (
-                        <Text weight="bold" variant="cell">Other Assets</Text>        
-                    ): (
+                        <Text weight="bold" variant="cell">Other Assets</Text>
+                    ) : (
                         <Text variant="cell">{value.label}</Text>
                     )
                 }
@@ -79,6 +80,7 @@ const Logo = styled.img<{ variant?: string }>`
             z-index: 2;
             width: 17px;
 	`}
+    border-radius: 50%;
 `
 const Circle = styled.div<{ variant?: string }>`
     z-index: 1;
