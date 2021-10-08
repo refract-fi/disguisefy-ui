@@ -45,15 +45,15 @@ const HelpComponent = ({ setHelpActive }) => {
                 <Text variant="normal" color="black" align="justify">All the data manipulations are done in the back-end. The higher the privacy level, the harder it is to reverse search your address.</Text>
                 <StyledRow margin="20px 0 0 0">
                     <div>
-                        <Link href="https://github.com/disguisefy" passHref={true}>
+                        <a target="_blan" href="https://github.com/disguisefy">
                             <Logo src="github_black.svg" />
-                        </Link>
-                        <Link href="https://twitter.com/disguisefy" passHref={true}>
+                        </a>
+                        <a target="_blan" href="https://twitter.com/disguisefy">
                             <Logo src="twitter_black.svg" marginLeft={true} />
-                        </Link>
-                        <Link href="https://discord.gg/Jn6aZEkvRd" passHref={true}>
+                        </a>
+                        <a target="_blan" href="https://discord.gg/Jn6aZEkvRd">
                             <Logo src="discord_black.svg" marginLeft={true} />
-                        </Link>
+                        </a>
                     </div>
                     <ZapperLogo src="zapper.svg" />
                 </StyledRow>

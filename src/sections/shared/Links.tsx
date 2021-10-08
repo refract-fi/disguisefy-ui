@@ -8,15 +8,15 @@ const LinksComponent = () => {
     return (
         <>
             <div>
-                <Link href="https://github.com/disguisefy" passHref={true}>
+                <a href="https://github.com/disguisefy">
                     <Logo src="github.svg" marginLeft={true} />
-                </Link>
-                <Link href="https://twitter.com/_Jabun" passHref={true}>
+                </a>
+                <a href="https://twitter.com/_Jabun">
                     <Logo src="twitter.svg" marginLeft={true} />
-                </Link>
-                <Link href="https://discord.gg/Jn6aZEkvRd" passHref={true}>
+                </a>
+                <a href="https://discord.gg/Jn6aZEkvRd">
                     <Logo src="discord.svg" marginLeft={true} />
-                </Link>
+                </a>
             </div>
         </>
     );
