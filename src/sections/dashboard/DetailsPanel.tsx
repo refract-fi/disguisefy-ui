@@ -11,7 +11,6 @@ const DetailsPanelComponent = ({ loading, data }) => {
 
     const theme = useTheme()
 
-    console.log(typeof data?.disguise?.preset)
     return (
         <Wrapper>
             <DisLogo src="disguisefy_logo.svg" />
@@ -25,20 +24,22 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
-                            {/* <FlexRowCentered>
-                                <SnowIcon src="./snow.svg" />
-                                <div>
-                                    <FlexRow>
-                                    <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>
-                                    <Tooltip
-                                        type="white"
-                                        variant="dashboard"
-                                        content1="This data was fetched once"
-                                        content2="at the time shown below." />
-                                    </FlexRow>
-                                    <Text margin="0 0 0 0" variant="normal" color="lightgrey">October 8th 2021, 12:07 am</Text>
-                                </div>
-                            </FlexRowCentered> */}
+                            {
+                                data.disguise.options.isSnapshot &&
+                                <FlexRowCentered>
+                                    <SnowIcon src="./snow.svg" />
+                                    <div>
+                                        <FlexRow>
+                                            <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>
+                                            <Tooltip
+                                                type="white"
+                                                variant="dashboard"
+                                                content1="This data was fetched once"
+                                                content2="at the time shown below." />
+                                        </FlexRow>
+                                        <Text margin="0 0 0 0" variant="normal" color="lightgrey">October 8th 2021, 12:07 am</Text>
+                                    </div>
+                                </FlexRowCentered>}
                         </div>
                     )
                 }
