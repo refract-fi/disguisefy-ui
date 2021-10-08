@@ -1,5 +1,5 @@
 import { Checkbox } from '@material-ui/core';
-import { BackButton, Block, Button, ExitButton, Slider, Text, TextInput } from 'components';
+import { BackButton, Block, Button, ExitButton, Slider, Text, TextInput, Tooltip } from 'components';
 import Spinner from 'components/Spinner';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -23,7 +23,8 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
     const onExit = () => {
         setFormActive(false)
         setIsAdvancedActive(false)
-        setForm({...form, 
+        setForm({
+            ...form,
             name: '',
             duration: 3600,
             preset: null,
@@ -31,7 +32,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             isGroupAssetsUnder: false,
             ignoreNFTs: false,
             isSnapshot: false
-          })
+        })
     }
 
     console.log(form)
@@ -43,13 +44,17 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                 {
                     isAdvancedActive ? (
                         <AdvancedSettings>
-                            <BackButton onClick={() => setIsAdvancedActive(false)} src="/arrow-back.svg"/>
+                            <BackButton onClick={() => setIsAdvancedActive(false)} src="/arrow-back.svg" />
                             <CheckboxWrapper margin="1rem 0 0.5rem 0">
                                 <Checkbox
                                     checked={form.isSnapshot}
                                     onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, isSnapshot: !form.isSnapshot })}
                                 />
                                 <Text color="black" size="1.1rem">One time snapshot with IPFS</Text>
+                                <Tooltip
+                                    type="blue"
+                                    content1="Data is frozen in time at link creation."
+                                    content2="This data is stored in decentralized storage." />
                             </CheckboxWrapper>
                         </AdvancedSettings>
                     ) : (

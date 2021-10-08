@@ -1,9 +1,9 @@
-import { Button, CopyLink, Text } from 'components';
+import { Button, CopyLink, Text, Tooltip } from 'components';
 import moment from 'moment';
 import React from 'react';
 import { Links, Menu } from 'sections/shared';
 import styled, { css, useTheme } from 'styled-components';
-import { Flex, FlexCol, FlexRowCentered } from 'styles/components';
+import { Flex, FlexCol, FlexRow, FlexRowCentered } from 'styles/components';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -28,7 +28,14 @@ const DetailsPanelComponent = ({ loading, data }) => {
                             {/* <FlexRowCentered>
                                 <SnowIcon src="./snow.svg" />
                                 <div>
+                                    <FlexRow>
                                     <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>
+                                    <Tooltip
+                                        type="white"
+                                        variant="dashboard"
+                                        content1="This data was fetched once"
+                                        content2="at the time shown below." />
+                                    </FlexRow>
                                     <Text margin="0 0 0 0" variant="normal" color="lightgrey">October 8th 2021, 12:07 am</Text>
                                 </div>
                             </FlexRowCentered> */}
@@ -93,7 +100,7 @@ const DetailsPanel = styled(FlexCol)`
     background-color: ${({ theme }) => theme.bg16};
     border-radius: 14px 0 0 14px;
     border-style: dashed none dashed dashed;
-    z-index: 2;
+    z-index: 3;
     min-height: 90px;
     ${({ theme }) => theme.mediaWidth.lg`
         bottom: -20px;
@@ -102,6 +109,7 @@ const DetailsPanel = styled(FlexCol)`
         width: 350px;
         padding: 10px 20px;
         padding-bottom: 30px;
+        z-index: 0;
     `};
     ${({ theme }) => theme.mediaWidth.md`
         padding: 10px 20px;
