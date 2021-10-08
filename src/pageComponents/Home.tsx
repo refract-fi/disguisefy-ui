@@ -16,7 +16,8 @@ const Index = () => {
     duration: 3600,
     preset: null,
     groupAssetsUnder: 0.1,
-    isAssetGroupActive: false,
+    isGroupAssetsUnder: false,
+    ignoreNFTs: false
   })
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
@@ -59,8 +60,9 @@ const Index = () => {
       name: '',
       duration: 3600,
       preset: null,
-      groupAssetsUnder: 0,
-      isAssetGroupActive: false,
+      groupAssetsUnder: 0.1,
+      isGroupAssetsUnder: false,
+      ignoreNFTs: false
     })
     setActive(false)
     Array.from(document.querySelectorAll("input")).forEach(
@@ -71,12 +73,16 @@ const Index = () => {
 
   const postForm = async (resolvedAddress?: string) => {
     setAwaitingLink(true)
-    try{
+    try {
       const res = await axios.post(`https://api.disguisefy.xyz/disguises/generate`, {
         address: resolvedAddress ? resolvedAddress : form.address,
         name: form.name,
         duration: form.duration,
-        preset: form.preset
+        preset: form.preset,
+        isGroupAssetsUnder: form.isGroupAssetsUnder,
+        groupAssetsUnder: form.groupAssetsUnder,
+        ignoreNFTs: form.ignoreNFTs
+
       }, {
         headers: {
           "x-api-key": "K4QouFjJu7xawHQq"
@@ -85,7 +91,7 @@ const Index = () => {
       setUrl(res.data.url)
       setAwaitingLink(false)
       setActive(true)
-    }catch(e){
+    } catch (e) {
       setAwaitingLink(false)
       console.log(e);
     }
@@ -165,6 +171,11 @@ const Index = () => {
               placeholder="0x...*"
               onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
               width="100%"
+              onKeyDown={(e) => {
+                if(e.code == "Enter"){
+                  onDisguiseClick()
+                }
+              }}
             />
             {
               awaitingENSResolve &&

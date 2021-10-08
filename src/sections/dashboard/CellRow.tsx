@@ -10,12 +10,20 @@ const CellRowComponent = ({ value, preset }) => {
             <FlexCentered>
                 <IconWrapper>
                     {
-                        value?.tokens?.length >= 1 &&
+                        value.label == "Grouped Assets" &&
+                        <Circle>
+                            <Logo src={"/coins.svg"} />
+                        </Circle>
+                    }
+                    {
+                        (value?.tokens?.length >= 1 && value.label !== 'Grouped Assets') &&
                         value?.tokens?.map((token, index) => {
                             if (index == 0) {
                                 return (
                                     <Circle>
-                                        <Logo src={token.img} />
+                                        <Logo onError={(e: any) => {
+                                            e.target.src = '/no_img.svg'
+                                        }} src={token.img} />
                                     </Circle>
                                 )
                             } else if (index == 1) {
@@ -29,17 +37,23 @@ const CellRowComponent = ({ value, preset }) => {
 
                     }
                     {
-                        (!value.tokens || value?.tokens?.length == 0) &&
+                        ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets') &&
                         <Circle>
                             <Logo src={value.img} />
                         </Circle>
                     }
                 </IconWrapper>
-                <Text variant="cell">{value.label}</Text>
+                {
+                    value.label == 'Grouped Assets' ? (
+                        <Text weight="bold" variant="cell">Other Assets</Text>
+                    ) : (
+                        <Text variant="cell">{value.label}</Text>
+                    )
+                }
             </FlexCentered>
             {
                 (value.percentage != null && preset == 10) &&
-                <Text variant="cell">{(Math.abs(value.percentage) < 0.1) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))} %</Text>
+                <Text variant="cell" weight={value.label == "Grouped Assets" && 'bold'}>{(Math.abs(value.percentage) < 0.1) ? '< 0.1' : Math.abs(value?.percentage.toFixed(1))} %</Text>
             }
         </CellRow>
     );
@@ -66,6 +80,7 @@ const Logo = styled.img<{ variant?: string }>`
             z-index: 2;
             width: 17px;
 	`}
+    border-radius: 50%;
 `
 const Circle = styled.div<{ variant?: string }>`
     z-index: 1;

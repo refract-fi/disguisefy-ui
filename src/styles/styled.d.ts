@@ -22,15 +22,19 @@ export interface Colors {
 
   level1: Color,
   level1Hover: Color,
+  level1Active: Color,
   
   level2: Color,
   level2Hover: Color,
+  level2Active: Color,
 
   level3: Color,
   level3Hover: Color,
+  level3Active: Color,
 
   level4: Color,
   level4Hover: Color,
+  level4Active: Color,
 
   i1: Color,
   i2: Color,

@@ -1,5 +1,5 @@
 import { Block, Text } from 'components';
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { FlexRowSpaceBetween } from 'styles/components';
 import { CellRow } from '.';
@@ -16,10 +16,17 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
             {
                 assetData &&
                 Object.entries(assetData).sort((a: any, b: any) => b[1].percentage - a[1].percentage).map((asset, index) => {
-                    return (
-                        <CellRow key={index} value={asset[1]} preset={preset} />
-                    )
+                    if(asset[0] != 'groupedAssets'){
+                        return (
+                            <CellRow key={index} value={asset[1]} preset={preset} />
+                        )
+                    }
                 })
+            }
+            {
+                assetData?.groupedAssets && (
+                    <CellRow value={assetData.groupedAssets} preset={preset} />
+                )
             }
         </CategoryBlock>
     );
