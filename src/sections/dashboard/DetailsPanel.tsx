@@ -37,7 +37,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                                 content1="This data was fetched once"
                                                 content2="at the time shown below." />
                                         </FlexRow>
-                                        <Text margin="0 0 0 0" variant="normal" color="lightgrey">October 8th 2021, 12:07 am</Text>
+                                        <Text margin="0 0 0 0" variant="normal" color="lightgrey">{data && moment.unix(data?.disguise?.generation).format("MMMM Do YYYY, h:mm a")}</Text>
                                     </div>
                                 </FlexRowCentered>}
                         </div>
