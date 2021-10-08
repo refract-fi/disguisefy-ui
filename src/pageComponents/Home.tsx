@@ -17,7 +17,8 @@ const Index = () => {
     preset: null,
     groupAssetsUnder: 0.1,
     isGroupAssetsUnder: false,
-    ignoreNFTs: false
+    ignoreNFTs: false,
+    isSnapshot: false
   })
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
@@ -62,7 +63,8 @@ const Index = () => {
       preset: null,
       groupAssetsUnder: 0.1,
       isGroupAssetsUnder: false,
-      ignoreNFTs: false
+      ignoreNFTs: false,
+      isSnapshot: false
     })
     setActive(false)
     Array.from(document.querySelectorAll("input")).forEach(
@@ -81,8 +83,8 @@ const Index = () => {
         preset: form.preset,
         isGroupAssetsUnder: form.isGroupAssetsUnder,
         groupAssetsUnder: form.groupAssetsUnder,
-        ignoreNFTs: form.ignoreNFTs
-
+        ignoreNFTs: form.ignoreNFTs,
+        isSnapshop: form.isSnapshot
       }, {
         headers: {
           "x-api-key": "K4QouFjJu7xawHQq"

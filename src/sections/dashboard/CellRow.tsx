@@ -21,15 +21,21 @@ const CellRowComponent = ({ value, preset }) => {
                             if (index == 0) {
                                 return (
                                     <Circle>
-                                        <Logo onError={(e: any) => {
-                                            e.target.src = '/no_img.svg'
-                                        }} src={token.img} />
+                                        <Logo
+                                            onError={(e: any) => {
+                                                e.target.src = '/no_img.svg'
+                                            }}
+                                            src={token.img} />
                                     </Circle>
                                 )
                             } else if (index == 1) {
                                 return (
                                     <Circle variant="small">
-                                        <Logo variant="small" src={token.img} />
+                                        <Logo variant="small"
+                                            onError={(e: any) => {
+                                                e.target.src = '/no_img.svg'
+                                            }}
+                                            src={token.img} />
                                     </Circle>
                                 )
                             }
@@ -39,7 +45,11 @@ const CellRowComponent = ({ value, preset }) => {
                     {
                         ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets') &&
                         <Circle>
-                            <Logo src={value.img} />
+                            <Logo
+                                onError={(e: any) => {
+                                    e.target.src = '/no_img.svg'
+                                }}
+                                src={value.img} />
                         </Circle>
                     }
                 </IconWrapper>

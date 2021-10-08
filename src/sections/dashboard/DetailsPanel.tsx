@@ -1,15 +1,17 @@
-import { Button, CopyLink, Text } from 'components';
+import { Button, CopyLink, Text, Tooltip } from 'components';
 import moment from 'moment';
 import React from 'react';
 import { Links, Menu } from 'sections/shared';
 import styled, { css, useTheme } from 'styled-components';
-import { Flex, FlexCol, FlexRowCentered } from 'styles/components';
+import { Flex, FlexCol, FlexRow, FlexRowCentered } from 'styles/components';
 import {Link} from 'react-router-dom';
+import Image from 'next/image';
 
 const DetailsPanelComponent = ({ loading, data }) => {
 
     const theme = useTheme()
 
+    console.log(typeof data?.disguise?.preset)
     return (
         <Wrapper>
             <DisLogo src="disguisefy_logo.svg" />
@@ -23,6 +25,20 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                 <CopyLink variant="details" url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
+                            {/* <FlexRowCentered>
+                                <SnowIcon src="./snow.svg" />
+                                <div>
+                                    <FlexRow>
+                                    <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>
+                                    <Tooltip
+                                        type="white"
+                                        variant="dashboard"
+                                        content1="This data was fetched once"
+                                        content2="at the time shown below." />
+                                    </FlexRow>
+                                    <Text margin="0 0 0 0" variant="normal" color="lightgrey">October 8th 2021, 12:07 am</Text>
+                                </div>
+                            </FlexRowCentered> */}
                         </div>
                     )
                 }
@@ -31,8 +47,16 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         <Button width="85px" size="small">New</Button>
                     </Link>
                 </Mobile>
-                <BatLoverImg src="batlover_img.svg" />
+
+                {
+                    data?.disguise?.preset == 10 &&
+                    <PresetImage preset={data?.disguise?.preset} src="preset_10.svg" />
+                }
             </DetailsPanel>
+            {
+                data?.disguise?.preset == 20 &&
+                <PresetImage preset={data?.disguise?.preset} src="preset_20.svg" />
+            }
             <LinksWrapper>
                 <Link to="/">
                     <Button width="85px" size="small">New</Button>
@@ -70,12 +94,13 @@ const Wrapper = styled.div`
 const DetailsPanel = styled(FlexCol)`
     position: relative;
     min-height: fit-content;
+    z-index: 2;
     border: 1px dotted ${({ theme }) => theme.accent};
     padding: 20px;
     background-color: ${({ theme }) => theme.bg16};
     border-radius: 14px 0 0 14px;
     border-style: dashed none dashed dashed;
-    z-index: 2;
+    z-index: 3;
     min-height: 90px;
     ${({ theme }) => theme.mediaWidth.lg`
         bottom: -20px;
@@ -84,6 +109,7 @@ const DetailsPanel = styled(FlexCol)`
         width: 350px;
         padding: 10px 20px;
         padding-bottom: 30px;
+        z-index: 0;
     `};
     ${({ theme }) => theme.mediaWidth.md`
         padding: 10px 20px;
@@ -116,14 +142,26 @@ const Mobile = styled.div`
     `};
 `
 
+const SnowIcon = styled.img`
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+`
 
-const BatLoverImg = styled.img`
+const PresetImage = styled.img<{ preset: number }>`
     position:fixed;
     width: 220px;
     bottom: 0px;
     ${({ theme }) => theme.mediaWidth.lg`
         display: none;
     `};
+    ${props => props.preset == 20 &&
+        css`
+        position: relative;
+    `};
+    @media (max-height: 540px){
+        display: none;
+    }
 `
 
 const DisLogo = styled.img`

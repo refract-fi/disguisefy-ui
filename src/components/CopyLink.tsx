@@ -9,7 +9,7 @@ const CopyLinkComponent: FC<{ url: string, variant?: string }> = ({ url, variant
     const [tooltipActive, setTooltipActive] = useState(false);
 
     const onCopyClick = async () => {
-        navigator.clipboard.writeText(`${window.location.origin}/#/${url}`)
+        navigator.clipboard.writeText(`${window.location.origin}/${url}`)
         await setTooltipActive(true)
         setTimeout(() => setTooltipActive(false), 2000)
     }

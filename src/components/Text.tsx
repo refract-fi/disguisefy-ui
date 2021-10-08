@@ -10,6 +10,7 @@ type TextProps = {
     color?: string
     weight?: string
     size?: string
+    underline?: boolean
 }
 
 const Text = styled.p<TextProps>`
@@ -19,6 +20,7 @@ const Text = styled.p<TextProps>`
     margin: ${props => props.margin && props.margin};
     font-weight: ${props => props.weight && props.weight};
     font-size: ${props => props.size && props.size};
+    text-decoration: ${props => props.underline && 'underline'};
     ${(props) =>
         props.variant == 'title' &&
         css`
