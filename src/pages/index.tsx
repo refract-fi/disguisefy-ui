@@ -84,7 +84,8 @@ export default function Home() {
       preset: form.preset,
       isGroupAssetsUnder: form.isGroupAssetsUnder,
       groupAssetsUnder: form.groupAssetsUnder,
-      ignoreNFTs: form.ignoreNFTs
+      ignoreNFTs: form.ignoreNFTs,
+      isSnapshot: false
     }).then(function (response) {
       setUrl(response.data.url)
       setAwaitingLink(false)
