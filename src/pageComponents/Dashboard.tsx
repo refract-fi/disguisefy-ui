@@ -17,6 +17,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
 
     const getBalances = async () => {
+        setLoading(true)
         try{
             const res = await axios.get(`https://api.disguisefy.xyz/disguises/url/${id}/balances`, {
                 headers:{
@@ -25,7 +26,6 @@ const Dashboard = () => {
             })
             console.log(res)
             setData(res.data)
-            // console.log(res.data)
             await setLoading(false)
         }catch(e){   
             console.log(e)
@@ -36,7 +36,6 @@ const Dashboard = () => {
     useEffect(() => {
         if(id){
             getBalances()
-            setLoading(false)
         }
     }, [id])
 
