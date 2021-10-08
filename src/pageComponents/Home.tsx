@@ -84,7 +84,7 @@ const Index = () => {
         isGroupAssetsUnder: form.isGroupAssetsUnder,
         groupAssetsUnder: form.groupAssetsUnder,
         ignoreNFTs: form.ignoreNFTs,
-        isSnapshop: form.isSnapshot
+        isSnapshot: form.isSnapshot
       }, {
         headers: {
           "x-api-key": "K4QouFjJu7xawHQq"
