@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
-const CellRowComponent = ({ value, preset }) => {
+const CellRowComponent = ({ value, preset, type }) => {
 
     return (
         <CellRow>
@@ -57,7 +57,9 @@ const CellRowComponent = ({ value, preset }) => {
                     value.label == 'Grouped Assets' ? (
                         <Text weight="bold" variant="cell">Other Assets</Text>
                     ) : (
-                        <Text variant="cell">{value.label}</Text>
+                            type == 'Claimable' ? 
+                            <Text variant="cell">{value.label.includes('Claimable') ? value.label : `Claimable ${value.label}`}</Text> :
+                            <Text variant="cell">{value.label}</Text>
                     )
                 }
             </FlexCentered>
