@@ -15,7 +15,7 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`${window.location.origin.length > 36 ? window.location.origin.substring(0, 36) : window.location.origin}/#/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`${window.location.origin.length > 24 ? `${window.location.origin.substring(0, 24)}[...]` : window.location.origin}/#/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
                         <CopyLinkWrapper>
                             <CopyLink url={url} />
