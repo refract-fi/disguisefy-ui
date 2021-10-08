@@ -5,6 +5,8 @@ import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
 const CellRowComponent = ({ value, preset, type }) => {
 
+    console.log(type)
+
     return (
         <CellRow>
             <FlexCentered>
@@ -16,7 +18,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         </Circle>
                     }
                     {
-                        (value?.tokens?.length >= 1 && value.label !== 'Grouped Assets') &&
+                        (value?.tokens?.length >= 1 && value.label !== 'Grouped Assets' && type != 'Staked') &&
                         value?.tokens?.map((token, index) => {
                             if (index == 0) {
                                 return (
@@ -43,7 +45,7 @@ const CellRowComponent = ({ value, preset, type }) => {
 
                     }
                     {
-                        ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets') &&
+                        ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets' && type != 'Staked') &&
                         <Circle>
                             <Logo
                                 onError={(e: any) => {
@@ -52,12 +54,33 @@ const CellRowComponent = ({ value, preset, type }) => {
                                 src={value.img} />
                         </Circle>
                     }
+                    {
+                        ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets' && type == 'Staked') &&
+                        <Circle>
+                            <Logo
+                                onError={(e: any) => {
+                                    e.target.src = '/no_img.svg'
+                                }}
+                                src={value.img} />
+                        </Circle>
+                    }
+                    {
+                        (value.label !== 'Grouped Assets' && type == "Deposits") &&
+                        <Circle variant="small">
+                            <Logo variant="small"
+                                onError={(e: any) => {
+                                    e.target.src = '/no_img.svg'
+                                }}
+                                src={value?.protocolImg}
+                            />
+                        </Circle>
+                    }
                 </IconWrapper>
                 {
                     value.label == 'Grouped Assets' ? (
                         <Text weight="bold" variant="cell">Other Assets</Text>
                     ) : (
-                            type == 'Claimable' ? 
+                        type == 'Claimable' ?
                             <Text variant="cell">{value.label.includes('Claimable') ? value.label : `Claimable ${value.label}`}</Text> :
                             <Text variant="cell">{value.label}</Text>
                     )
