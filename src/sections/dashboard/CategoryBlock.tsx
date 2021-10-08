@@ -6,11 +6,10 @@ import { CellRow } from '.';
 const CategoryBlockComponent = ({ title, categoryData, assetData, display, preset }) => {
 
     const theme = useTheme();
-
     return (
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
             <FlexRowSpaceBetween width="100%">
-                <Text variant="block-title" color="white" margin="0 0 5px 0">{title}</Text>
+                <Text variant="block-title" color="white" margin="0 0 5px 0">{title == 'Claimable' ? 'Yield Farming' : title}</Text>
                 <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : categoryData?.toFixed(2)}%</Text>
             </FlexRowSpaceBetween>
             {
@@ -18,14 +17,14 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
                 Object.entries(assetData).sort((a: any, b: any) => preset == 10 ? b[1].percentage - a[1].percentage : a[1].percentage - b[1].percentage).map((asset, index) => {
                     if(asset[0] != 'groupedAssets'){
                         return (
-                            <CellRow key={index} value={asset[1]} preset={preset} />
+                            <CellRow key={index} type={title} value={asset[1]} preset={preset} />
                         )
                     }
                 })
             }
             {
                 assetData?.groupedAssets && (
-                    <CellRow value={assetData.groupedAssets} preset={preset} />
+                    <CellRow type={title} value={assetData.groupedAssets} preset={preset} />
                 )
             }
         </CategoryBlock>

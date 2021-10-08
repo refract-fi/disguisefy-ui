@@ -25,6 +25,7 @@
     "styled-reset": "^4.3.4"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "babel-plugin-styled-components": "latest",
     "typescript": "^4.4.3"
   }

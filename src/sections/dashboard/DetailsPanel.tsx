@@ -5,7 +5,7 @@ import { Links, Menu } from 'sections/shared';
 import styled, { css, useTheme } from 'styled-components';
 import { Flex, FlexCol, FlexRow, FlexRowCentered } from 'styles/components';
 import Link from 'next/link';
-import Image from 'next/image';
+import Logo from '../../../public/disguisefy_logo_2.svg';
 
 const DetailsPanelComponent = ({ loading, data }) => {
 
@@ -149,6 +149,8 @@ const SnowIcon = styled.img`
     margin-right: 10px;
 `
 
+
+
 const PresetImage = styled.img<{ preset: number }>`
     position:fixed;
     width: 220px;
@@ -175,6 +177,16 @@ const DisLogo = styled.img`
     display: none;
     `};
 `
+
+// const LogoWrapper = styled.div`
+//     position: absolute;
+//     width:40px;
+//     top: -32px;
+//     left: 40px;
+//     ${({ theme }) => theme.mediaWidth.lg`
+//     display: none;
+//     `};
+// `
 
 const LinksWrapper = styled.div`
     display: none;
