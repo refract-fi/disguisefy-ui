@@ -105,6 +105,21 @@ export const ExitButton = styled.img`
     `};
 `
 
+export const BackButton = styled.img`
+    width: 25px;
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    opacity: 0.8;
+    ${({ theme }) => theme.mediaWidth.sm`
+        width: 20px;
+    `};
+    &:hover{
+        opacity:1;
+    }
+`
+
 export const ResetButton = styled.img`
     width: 25px;
     cursor: pointer;

@@ -7,8 +7,6 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
 
     const theme = useTheme();
 
-
-    console.log(assetData?.groupedAssets)
     return (
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
             <FlexRowSpaceBetween width="100%">

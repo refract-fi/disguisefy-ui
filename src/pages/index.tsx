@@ -19,7 +19,8 @@ export default function Home() {
     preset: null,
     groupAssetsUnder: 0.1,
     isGroupAssetsUnder: false,
-    ignoreNFTs: false
+    ignoreNFTs: false,
+    isSnapshot: false
   })
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
@@ -64,7 +65,8 @@ export default function Home() {
       preset: null,
       groupAssetsUnder: 0.1,
       isGroupAssetsUnder: false,
-      ignoreNFTs: false
+      ignoreNFTs: false,
+      isSnapshot: false
     })
     setActive(false)
     Array.from(document.querySelectorAll("input")).forEach(
