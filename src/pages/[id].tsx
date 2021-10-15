@@ -25,8 +25,6 @@ const Dashboard = () => {
         });
         await setLoading(false)
     }
-
-    console.log(data)
     useEffect(() => {
         if(id){
             getBalances()

@@ -4,9 +4,6 @@ import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
 
 const CellRowComponent = ({ value, preset, type }) => {
-
-    console.log(type)
-
     return (
         <CellRow>
             <FlexCentered>

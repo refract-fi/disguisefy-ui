@@ -30,11 +30,11 @@ export default function handler(req, res) {
       }
     } catch (e) {
       console.log(e)
-      // if(e.response.status == 404){
-      //   res.status(404).json({
-      //     "error": "Write custom error"
-      //   })
-      // }
+      if(e.response.status == 404){
+        res.status(404).json({
+          "error": "Write custom error"
+        })
+      }
     } finally {
       // could have better error handling
       resolve();
