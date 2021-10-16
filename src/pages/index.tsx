@@ -76,9 +76,18 @@ export default function Home() {
 
 
   const postForm = async (resolvedAddress?: string) => {
-    setAwaitingLink(true)
+    setAwaitingLink(true);
+
+    let addresses = [];
+
+    if(resolvedAddress) {
+      addresses.push(resolvedAddress);
+    } else {
+      addresses.push(form.address);
+    }
+
     axios.post('/api/disguise', {
-      address: resolvedAddress ? resolvedAddress : form.address,
+      addresses: addresses,
       name: form.name,
       duration: form.duration,
       preset: form.preset,
