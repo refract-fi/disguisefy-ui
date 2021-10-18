@@ -53,7 +53,11 @@ export default function Home() {
   const onHelpClick = () => {
     setFormActive(false)
     setErrorMsg('')
-    setHelpActive(true)
+    helpActive ? (
+      setHelpActive(false)
+    ): (
+      setHelpActive(true)
+    )
   }
 
   const onResetClick = () => {
