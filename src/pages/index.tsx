@@ -171,7 +171,7 @@ export default function Home() {
           </Text>
           <TextInputWrapper>
             <TextInput
-              placeholder="0x...*"
+              placeholder="0x... or enter an ENS name*"
               onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
               width="100%"
               onKeyDown={(e) => {

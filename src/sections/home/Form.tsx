@@ -140,6 +140,11 @@ const StyledBlock = styled(Block)`
   padding: 25px 50px;
   ${({ theme }) => theme.mediaWidth.sm`
         padding: 30px 25px 20px;
+        min-height: 380px;
+  `};
+  ${({ theme }) => theme.mediaWidth.xs`
+        padding: 30px 25px 30px;
+        min-height: 380px;
   `};
 `
 
