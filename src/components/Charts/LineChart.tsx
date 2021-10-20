@@ -1,12 +1,14 @@
 import { Label, Text } from 'components';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexCol } from 'styles/components';
+import LineWrapper from './LineWrapper';
 
 //Improve the mess below
 const LineChartComponent = ({ data }) => {
 
     const [dataObj, setDataObj] = useState({});
+
 
     const theme = useTheme();
 
@@ -25,115 +27,96 @@ const LineChartComponent = ({ data }) => {
             checkDataLength()
         }
     }, [data])
-    
+
     return (
         <Component>
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
             <LineChart>
                 {
                     data?.wallet > 0.1 &&
-                    <LineWrapper flex={data.wallet}>
-                        <Line
-                            first={true}
-                            last={Object.values(dataObj).length == 1}
-                            color={theme.i1}
-                        />
-                        <Label
-                            type="top"
-                            name={"Wallet"}
-                            percent={data.wallet.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.wallet}
+                        first={true}
+                        last={Object.values(dataObj).length == 1}
+                        color={theme.i1}
+                        type="top"
+                        name="Wallet"
+                        percent={data.wallet.toFixed(2)}
+                    />
                 }
                 {
                     data?.deposit > 0.1 &&
-                    <LineWrapper flex={data.deposit}>
-                        <Line
-                            first={Object.values(dataObj).includes('wallet')}
-                            last={!(Object.keys(dataObj).some(item => ['pool', 'staking', 'claimable', 'nft', 'investment'].includes(item)))}
-                            color={theme.i2}
-                        />
-                        <Label
-                            type="top"
-                            name={"Deposits"}
-                            percent={data.deposit.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.deposit}
+                        first={Object.values(dataObj).includes('wallet')}
+                        last={!(Object.keys(dataObj).some(item => ['pool', 'staking', 'claimable', 'nft', 'investment'].includes(item)))}
+                        color={theme.i2}
+                        type="top"
+                        name={"Deposits"}
+                        percent={data.deposit.toFixed(2)}
+                    />
                 }
                 {
                     data?.pool > 0.1 &&
-                    <LineWrapper flex={data.pool}>
-                        <Line
-                            first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit'].includes(item)))}
-                            last={!(Object.keys(dataObj).some(item => ['staking', 'claimable', 'nft', 'investment'].includes(item)))}
-                            color={theme.i3}
-                        />
-                        <Label
-                            type="top"
-                            name={"Liquidity Pools"}
-                            percent={data.pool.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.pool}
+                        first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit'].includes(item)))}
+                        last={!(Object.keys(dataObj).some(item => ['staking', 'claimable', 'nft', 'investment'].includes(item)))}
+                        color={theme.i3}
+                        type="top"
+                        name={"Liquidity Pools"}
+                        percent={data.pool.toFixed(2)}
+
+                    />
                 }
                 {
                     data?.staking > 0.1 &&
-                    <LineWrapper flex={data.staking}>
-                        <Line
-                            first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool'].includes(item)))}
-                            last={!(Object.keys(dataObj).some(item => ['claimable', 'nft', 'investment'].includes(item)))}
-                            color={theme.i4}
-                        />
-                        <Label
-                            type="top"
-                            name={"Staking"}
-                            percent={data.staking.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.staking}
+                        first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool'].includes(item)))}
+                        last={!(Object.keys(dataObj).some(item => ['claimable', 'nft', 'investment'].includes(item)))}
+                        color={theme.i4}
+                        type="top"
+                        name={"Staking"}
+                        percent={data.staking.toFixed(2)}
+                    />
                 }
                 {
                     data?.claimable > 0.1 &&
-                    <LineWrapper flex={data.claimable}>
-                        <Line
-                            first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking'].includes(item)))}
-                            last={!(Object.keys(dataObj).some(item => ['nft', 'investment'].includes(item)))}
-                            color={theme.i5}
-                        />
-                        <Label
-                            type="top"
-                            name={"Claimable"}
-                            percent={data.claimable.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.claimable}
+                        first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking'].includes(item)))}
+                        last={!(Object.keys(dataObj).some(item => ['nft', 'investment'].includes(item)))}
+                        color={theme.i5}
+                        type="top"
+                        name={"Claimable"}
+                        percent={data.claimable.toFixed(2)}
+
+                    />
                 }
                 {
                     data?.nft > 0.1 &&
-                    <LineWrapper flex={data.nft}>
-                        <Line
-                            first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking', 'claimable'].includes(item)))}
-                            last={!(Object.values(dataObj).includes('investment'))}
-                            color={theme.i6}
-                        />
-                        <Label
-                            type="top"
-                            name={"NFTs"}
-                            percent={data.nft.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.nft}
+                        first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking', 'claimable'].includes(item)))}
+                        last={!(Object.values(dataObj).includes('investment'))}
+                        color={theme.i6}
+                        type="top"
+                        name={"NFTs"}
+                        percent={data.nft.toFixed(2)}
+                    />
                 }
                 {
                     data?.investment > 0.1 &&
-                    <LineWrapper flex={data.investment}>
-                        <Line
-                            first={Object.values(dataObj).length == 1}
-                            last={true}
-                            color={theme.i7}
-                        />
-                        <Label
-                            type="top"
-                            name={"Investments"}
-                            percent={data.investment.toFixed(2)}
-                        />
-                    </LineWrapper>
+                    <LineWrapper
+                        flex={data.investment}
+                        first={Object.values(dataObj).length == 1}
+                        last={true}
+                        color={theme.i7}
+                        type="top"
+                        name={"Investments"}
+                        percent={data.investment.toFixed(2)}
+                    />
                 }
                 {
                     data?.debt > 0.1 && (
@@ -170,20 +153,6 @@ const LineChart = styled(Flex)`
     position: relative;
 `;
 
-const LineWrapper = styled(FlexCol) <{ flex: number }>`
-    flex: ${props => props.flex > 0.1 ? props.flex : 0.020};
-    min-width: 60px;
-`
-
-const Line = styled.div<{ first: boolean, last: boolean }>`
-    background-color: ${props => props.color};
-    height: 24px;
-    border-radius: ${props => props.first ? "20px" : "0px"} ${props => props.last ? "20px" : "0px"} ${props => props.last ? "20px" : "0px"} ${props => props.first ? "20px" : "0px"};
-    &:hover{
-        filter: brightness(1.1);
-    }
-`
-
 const BorrowedLineWrapper = styled.div<{ width: number }>`
     position: absolute;
     right: 0;
@@ -191,7 +160,7 @@ const BorrowedLineWrapper = styled.div<{ width: number }>`
     width: ${props => props.width && `${props.width}%`};
     top: 35px;
     transform: translate(0, -100%); 
-    min-width: 30px;
+    min-width: 27px;
 `
 
 const BorrowedLine = styled.div<{}>`
