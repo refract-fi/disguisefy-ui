@@ -28,6 +28,7 @@ const LineChartComponent = ({ data }) => {
         }
     }, [data])
 
+    console.log(data.debt)
     return (
         <Component>
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
@@ -155,8 +156,7 @@ const LineChart = styled(Flex)`
 
 const BorrowedLineWrapper = styled.div<{ width: number }>`
     position: absolute;
-    right: 0;
-    padding-right: 20px;
+    right: 20px;
     width: ${props => props.width && `${props.width}%`};
     top: 35px;
     transform: translate(0, -100%); 
@@ -164,7 +164,7 @@ const BorrowedLineWrapper = styled.div<{ width: number }>`
 `
 
 const BorrowedLine = styled.div<{}>`
-    background-color: ${({ theme }) => theme.red};;
+    background-color: ${({ theme }) => theme.red};
     border-radius: 0px 20px 0px 0px;
     height: 10px;
     width: 100%;

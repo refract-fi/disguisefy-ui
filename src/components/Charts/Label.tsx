@@ -23,7 +23,4 @@ const Label = styled(FlexColAllCentered)<{type?: string, percent?: any}>`
     margin-top: ${props => props.type == "top" && "15px"};
     margin-bottom: ${props => props.type == "bot" && "5px"};
     text-align: center;
-    .hover{
-        display: flex;
-    }
 `;

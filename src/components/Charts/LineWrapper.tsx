@@ -35,7 +35,8 @@ export default LineWrapperComponent;
 
 
 const LineWrapper = styled(FlexCol) <{ flex: number }>`
-    flex: ${props => props.flex > 0.1 ? props.flex : 0.020};
+    /* flex: ${props => props.flex}; */
+    width: ${props => props.flex}%;
     min-width: 10px;
     &:hover{
         
