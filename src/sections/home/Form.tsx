@@ -13,10 +13,10 @@ type FormComponentProps = {
     durationValue: number
     onFormSubmit: any
     awaitingLink: boolean
-    errorMsg: string
+    formMsg: string
 }
 
-const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, errorMsg }) => {
+const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, formMsg }) => {
 
     const [isAdvancedActive, setIsAdvancedActive] = useState(false)
 
@@ -103,7 +103,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             </StyledBlock>
             <ButtonWrapper>
                 <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
-                <Text color={"red"} margin="5px 0 0 0">{errorMsg && errorMsg}</Text>
+                <Text color={formMsg == "Don't worry, this can take a few seconds" ? "white" : "red"} margin="5px 0 0 0">{formMsg && formMsg}</Text>
             </ButtonWrapper>
         </FormWrapper >
     );

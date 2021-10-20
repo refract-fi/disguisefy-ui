@@ -26,13 +26,13 @@ export default function Home() {
   const [durationValue, setDurationValue] = useState(0)
   const [url, setUrl] = useState('')
   const [active, setActive] = useState(false)
-  const [errorMsg, setErrorMsg] = useState(null)
+  const [formMsg, setFormMsg] = useState(null)
   const [helpActive, setHelpActive] = useState(false)
   const [awaitingLink, setAwaitingLink] = useState(false)
   const [awaitingENSResolve, setAwaitingENSResolve] = useState(false)
 
   const onDisguiseClick = async () => {
-    setErrorMsg('')
+    setFormMsg('')
     setHelpActive(false)
     if (isAddress(form.address)) {
       setFormActive(true)
@@ -44,7 +44,7 @@ export default function Home() {
         setAwaitingENSResolve(false)
         setFormActive(true)
       } else {
-        setErrorMsg('Not a valid address')
+        setFormMsg('Not a valid address')
         setAwaitingENSResolve(false)
       }
     }
@@ -52,7 +52,7 @@ export default function Home() {
 
   const onHelpClick = () => {
     setFormActive(false)
-    setErrorMsg('')
+    setFormMsg('')
     helpActive ? (
       setHelpActive(false)
     ): (
@@ -80,7 +80,11 @@ export default function Home() {
 
 
   const postForm = async (resolvedAddress?: string) => {
+    setFormMsg(null)
     setAwaitingLink(true)
+    setTimeout(() => {
+      setFormMsg("Don't worry, this can take a few seconds")
+    }, 3500)
     axios.post('/api/disguise', {
       address: resolvedAddress ? resolvedAddress : form.address,
       name: form.name,
@@ -94,24 +98,26 @@ export default function Home() {
       setUrl(response.data.url)
       setAwaitingLink(false)
       setActive(true)
+      setFormMsg(null)
     }).catch(function (error) {
       setAwaitingLink(false)
+      setFormMsg('Error: Could not create link, please try again')
       console.log(error);
     });
   }
 
   const onFormSubmit = async () => {
-    setErrorMsg(null)
+    setFormMsg(null)
     setAwaitingLink(true)
     if (form.name.length > 36) {
       console.log("[ERROR] Name is too long")
-      setErrorMsg("Name is too long")
+      setFormMsg("Name is too long")
       setAwaitingLink(false)
       return;
     }
     if (!form.preset) {
       console.log("[ERROR] No Privacy Level Selected")
-      setErrorMsg("No Privacy Level Selected")
+      setFormMsg("No Privacy Level Selected")
       setAwaitingLink(false)
       return;
     }
@@ -122,7 +128,7 @@ export default function Home() {
       if (resolvedAddress) {
         postForm(resolvedAddress)
       } else {
-        setErrorMsg('Not a valid address')
+        setFormMsg('Not a valid address')
         setAwaitingLink(false)
       }
     }
@@ -190,7 +196,7 @@ export default function Home() {
           <Button width="wide" margin="12px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
           <Button variant="underline" onClick={() => onHelpClick()}>What is dis?</Button>
           {
-            <ErrorText color={"red"}>{(errorMsg && !formActive) && errorMsg}</ErrorText>
+            <ErrorText color={"red"}>{(formMsg && !formActive) && formMsg}</ErrorText>
           }
           {
             formActive && (
@@ -201,7 +207,7 @@ export default function Home() {
                 durationValue={durationValue}
                 onFormSubmit={onFormSubmit}
                 awaitingLink={awaitingLink}
-                errorMsg={errorMsg}
+                formMsg={formMsg}
               />
             )
           }
