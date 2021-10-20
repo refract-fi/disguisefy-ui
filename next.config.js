@@ -1,8 +1,8 @@
 module.exports = {
-    env: {
-        REST_API_URL: 'https://api.disguisefy.xyz',
-        REST_API_KEY: 'K4QouFjJu7xawHQq'
-    },
+    // env: {
+    //     REST_API_URL: 'https://api.disguisefy.xyz',
+    //     REST_API_KEY: 'K4QouFjJu7xawHQq'
+    // },
     webpack(config) {
         config.module.rules.push({
           test: /\.svg$/i,
