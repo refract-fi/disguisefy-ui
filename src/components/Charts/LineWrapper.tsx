@@ -6,8 +6,6 @@ import { FlexCol } from 'styles/components';
 const LineWrapperComponent = ({ flex, first, last, color, type, name, percent }) => {
     const [isShown, setIsShown] = useState(false);
 
-    console.log(isShown)
-
     return (
         <LineWrapper flex={flex}>
             <Line
