@@ -48,16 +48,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         <Button width="85px" size="small">New</Button>
                     </Link>
                 </Mobile>
-
-                {
-                    data?.disguise?.preset == 10 &&
-                    <PresetImage preset={data?.disguise?.preset} src="preset_10.svg" />
-                }
             </DetailsPanel>
-            {
-                data?.disguise?.preset == 20 &&
-                <PresetImage preset={data?.disguise?.preset} src="preset_20.svg" />
-            }
             <LinksWrapper>
                 <Link href="/">
                     <Button width="85px" size="small">New</Button>
