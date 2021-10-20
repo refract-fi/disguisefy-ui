@@ -102,7 +102,6 @@ export default function Home() {
     }).catch(function (error) {
       setAwaitingLink(false)
       setFormMsg('Error: Could not create link, please try again')
-      console.log(error);
     });
   }
 
