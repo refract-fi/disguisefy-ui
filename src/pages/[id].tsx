@@ -30,6 +30,7 @@ const Dashboard = () => {
             getBalances()
         }
     }, [id])
+    
     return (
         <Wrapper>
             <Menu />
