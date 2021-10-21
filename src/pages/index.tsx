@@ -85,7 +85,9 @@ export default function Home() {
     setFormMsg(null)
     setAwaitingLink(true)
     setTimeout(() => {
-      setFormMsg("Don't worry, this can take a few seconds")
+      if(awaitingLink) {
+        setFormMsg("Don't worry, this can take a few seconds");
+      }
     }, 3500)
     axios.post('/api/disguise', {
       address: resolvedAddress ? resolvedAddress : form.address,
