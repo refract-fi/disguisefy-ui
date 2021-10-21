@@ -12,7 +12,10 @@ function MyApp({ Component, pageProps }) {
           <link rel="stylesheet" href="https://use.typekit.net/ukf1mgq.css" />
           <link rel="icon" type="image/png" href="/disguisefy_favicon.png" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-          <script defer data-domain="disguisefy.xyz" src="https://plausible.io/js/plausible.js"></script>
+          {
+            process.env.NEXT_PUBLIC_ENV == 'prod' && 
+            <script defer data-domain="disguisefy.xyz" src="https://plausible.io/js/plausible.js"></script>
+          }
         </Head>
         <GlobalStyle />
         <Layout>
