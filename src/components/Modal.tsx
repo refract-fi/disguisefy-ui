@@ -14,7 +14,7 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`disguisefy.xyz/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`${process.env.NEXT_PUBLIC_HOST_URL}/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
                         <CopyLinkWrapper>
                             <CopyLink url={url} />
