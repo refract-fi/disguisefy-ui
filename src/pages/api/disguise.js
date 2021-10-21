@@ -29,9 +29,13 @@ export default function handler(req, res) {
         console.log(`[disguiseHandler Error]: method ${req.method} is not acceptable.`);
       }
     } catch (e) {
-      if(e.response.status == 404){
+      if (e?.response?.status == 404) {
         res.status(404).json({
-          "error": "Write custom error"
+          "error": "Link expired or does not exist"
+        })
+      } else {
+        res.status(e?.response?.status).json({
+          "error": `${e.response?.status}`
         })
       }
     } finally {

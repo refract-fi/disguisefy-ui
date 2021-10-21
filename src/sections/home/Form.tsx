@@ -30,6 +30,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             preset: null,
             groupAssetsUnder: 0.1,
             isGroupAssetsUnder: false,
+            showNFTCollections: false,
             ignoreNFTs: false,
             isSnapshot: false
         })
@@ -54,6 +55,13 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                                     content1="Data is frozen in time at link creation."
                                     content2="This data is stored in decentralized storage." />
                             </CheckboxWrapper>
+                            <CheckboxWrapper margin="1rem 0 0.5rem 0">
+                                    <Checkbox
+                                        checked={form.showNFTCollections}
+                                        onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, showNFTCollections: !form.showNFTCollections })}
+                                    />
+                                    <Text color="black" size="1.1rem">Show NFT Collections</Text>
+                                </CheckboxWrapper>
                         </AdvancedSettings>
                     ) : (
                         <NormalSettings>
@@ -65,7 +73,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                             />
                             <Text align="center" margin="20px 0 15px 0" variant="subtitle" color="black">Privacy Level</Text>
                             <PrivacySelect level={form.preset} form={form} setForm={setForm} />
-                            <Text align="center" margin="20px 0 15px 0" variant="subtitle" color="black">Duration</Text>
+                            <Text align="center" margin="20px 0 15px 0" variant="subtitle" color="black">Link Duration</Text>
                             <Slider durationValue={durationValue} duration={form.duration} form={form} setForm={setForm} />
                             <CheckboxRow>
                                 <CheckboxWrapper margin="1rem 0 0.5rem 0">
@@ -90,7 +98,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                                         checked={form.ignoreNFTs}
                                         onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, ignoreNFTs: !form.ignoreNFTs })}
                                     />
-                                    <Text color="black" size="1.1rem">Ignore NFTs</Text>
+                                    <Text color="black" size="1.1rem">Ignore NFT assets</Text>
                                 </CheckboxWrapper>
                             </CheckboxRow>
                             <AdvancedSettingsBlock>
@@ -99,7 +107,6 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
                         </NormalSettings>
                     )
                 }
-
             </StyledBlock>
             <ButtonWrapper>
                 <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
