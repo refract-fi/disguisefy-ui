@@ -14,7 +14,7 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
             </FlexRowSpaceBetween>
             {
                 assetData &&
-                Object.entries(assetData).sort((a: any, b: any) => preset == 10 ? b[1].percentage - a[1].percentage : a[1].percentage - b[1].percentage).map((asset, index) => {
+                Object.entries(assetData).sort((a: any, b: any) => (preset == 10 || preset == 0) ? b[1].percentage - a[1].percentage : a[1].percentage - b[1].percentage).map((asset, index) => {
                     if(asset[0] != 'groupedAssets'){
                         return (
                             <CellRow key={index} type={title} value={asset[1]} preset={preset} />
