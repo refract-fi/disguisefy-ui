@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Flex } from 'styles/components';
 
 const DropdownTextInputComponent: FC<{ index: any, addresses: any, value: any, handleRemoveClick: any, handleAddClick: any, onChange: any, setIsShown: any, isShown: boolean }> = ({ index, addresses, value, handleRemoveClick, handleAddClick, onChange, setIsShown, isShown }) => {
-    console.log(addresses.length)
     return (
         <DropdownTextInput index={index}>
             <TextInput

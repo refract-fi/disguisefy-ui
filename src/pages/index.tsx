@@ -39,15 +39,24 @@ export default function Home() {
       setFormActive(true)
     } else {
       setAwaitingENSResolve(true)
-      
-      let resolvedAddress = await isENS(form.address[0])
-      if (resolvedAddress) {
-        setAwaitingENSResolve(false)
-        setFormActive(true)
-      } else {
-        setFormMsg('Not a valid address')
-        setAwaitingENSResolve(false)
+      for (let address of form.address) {
+        if (isAddress(address)) {
+          console.log("Valid Address")
+        } else if (address === '') {
+          setFormMsg('You have an empty input')
+          setAwaitingENSResolve(false)
+          return;
+        } else {
+          let resolvedAddress = await isENS(address)
+          if (!resolvedAddress) {
+            setFormMsg(`${address} is not a valid Address or ENS`)
+            setAwaitingENSResolve(false)
+            return;
+          }
+        }
       }
+      await setAwaitingENSResolve(false)
+      await setFormActive(true)
     }
   }
 
@@ -56,7 +65,7 @@ export default function Home() {
     setFormMsg('')
     helpActive ? (
       setHelpActive(false)
-    ): (
+    ) : (
       setHelpActive(true)
     )
   }
@@ -80,20 +89,14 @@ export default function Home() {
     );
   }
 
-  useEffect(() => {
-    console.log(form)
-  }, [form])
-
-  const postForm = async (resolvedAddress?: string) => {
+  const postForm = async (addressArray: Array<string>) => {
     setFormMsg(null)
     setAwaitingLink(true)
     setTimeout(() => {
-      if(awaitingLink) {
-        setFormMsg("Don't worry, this can take a few seconds");
-      }
+      setFormMsg("Don't worry, this can take a few seconds");
     }, 3500)
     axios.post('/api/disguise', {
-      address: form.address,
+      address: addressArray,
       name: form.name,
       duration: form.duration,
       preset: form.preset,
@@ -128,16 +131,29 @@ export default function Home() {
       setAwaitingLink(false)
       return;
     }
-    if(form.address.every(isAddress)) {
-      postForm()
+    if (form.address.every(isAddress)) {
+      postForm(form.address)
     } else {
-      let resolvedAddress = await isENS(form.address[0])
-      if (resolvedAddress) {
-        postForm(resolvedAddress)
-      } else {
-        setFormMsg('Not a valid address')
-        setAwaitingLink(false)
+      let addressArray = []
+      let index = 0
+      for (let address of form.address) {
+        index += 1
+        if (isAddress(address)) {
+          addressArray.push(address)
+        } else if (address == '') {
+          console.log('Empty String removed')
+        } else {
+          let resolvedAddress = await isENS(address)
+          if (!resolvedAddress) {
+            setFormMsg(`${address} is not a valid address or ENS`)
+            setAwaitingLink(false)
+            return;
+          } else {
+            addressArray.push(resolvedAddress)
+          }
+        }
       }
+      postForm(addressArray)
     }
   }
 
@@ -188,15 +204,15 @@ export default function Home() {
               setForm={setForm}
               onDisguiseClick={onDisguiseClick}
             />
-            {
-              awaitingENSResolve &&
-              <SpinnerWrapper>
-                <Spinner variant="textinput" />
-              </SpinnerWrapper>
-            }
           </TextInputWrapper>
           <Button width="wide" margin="12px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
           <Button variant="underline" onClick={() => onHelpClick()}>What is dis?</Button>
+          {
+            awaitingENSResolve &&
+            <SpinnerWrapper>
+              <Spinner variant="textinput" />
+            </SpinnerWrapper>
+          }
           {
             <ErrorText color={"red"}>{(formMsg && !formActive) && formMsg}</ErrorText>
           }
@@ -268,9 +284,9 @@ const TextInputWrapper = styled.div`
 const SpinnerWrapper = styled.div`
   position: absolute;
   height: 100%;
-  top: 0;
+  width: 100%;
+  justify-content: center;
   display: flex;
   align-items: center;
-  right: 0;
   padding-right: 10px;
 `
