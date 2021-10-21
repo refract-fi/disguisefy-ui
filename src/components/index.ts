@@ -13,6 +13,5 @@ import { Bold } from './Text';
 import { Logo } from './Images' ;
 import CopyLink from './CopyLink';
 import Tooltip from './Tooltip';
-import Select from './Select';
 
-export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink, BackButton, Tooltip, Select};
+export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink, BackButton, Tooltip};
