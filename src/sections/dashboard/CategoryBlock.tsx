@@ -4,13 +4,16 @@ import styled, { useTheme } from 'styled-components';
 import { FlexRowSpaceBetween } from 'styles/components';
 import { CellRow } from '.';
 const CategoryBlockComponent = ({ title, categoryData, assetData, display, preset }) => {
-
     const theme = useTheme();
+    const round = (value) => {
+        return Math.round((value + Number.EPSILON) * 100) / 100;
+    }
+    
     return (
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
             <FlexRowSpaceBetween width="100%">
                 <Text variant="block-title" color="white" margin="0 0 5px 0">{title == 'Claimable' ? 'Yield Farming' : title}</Text>
-                <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : categoryData?.toFixed(2)}%</Text>
+                <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : round(categoryData)}%</Text>
             </FlexRowSpaceBetween>
             {
                 assetData &&
