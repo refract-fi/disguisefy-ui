@@ -1,23 +1,22 @@
 import { LineChart } from 'components';
 import Spinner from 'components/Spinner';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex, FlexCol, FlexRow, FlexRowSpaceAround, FlexRowSpaceBetween, Tablet } from 'styles/components';
 import { CategoryBlock, RequestError } from '.';
 
 
-const MainPanelComponent = ({ data, loading }) => {
+const MainPanelComponent = ({ data, error, loading }) => {
 
     let preset = data?.disguise?.preset
 
     return (
-        <MainPanel loading={loading} error={(data == 404 || data == 408 || data == 500) && true}>
-
+        <MainPanel loading={loading} error={(error == 404 || error == 408 || error == 500 || error == 999) && true}>
             {
                 loading ? <Spinner /> :
                     (
-                        (data == 404 || data == 408 || data == 500) ? (
-                        <RequestError type={data} />
+                        (error == 404 || error == 408 || error == 500 || error == 999) ? (
+                        <RequestError error={error} />
                     ) : (
                         <>
                             <Tablet>

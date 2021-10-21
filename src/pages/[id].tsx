@@ -14,13 +14,23 @@ const Dashboard = () => {
     const { id } = router.query
 
     const [data, setData] = useState();
+    const [error, setError] = useState<string | number>();
     const [loading, setLoading] = useState<boolean>(true);
+
+    const checkPercent = (percent) => {
+        return percent == 0
+    }
 
     const getBalances = async () => {
         await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
             setData(response.data)
+            let isEthCompatible = !Object.values(response.data.percentages).every(checkPercent)
+            if(!isEthCompatible){
+                setError(999)
+            }
         }).catch(function (error) {
-            setData(error.response!.status)
+            setData(null)
+            setError(error.response!.status)
             setLoading(false)
         });
         await setLoading(false)
@@ -35,7 +45,7 @@ const Dashboard = () => {
         <Wrapper>
             <Menu />
             <DetailsPanel data={data} loading={loading} />
-            <MainPanel data={data} loading={loading} />
+            <MainPanel data={data} error={error} loading={loading} />
             <Footer />
         </Wrapper>
     );
