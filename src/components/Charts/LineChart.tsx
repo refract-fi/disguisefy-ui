@@ -27,8 +27,6 @@ const LineChartComponent = ({ data }) => {
             checkDataLength()
         }
     }, [data])
-
-    console.log(data.debt)
     return (
         <Component>
             <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
@@ -122,11 +120,11 @@ const LineChartComponent = ({ data }) => {
                 {
                     data?.debt > 0.1 && (
                         <BorrowedLineWrapper
-                            width={Math.abs(data.debt)}>
+                            width={Math.abs(data?.debt)}>
                             <Label
                                 type="bot"
                                 name={"Debt"}
-                                percent={Math.abs(data.debt.toFixed(2))}
+                                percent={Math.abs(data?.debt.toFixed(2))}
                             />
                             <BracketLine />
                             <BracketBox />

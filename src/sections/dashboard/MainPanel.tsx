@@ -11,13 +11,13 @@ const MainPanelComponent = ({ data, loading }) => {
     let preset = data?.disguise?.preset
 
     return (
-        <MainPanel loading={loading} error={data == 404 && true}>
+        <MainPanel loading={loading} error={(data == 404 || data == 408 || data == 500) && true}>
 
             {
                 loading ? <Spinner /> :
                     (
-                        data == 404 ? (
-                        <RequestError type="404" />
+                        (data == 404 || data == 408 || data == 500) ? (
+                        <RequestError type={data} />
                     ) : (
                         <>
                             <Tablet>
