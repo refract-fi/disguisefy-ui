@@ -20,6 +20,7 @@ export default function Home() {
     groupAssetsUnder: 0.1,
     isGroupAssetsUnder: false,
     ignoreNFTs: false,
+    showNFTCollections: false,
     isSnapshot: false
   })
   const [formActive, setFormActive] = useState(false)
@@ -70,6 +71,7 @@ export default function Home() {
       groupAssetsUnder: 0.1,
       isGroupAssetsUnder: false,
       ignoreNFTs: false,
+      showNFTCollections: false,
       isSnapshot: false
     })
     setActive(false)
@@ -93,6 +95,7 @@ export default function Home() {
       isGroupAssetsUnder: form.isGroupAssetsUnder,
       groupAssetsUnder: form.groupAssetsUnder,
       ignoreNFTs: form.ignoreNFTs,
+      showNFTCollections: form.showNFTCollections,
       isSnapshot: form.isSnapshot
     }).then(function (response) {
       setUrl(response.data.url)
