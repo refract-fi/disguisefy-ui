@@ -19,6 +19,7 @@ const TextInput = styled.input<TextInputProps>`
     padding: 0.65rem 0.8rem;
     border: 1px solid black;
     border-radius: 3px;
+    width: 100%;
     text-align: ${props => props.align && props.align};
     background-color: ${({ theme }) => theme.input};
     width: ${props => props.width && props.width};

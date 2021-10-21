@@ -1,5 +1,4 @@
-import { Button, Modal, Text } from "components";
-import { TextInput } from "components";
+import { Button, Modal, Text, TextInputDropdown } from "components";
 import { ChangeEvent, useEffect, useState } from "react";
 import styled, { useTheme } from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
@@ -13,7 +12,7 @@ import { provider } from "utils/provider";
 export default function Home() {
 
   const [form, setForm] = useState({
-    address: null,
+    address: [''],
     name: '',
     duration: 3600,
     preset: null,
@@ -23,6 +22,7 @@ export default function Home() {
     showNFTCollections: false,
     isSnapshot: false
   })
+
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
   const [url, setUrl] = useState('')
@@ -35,13 +35,13 @@ export default function Home() {
   const onDisguiseClick = async () => {
     setFormMsg('')
     setHelpActive(false)
-    if (isAddress(form.address)) {
+    if (form.address.every(isAddress)) {
       setFormActive(true)
     } else {
       setAwaitingENSResolve(true)
-      let resolvedAddress = await isENS(form.address)
+      
+      let resolvedAddress = await isENS(form.address[0])
       if (resolvedAddress) {
-        setForm({ ...form, address: resolvedAddress })
         setAwaitingENSResolve(false)
         setFormActive(true)
       } else {
@@ -64,7 +64,7 @@ export default function Home() {
   const onResetClick = () => {
     setFormActive(false)
     setForm({
-      address: null,
+      address: [''],
       name: '',
       duration: 3600,
       preset: null,
@@ -80,6 +80,9 @@ export default function Home() {
     );
   }
 
+  useEffect(() => {
+    console.log(form)
+  }, [form])
 
   const postForm = async (resolvedAddress?: string) => {
     setFormMsg(null)
@@ -88,7 +91,7 @@ export default function Home() {
       setFormMsg("Don't worry, this can take a few seconds")
     }, 3500)
     axios.post('/api/disguise', {
-      address: resolvedAddress ? resolvedAddress : form.address,
+      address: form.address,
       name: form.name,
       duration: form.duration,
       preset: form.preset,
@@ -123,10 +126,10 @@ export default function Home() {
       setAwaitingLink(false)
       return;
     }
-    if (isAddress(form.address)) {
+    if(form.address.every(isAddress)) {
       postForm()
     } else {
-      let resolvedAddress = await isENS(form.address)
+      let resolvedAddress = await isENS(form.address[0])
       if (resolvedAddress) {
         postForm(resolvedAddress)
       } else {
@@ -178,15 +181,10 @@ export default function Home() {
             Conceal your Wealth, Share your Choices
           </Text>
           <TextInputWrapper>
-            <TextInput
-              placeholder="0x... or enter an ENS name*"
-              onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, address: event.target.value })}
-              width="100%"
-              onKeyDown={(e) => {
-                if(e.code == "Enter"){
-                  onDisguiseClick()
-                }
-              }}
+            <TextInputDropdown
+              form={form}
+              setForm={setForm}
+              onDisguiseClick={onDisguiseClick}
             />
             {
               awaitingENSResolve &&
