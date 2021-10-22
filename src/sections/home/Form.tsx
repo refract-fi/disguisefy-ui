@@ -110,7 +110,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             </StyledBlock>
             <ButtonWrapper>
                 <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
-                <Text color={formMsg == "Don't worry, this can take a few seconds" ? "white" : "red"} margin="5px 0 0 0">{formMsg && formMsg}</Text>
+                <Text position={"absolute"} top="4rem" color={formMsg == "Don't worry, this can take a few seconds" ? "white" : "red"} margin="5px 0 0 0">{formMsg && formMsg}</Text>
             </ButtonWrapper>
         </FormWrapper >
     );
@@ -121,8 +121,9 @@ export default FormComponent;
 const FormWrapper = styled.div`
   position: absolute;
   width: 630px;
-  top: 175px;
+  top: 182px;
   margin-bottom: 25px;
+  padding-bottom: 50px;
   @media (max-height: 768px){
       position: relative;
       top: 0px;
@@ -182,6 +183,7 @@ const ButtonWrapper = styled(FlexColCentered)`
   width: 100%;
   margin-top: 10px;
   justify-content: center;
+  position: relative;
 `;
 
 const AdvancedSettingsBlock = styled(FlexRow)`

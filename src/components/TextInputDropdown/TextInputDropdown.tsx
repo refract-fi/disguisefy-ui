@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { Flex, FlexCol, FlexRow } from 'styles/components';
 import DropdownTextInput from './DropdownTextInput';
 
-const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick: any }> = ({ form, setForm }) => {
+const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick: any }> = ({ form, setForm, onDisguiseClick }) => {
 
     const [addresses, setAddresses] = useState([""])
 
-    const [isShown, setIsShown] = useState(true)
+    const [isShown, setIsShown] = useState(false)
 
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
@@ -27,9 +27,11 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick:
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setIsShown(true)
-        setAddresses([...addresses, ""]);
-        setForm({ ...form, address: [...addresses, ""] })
+        if(addresses.length < 5){   
+            setIsShown(true)
+            setAddresses([...addresses, ""]);
+            setForm({ ...form, address: [...addresses, ""] })
+        }
     };
 
     return (
@@ -47,6 +49,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick:
                                 handleRemoveClick={handleRemoveClick}
                                 setIsShown={setIsShown}
                                 isShown={isShown}
+                                onDisguiseClick={onDisguiseClick}
                             />
                         )
                     } else {
@@ -61,6 +64,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick:
                                 handleRemoveClick={handleRemoveClick}
                                 setIsShown={setIsShown}
                                 isShown={isShown}
+                                onDisguiseClick={onDisguiseClick}
                                 />
                                 )
                             }

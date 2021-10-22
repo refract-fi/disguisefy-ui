@@ -49,7 +49,7 @@ export default function Home() {
         } else {
           let resolvedAddress = await isENS(address)
           if (!resolvedAddress) {
-            setFormMsg(`${address} is not a valid Address or ENS`)
+            setFormMsg(`${address} is not a valid address or ENS`)
             setAwaitingENSResolve(false)
             return;
           }
@@ -195,7 +195,7 @@ export default function Home() {
             variant="title"
             align="center"
             width="wide"
-            margin="0 0 10px 0">
+            margin="0 0 17px 0">
             Conceal your Wealth, Share your Choices
           </Text>
           <TextInputWrapper>
@@ -205,7 +205,7 @@ export default function Home() {
               onDisguiseClick={onDisguiseClick}
             />
           </TextInputWrapper>
-          <Button width="wide" margin="12px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
+          <Button width="wide" margin="17px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
           <Button variant="underline" onClick={() => onHelpClick()}>What is dis?</Button>
           {
             awaitingENSResolve &&
@@ -285,6 +285,7 @@ const SpinnerWrapper = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
+  margin-top: 12px;
   justify-content: center;
   display: flex;
   align-items: center;

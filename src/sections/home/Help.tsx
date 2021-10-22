@@ -67,7 +67,7 @@ export default HelpComponent;
 const Help = styled.div`
   position: absolute;
   width: 630px;
-  top: 175px;
+  top: 182px;
   margin-bottom: 25px;
   @media (max-height: 768px){
       position: relative;
