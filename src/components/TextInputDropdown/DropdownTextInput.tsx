@@ -123,7 +123,7 @@ const DropdownTextInput = styled(Flex) <{ index: number, pos: string | null }>`
     width: 100%;
     position: ${props => props.index == 0 ? 'relative' : 'absolute'};
     top: ${props => `${props.index * 2.6}rem`};
-    z-index: 5;
+    z-index: 2;
 `
 
 const IconWrapper = styled(Flex)`
@@ -148,12 +148,14 @@ const HideDropdownWrapper = styled(Flex)`
     position: absolute;
     width: 100%;
     justify-content: center;
-    z-index: 2;
+    z-index: 1;
     bottom: -14px;
     @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { bottom: -12px; }}
 `
 
 const HideDropdownIcon = styled.img`
+    position: relative;
+    z-index: 1;
     height: 15px;
     cursor: pointer;
     transition: all 0.2s ease;

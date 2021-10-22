@@ -34,7 +34,7 @@ export default ModalComponent;
 const Modal = styled(FlexColAllCentered) <{ active?: boolean }>`
     display: ${props => props.active ? 'flex' : 'none'};
     position: fixed;
-    z-index: 2;
+    z-index: 4;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.3);
@@ -73,8 +73,10 @@ const CustomTextInput = styled(TextInput)`
 `
 
 const StyledBlock = styled(Block)`
+    position: relative;
     width: 500px;
     padding: 30px 40px;
+    z-index: 3;
     ${({ theme }) => theme.mediaWidth.sm`
         width:95%;
         max-width: 500px;
