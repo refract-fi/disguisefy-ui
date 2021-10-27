@@ -1,21 +1,38 @@
 import { Block, Button, CopyLink, ExitButton, Text, TextInput } from 'components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
 import { ResetButton } from './Button';
 
 const ModalComponent = ({ active, setActive, url, onResetClick }) => {
+
+    const [width, setWidth] = useState(0);
+
+    useEffect(() => {
+        if (!width) setWidth(window?.innerWidth);
+        window.addEventListener("resize", () => {
+            setWidth(window?.innerWidth);
+        });
+    }, []);
+
     return (
         <Modal active={active}>
             <StyledBlock>
                 <ExitButton onClick={() => setActive(false)} src="/exit.svg" />
-                <ResetButton onClick={() => onResetClick()}src="/reset.svg" />
+                <ResetButton onClick={() => onResetClick()} src="/reset.svg" />
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`${process.env.NEXT_PUBLIC_HOST_URL}/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `disguisefy.xyz/${url}` : `${process.env.NEXT_PUBLIC_HOST_URL}/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
+                        <ExternalLinkWrapper>
+                            <Link href={url}>
+                                <a target="_blank">
+                                    <Img src="open-outline.svg" />
+                                </a>
+                            </Link>
+                        </ExternalLinkWrapper>
                         <CopyLinkWrapper>
                             <CopyLink url={url} />
                         </CopyLinkWrapper>
@@ -49,6 +66,21 @@ const StyledRow = styled(FlexRowSpaceBetween)`
     width: 100%;
 `
 
+const ExternalLinkWrapper = styled.div`
+    position: absolute;
+    right: 35px;
+    top: 0;
+    margin-top: 25px;
+    z-index: 2;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.7;
+    }
+`
+
 const CopyLinkWrapper = styled.div`
     position: absolute;
     right: 10px;
@@ -58,6 +90,11 @@ const CopyLinkWrapper = styled.div`
     height: 40px;
     align-items: center;
     display: flex;
+`
+
+const Img = styled.img`
+        height: 20px;
+    width: 20px;
 `
 
 const DisLogo = styled.img`
