@@ -8,6 +8,7 @@ import { ResetButton } from './Button';
 const ModalComponent = ({ active, setActive, url, onResetClick }) => {
 
     const [width, setWidth] = useState(0);
+    const [location, setLocation] = useState<string>();
 
     useEffect(() => {
         if (!width) setWidth(window?.innerWidth);
@@ -15,6 +16,15 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
             setWidth(window?.innerWidth);
         });
     }, []);
+
+    useEffect(() => {
+
+        if (typeof window !== undefined) {
+            setLocation(window.location.host)
+        } else {
+            setLocation("disguisefy.xyz/")
+        }
+    })
 
     return (
         <Modal active={active}>
@@ -24,7 +34,7 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `disguisefy.xyz/${url}` : `${process.env.NEXT_PUBLIC_HOST_URL}/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `${location}/${url}` : `${location}/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
                         <ExternalLinkWrapper>
                             <Link href={url}>
@@ -34,7 +44,7 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
                             </Link>
                         </ExternalLinkWrapper>
                         <CopyLinkWrapper>
-                            <CopyLink url={url} />
+                            <CopyLink host={location} url={url} />
                         </CopyLinkWrapper>
                     </TextInputContainer>
                     <Link href={`/${url}`}>
