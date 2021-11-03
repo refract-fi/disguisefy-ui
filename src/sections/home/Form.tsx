@@ -123,7 +123,7 @@ const FormWrapper = styled.div`
   width: 630px;
   top: 182px;
   margin-bottom: 25px;
-  padding-bottom: 50px;
+  padding-bottom: 15px;
   @media (max-height: 768px){
       position: relative;
       top: 0px;

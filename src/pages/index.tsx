@@ -257,7 +257,7 @@ const Wrapper = styled(FlexCentered)`
 const Content = styled(FlexCol)`
   width: 630px;
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: 140px;
   @media (max-height: 768px){
       padding-bottom: 0px;
       padding-top: 150px;
