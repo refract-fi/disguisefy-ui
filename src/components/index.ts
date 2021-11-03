@@ -14,5 +14,6 @@ import { Logo } from './Images' ;
 import CopyLink from './CopyLink';
 import Tooltip from './Tooltip';
 import TextInputDropdown from './TextInputDropdown/TextInputDropdown';
+import Dropdown from './Dropdown';
 
-export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink, BackButton, Tooltip, TextInputDropdown};
+export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink, BackButton, Tooltip, TextInputDropdown, Dropdown};

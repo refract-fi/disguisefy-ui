@@ -81,7 +81,7 @@ const SliderComponent = ({ duration, form, setForm, durationValue }) => {
                 valueLabelDisplay="off"
                 onChange={handleChange}
             />
-            <Text color="black">{moment.duration(duration, 'seconds').humanize()}</Text>
+            <Text>{moment.duration(duration, 'seconds').humanize()}</Text>
         </>
     );
 }

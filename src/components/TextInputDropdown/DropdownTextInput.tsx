@@ -12,7 +12,7 @@ const DropdownTextInputComponent: FC<{
     onChange: any,
     setIsShown: any,
     isShown: boolean,
-    onDisguiseClick: any
+    variant?: string
 }> = ({
     index,
     addresses,
@@ -22,13 +22,12 @@ const DropdownTextInputComponent: FC<{
     onChange,
     setIsShown,
     isShown,
-    onDisguiseClick }) => {
+    variant }) => {
 
         const [position, setPosition] = useState<string | null>(null)
 
         const onEnterPress = () => {
             setIsShown(false)
-            onDisguiseClick()
         }
 
         const onMouseOver = (type, e) => {
@@ -82,6 +81,7 @@ const DropdownTextInputComponent: FC<{
                     name="address"
                     value={value}
                     pos={position}
+                    variant={variant}
                     onKeyDown={(e) => {
                         if (e.code == "Enter") {
                             onEnterPress()
@@ -90,29 +90,31 @@ const DropdownTextInputComponent: FC<{
                 />
                 <IconWrapper>
                     {
-                        addresses.length !== 1 && (
-                            <Icon
-                                onClick={() => handleRemoveClick(index)}
-                                src="remove-icon.svg" />
-                        )
-                    }
-                    {
-                        (addresses.length - 1 === index && index != 4) && (
+                        (addresses.length - 1 === index && index != 4) ? (
                             <Icon
                                 onClick={() => handleAddClick()}
-                                src="add-icon.svg" />
-                        )
+                                src="add-icon-red.svg" />
+                        ) : <Icon />
                     }
+                    {
+                        addresses.length !== 1 ? (
+                            <Icon
+                                onClick={() => handleRemoveClick(index)}
+                                src="remove-icon-red.svg" />
+                        ) : <Icon />
+                    }
+
+
+                    {
+                        ((isShown && index == addresses.length - 1 && index > 0) || (!isShown && addresses.length > 1)) ?
+                            <Icon
+                                onClick={() => setIsShown(!isShown)}
+                                src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                            /> :
+                            <Icon />
+                    }
+
                 </IconWrapper>
-                {
-                    ((isShown && index == addresses.length - 1 && index > 0) || (!isShown && addresses.length > 1)) &&
-                    <HideDropdownWrapper>
-                        <HideDropdownIcon src={isShown ? 'dropdown-close.svg' : 'dropdown.svg'}
-                            onMouseEnter={e => onMouseOver('in', e)}
-                            onMouseOut={e => onMouseOver('out', e)}
-                            onClick={() => setIsShown(!isShown)} />
-                    </HideDropdownWrapper>
-                }
             </DropdownTextInput>
         );
     }
@@ -135,6 +137,7 @@ const IconWrapper = styled(Flex)`
 `
 
 const Icon = styled.img`
+    position: relative;
     width: 20px;
     transition: all 0.2s ease;
     margin: 0 2.5px;
@@ -142,22 +145,4 @@ const Icon = styled.img`
         cursor: pointer;
         opacity: 0.7;
     }
-    
-`
-const HideDropdownWrapper = styled(Flex)`
-    position: absolute;
-    width: 100%;
-    justify-content: center;
-    z-index: 1;
-    bottom: -14px;
-    @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { bottom: -12px; }}
-`
-
-const HideDropdownIcon = styled.img`
-    position: relative;
-    z-index: 1;
-    height: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-image: url("dropdown-close.svg") no-repeat;
 `

@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { Form, Help } from "sections/home";
+import { Form, FormModal, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
 import { provider } from "utils/provider";
@@ -218,15 +218,16 @@ export default function Home() {
           }
           {
             formActive && (
-              <Form
-                form={form}
-                setForm={setForm}
-                setFormActive={setFormActive}
-                durationValue={durationValue}
-                onFormSubmit={onFormSubmit}
-                awaitingLink={awaitingLink}
-                formMsg={formMsg}
-              />
+
+                  <FormModal 
+                  form={form}
+                  setForm={setForm}
+                  setFormActive={setFormActive}
+                  durationValue={durationValue}
+                  onFormSubmit={onFormSubmit}
+                  awaitingLink={awaitingLink}
+                  formMsg={formMsg}
+                />
             )
           }
           {
