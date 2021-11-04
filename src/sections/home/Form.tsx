@@ -35,6 +35,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             isSnapshot: false
         })
     }
+    
 
     return (
         <FormWrapper>
