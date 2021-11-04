@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { Text } from 'components';
 
 
-const CopyLinkComponent: FC<{ url: string, variant?: string }> = ({ url, variant }) => {
+const CopyLinkComponent: FC<{ url: string, variant?: string, host?: string }> = ({ url, variant, host }) => {
     const [tooltipActive, setTooltipActive] = useState(false);
 
     const onCopyClick = async () => {
-        navigator.clipboard.writeText(`disguisefy.xyz/${url}`)
+        navigator.clipboard.writeText(`${host}/${url}`)
         await setTooltipActive(true)
         setTimeout(() => setTooltipActive(false), 2000)
     }

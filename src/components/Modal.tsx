@@ -1,23 +1,50 @@
 import { Block, Button, CopyLink, ExitButton, Text, TextInput } from 'components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
 import { ResetButton } from './Button';
 
 const ModalComponent = ({ active, setActive, url, onResetClick }) => {
+
+    const [width, setWidth] = useState(0);
+    const [location, setLocation] = useState<string>();
+
+    useEffect(() => {
+        if (!width) setWidth(window?.innerWidth);
+        window.addEventListener("resize", () => {
+            setWidth(window?.innerWidth);
+        });
+    }, []);
+
+    useEffect(() => {
+
+        if (typeof window !== undefined) {
+            setLocation(window.location.host)
+        } else {
+            setLocation("disguisefy.xyz/")
+        }
+    })
+
     return (
         <Modal active={active}>
             <StyledBlock>
                 <ExitButton onClick={() => setActive(false)} src="/exit.svg" />
-                <ResetButton onClick={() => onResetClick()}src="/reset.svg" />
+                <ResetButton onClick={() => onResetClick()} src="/reset.svg" />
                 <Text variant="title" color="black">You've been disguisefied!</Text>
                 <StyledRow>
                     <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={`disguisefy.xyz/${url}`} width="100%" readOnly />
+                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `${location}/${url}` : `${location}/${url}`} width="100%" readOnly />
                         <DisLogo src="disguisefy_logo.svg" />
+                        <ExternalLinkWrapper>
+                            <Link href={url}>
+                                <a target="_blank">
+                                    <Img src="open-outline.svg" />
+                                </a>
+                            </Link>
+                        </ExternalLinkWrapper>
                         <CopyLinkWrapper>
-                            <CopyLink url={url} />
+                            <CopyLink host={location} url={url} />
                         </CopyLinkWrapper>
                     </TextInputContainer>
                     <Link href={`/${url}`}>
@@ -34,7 +61,7 @@ export default ModalComponent;
 const Modal = styled(FlexColAllCentered) <{ active?: boolean }>`
     display: ${props => props.active ? 'flex' : 'none'};
     position: fixed;
-    z-index: 2;
+    z-index: 4;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.3);
@@ -49,6 +76,21 @@ const StyledRow = styled(FlexRowSpaceBetween)`
     width: 100%;
 `
 
+const ExternalLinkWrapper = styled.div`
+    position: absolute;
+    right: 35px;
+    top: 0;
+    margin-top: 25px;
+    z-index: 2;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.7;
+    }
+`
+
 const CopyLinkWrapper = styled.div`
     position: absolute;
     right: 10px;
@@ -58,6 +100,11 @@ const CopyLinkWrapper = styled.div`
     height: 40px;
     align-items: center;
     display: flex;
+`
+
+const Img = styled.img`
+        height: 20px;
+    width: 20px;
 `
 
 const DisLogo = styled.img`
@@ -73,8 +120,10 @@ const CustomTextInput = styled(TextInput)`
 `
 
 const StyledBlock = styled(Block)`
+    position: relative;
     width: 500px;
     padding: 30px 40px;
+    z-index: 3;
     ${({ theme }) => theme.mediaWidth.sm`
         width:95%;
         max-width: 500px;

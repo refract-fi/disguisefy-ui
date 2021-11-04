@@ -11,6 +11,7 @@ type TextInputProps = {
     onChange?: any
     loading?: boolean
     placeholder?: any
+    pos?: any
 }
 
 const TextInput = styled.input<TextInputProps>`
@@ -19,6 +20,7 @@ const TextInput = styled.input<TextInputProps>`
     padding: 0.65rem 0.8rem;
     border: 1px solid black;
     border-radius: 3px;
+    width: 100%;
     text-align: ${props => props.align && props.align};
     background-color: ${({ theme }) => theme.input};
     width: ${props => props.width && props.width};
@@ -36,6 +38,24 @@ const TextInput = styled.input<TextInputProps>`
             margin: 0 0.4rem;
             background-color: ${({ theme }) => theme.accentBg};
         `}
+    ${props => 
+        props.pos == 'top' &&
+        css`
+            border-radius: 3px 3px 0px 0px;
+        `
+    }
+    ${props => 
+        props.pos == 'mid' &&
+        css`
+            border-radius: 0px 0px 0px 0px;
+        `
+    }
+    ${props => 
+        props.pos == 'bot' &&
+        css`
+            border-radius: 0px 0px 3px 3px;
+        `
+    }
 `
 
 export default TextInput

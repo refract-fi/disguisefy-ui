@@ -8,9 +8,10 @@ import LineWrapper from './LineWrapper';
 const LineChartComponent = ({ data }) => {
 
     const [dataObj, setDataObj] = useState({});
-
-
     const theme = useTheme();
+    const round = (value) => {
+        return Math.round((value + Number.EPSILON) * 100) / 100;
+    }
 
     const checkDataLength = () => {
         let obj = {}
@@ -40,7 +41,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i1}
                         type="top"
                         name="Wallet"
-                        percent={data.wallet.toFixed(2)}
+                        percent={round(data.wallet)}
                     />
                 }
                 {
@@ -52,7 +53,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i2}
                         type="top"
                         name={"Deposits"}
-                        percent={data.deposit.toFixed(2)}
+                        percent={round(data.deposit)}
                     />
                 }
                 {
@@ -64,7 +65,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i3}
                         type="top"
                         name={"Liquidity Pools"}
-                        percent={data.pool.toFixed(2)}
+                        percent={round(data.pool)}
 
                     />
                 }
@@ -77,7 +78,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i4}
                         type="top"
                         name={"Staking"}
-                        percent={data.staking.toFixed(2)}
+                        percent={round(data.staking)}
                     />
                 }
                 {
@@ -89,7 +90,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i5}
                         type="top"
                         name={"Claimable"}
-                        percent={data.claimable.toFixed(2)}
+                        percent={round(data.claimable)}
 
                     />
                 }
@@ -102,7 +103,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i6}
                         type="top"
                         name={"NFTs"}
-                        percent={data.nft.toFixed(2)}
+                        percent={round(data.nft)}
                     />
                 }
                 {
@@ -114,7 +115,7 @@ const LineChartComponent = ({ data }) => {
                         color={theme.i7}
                         type="top"
                         name={"Investments"}
-                        percent={data.investment.toFixed(2)}
+                        percent={round(data.investment)}
                     />
                 }
                 {
@@ -124,7 +125,7 @@ const LineChartComponent = ({ data }) => {
                             <Label
                                 type="bot"
                                 name={"Debt"}
-                                percent={Math.abs(data?.debt.toFixed(2))}
+                                percent={Math.abs(round(data?.debt))}
                             />
                             <BracketLine />
                             <BracketBox />

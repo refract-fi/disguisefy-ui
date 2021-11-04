@@ -11,6 +11,8 @@ type TextProps = {
     weight?: string
     size?: string
     underline?: boolean
+    position?: "relative" | "absolute"
+    top?: string
 }
 
 const Text = styled.p<TextProps>`
@@ -21,6 +23,8 @@ const Text = styled.p<TextProps>`
     font-weight: ${props => props.weight && props.weight};
     font-size: ${props => props.size && props.size};
     text-decoration: ${props => props.underline && 'underline'};
+    position: ${props => props.position && props.position};
+    top: ${props => props.top && props.top};
     ${(props) =>
         props.variant == 'title' &&
         css`
