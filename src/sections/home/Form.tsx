@@ -36,7 +36,6 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
         })
     }
     
-
     return (
         <FormWrapper>
             <StyledBlock>
