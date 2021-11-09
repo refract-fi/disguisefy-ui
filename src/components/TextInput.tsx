@@ -29,7 +29,7 @@ const TextInput = styled.input<TextInputProps>`
     width: ${props => props.width && props.width};
     font-weight: 400;
     margin: ${props => props.margin};
-    color: ${props => props.type == 'dark' && 'white'};
+    outline-color: ${({ theme }) => theme.accent};
     ${props =>
         props.variant == "group-assets" &&
         css`
@@ -46,7 +46,10 @@ const TextInput = styled.input<TextInputProps>`
         css`
             background-color: ${({ theme }) => theme.bg16};
             color: white;
-            border: 1px solid white
+            border: 1px solid white;
+            &:focus{
+                box-shadow: 0px 0px 6px rgba(256,256,256, 0.5);
+            }
         `
     };
     ${props =>

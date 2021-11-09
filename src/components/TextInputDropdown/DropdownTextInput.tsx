@@ -62,7 +62,6 @@ const DropdownTextInputComponent: FC<{
                         value={form.address[index]}
                         pos={position}
                         variant={variant}
-                        id={variant === "index" && `${index}-index`}
                         onKeyDown={(e) => {
                             if (e.code == "Enter") {
                                 onEnter()
