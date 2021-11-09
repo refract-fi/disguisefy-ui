@@ -12,7 +12,8 @@ const DropdownTextInputComponent: FC<{
     onChange: any,
     setIsShown: any,
     isShown: boolean,
-    variant?: string
+    variant?: string,
+    onEnter?: any
 }> = ({
     index,
     addresses,
@@ -22,29 +23,10 @@ const DropdownTextInputComponent: FC<{
     onChange,
     setIsShown,
     isShown,
-    variant }) => {
+    variant,
+    onEnter }) => {
 
         const [position, setPosition] = useState<string | null>(null)
-
-        const onEnterPress = () => {
-            setIsShown(false)
-        }
-
-        const onMouseOver = (type, e) => {
-            if (type == 'in') {
-                if (isShown) {
-                    e.currentTarget.src = 'dropdown-close-hover.svg'
-                } else {
-                    e.currentTarget.src = 'dropdown-hover.svg'
-                }
-            } else {
-                if (isShown) {
-                    e.currentTarget.src = 'dropdown-close.svg'
-                } else {
-                    e.currentTarget.src = 'dropdown.svg'
-                }
-            }
-        }
 
 
         useEffect(() => {
@@ -71,7 +53,7 @@ const DropdownTextInputComponent: FC<{
                 setIsShown(false)
             }
         }, [addresses])
-
+        
         return (
             <TextInputWrapper>
                 <DropdownTextInput index={index} pos={position}>
@@ -83,9 +65,10 @@ const DropdownTextInputComponent: FC<{
                         value={value}
                         pos={position}
                         variant={variant}
+                        id={variant === "index" && `${index}-index`}
                         onKeyDown={(e) => {
                             if (e.code == "Enter") {
-                                onEnterPress()
+                                onEnter()
                             }
                         }}
                     />

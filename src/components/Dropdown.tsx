@@ -3,24 +3,23 @@ import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'styles/components';
 
-
-
 const DropdownComponent: FC<{
     title: string,
     options: Array<string>,
     type: string,
     form: any,
+    objectKey: string,
     setForm: (form: any) => void,
     margin?: string
 }> = ({
     title,
     options,
     type,
+    objectKey,
     form,
     setForm,
     margin }) => {
-        const [value, setValue] = useState('All');
-        const [arrayValues, setArrayValues] = useState<Array<string>>(["All"])
+        // const [value, setValue] = useState('All');
         const [isShown, setIsShown] = useState(false);
 
         const onDropdownClick = () => {
@@ -31,26 +30,27 @@ const DropdownComponent: FC<{
 
         const onValueChange = (type: string, option: string, index: number) => {
             if (type === "single") {
-                setValue(option)
+                setForm({...form, [objectKey]: option})
             } else if (type === "multi") {
                 if (option === "All") {
-                    setArrayValues(["All"])
+                    setForm({...form, [objectKey]: ["All"]})
                 } else {
-                    if (arrayValues.includes(option)) {
-                        const list = [...arrayValues];
+                    if (form[objectKey].includes(option)) {
+                        const list = [...form[objectKey]];
                         list.splice(list.findIndex((value) => value === option), 1);
                         if (list.length === 0) {
-                            setArrayValues(["All"])
+                            setForm({...form, [objectKey]: ["All"]})
                         } else {
-                            setArrayValues(list);
+                            setForm({...form, [objectKey]: list});
                         }
                     } else {
-                        setArrayValues([...arrayValues.filter((n) => n !== 'All'), option])
+                        // setArrayValues([...arrayValues.filter((n) => n !== 'All'), option])
+                        setForm({...form, [objectKey]: [...form[objectKey].filter((n) => n !== 'All'), option]})
                     }
                 }
             }
         }
-        console.log(arrayValues)
+        console.log(form[objectKey])
         return (
             <Dropdown onClick={() => onDropdownClick()} margin={margin}>
                 <InputTitleWrapper isShown={isShown}>
@@ -61,12 +61,12 @@ const DropdownComponent: FC<{
                         <Text variant={"large"}>
                             {
                                 type === 'single' &&
-                                value
+                                form[objectKey]
                             }
                             {
                                 type === "multi" && (
-                                    arrayValues.map((value, index) => {
-                                        if ((index === 0 && arrayValues.length > 1) || (arrayValues.length - 1 !== index && index !== 0)) {
+                                    form[objectKey].map((value, index) => {
+                                        if ((index === 0 && form[objectKey].length > 1) || (form[objectKey].length - 1 !== index && index !== 0)) {
                                             return (
                                                 `${value}, `
                                             )
@@ -93,7 +93,7 @@ const DropdownComponent: FC<{
                                 return (
                                     <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
                                         {
-                                            option == value && (
+                                            option == form[objectKey] && (
                                                 <Icon
                                                     src="checkmark-icon.svg"
                                                 />
@@ -106,7 +106,7 @@ const DropdownComponent: FC<{
                                 return (
                                     <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
                                         {
-                                            arrayValues.includes(option) && (
+                                            form[objectKey].includes(option) && (
                                                 <Icon
                                                     src="checkmark-icon.svg"
                                                 />

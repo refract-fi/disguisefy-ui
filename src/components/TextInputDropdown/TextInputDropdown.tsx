@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Flex, FlexCol, FlexRow } from 'styles/components';
 import DropdownTextInput from './DropdownTextInput';
 
-const TextInputDropdownComponent: FC<{ form: any, setForm: any, variant?: string, margin?: string }> = ({ form, setForm, variant, margin }) => {
+const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, variant?: string, margin?: string, onEnter?: any }> = ({ form, setForm, variant, margin, onEnter }) => {
 
-    const [addresses, setAddresses] = useState([""])
+    const [addresses, setAddresses] = useState(form.address)
 
     const [isShown, setIsShown] = useState(false)
 
@@ -50,6 +50,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, variant?: string
                                 setIsShown={setIsShown}
                                 isShown={isShown}
                                 variant={variant}
+                                onEnter={onEnter}
                             />
                         )
                     } else {
@@ -65,6 +66,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, variant?: string
                                 setIsShown={setIsShown}
                                 isShown={isShown}
                                 variant={variant}
+                                onEnter={onEnter}
                                 />
                                 )
                             }

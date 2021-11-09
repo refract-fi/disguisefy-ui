@@ -15,7 +15,9 @@ export default function Home() {
     address: [''],
     name: '',
     duration: 3600,
-    preset: null,
+    preset: null,    
+    type: "All",
+    chains: ["All"],
     groupAssetsUnder: 0.1,
     isGroupAssetsUnder: false,
     ignoreNFTs: false,
@@ -23,6 +25,7 @@ export default function Home() {
     isSnapshot: false
   })
 
+  console.log(form)
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
   const [url, setUrl] = useState('')
@@ -77,6 +80,8 @@ export default function Home() {
       name: '',
       duration: 3600,
       preset: null,
+      type: "All",
+      chains: ["All"],
       groupAssetsUnder: 0.1,
       isGroupAssetsUnder: false,
       ignoreNFTs: false,
@@ -100,6 +105,8 @@ export default function Home() {
       name: form.name,
       duration: form.duration,
       preset: form.preset,
+      type: form.type,
+      chains: form.chains.map(chain => chain.toLowerCase()),
       isGroupAssetsUnder: form.isGroupAssetsUnder,
       groupAssetsUnder: form.groupAssetsUnder,
       ignoreNFTs: form.ignoreNFTs,
@@ -202,7 +209,7 @@ export default function Home() {
             <TextInputDropdown
               form={form}
               setForm={setForm}
-              onDisguiseClick={onDisguiseClick}
+              onEnter={onDisguiseClick}
               variant="index"
             />
           </TextInputWrapper>

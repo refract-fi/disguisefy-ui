@@ -26,7 +26,7 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
         setFormActive(false)
         setIsAdvancedActive(false)
         setForm({
-            ...form,
+            address: [''],
             name: '',
             duration: 3600,
             type: 'All',

@@ -39,6 +39,7 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
                 form={form}
                 setForm={setForm}
                 margin="0 0 1.5rem 0"
+                objectKey={"type"}
             />
             <Dropdown
                 title="Network"
@@ -46,6 +47,7 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
                 type="multi"
                 form={form}
                 setForm={setForm}
+                objectKey={"chains"}
 
             />
             <Text align="center" margin="20px 0 15px 0" variant="subtitle">Privacy Level</Text>
