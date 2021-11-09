@@ -64,11 +64,17 @@ const DropdownComponent: FC<{
                             {
                                 type === "multi" && (
                                     form[objectKey].map((value, index) => {
-                                        if ((index === 0 && form[objectKey].length > 1) || (form[objectKey].length - 1 !== index && index !== 0)) {
+                                        if ((index === 0 && form[objectKey].length > 1) || (index < 3 && form[objectKey].length -1 !== index)) {
                                             return (
                                                 `${value}, `
                                             )
-                                        } else {
+                                        }else if(index === 3){
+                                            return(
+                                                form[objectKey].length !== 3 ?
+                                                `...(${form[objectKey].length - 3})`:
+                                                `...`
+                                            )
+                                        }else if(index < 3) {
                                             return (
                                                 value
                                             )
@@ -117,8 +123,10 @@ const DropdownComponent: FC<{
                         })
                     }
                 </Options>
-                <IconWrapper>
+                <IconWrapper
+                isShown={isShown}>
                     <DropdownIcon
+                        
                         onClick={() => setIsShown(!isShown)}
                         src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
                     />
@@ -151,7 +159,6 @@ const Options = styled.div<{ isShown: boolean }>`
 const Option = styled.div<{ pos?: string, isShown: boolean }>`
     height: 2.6rem;
     padding-left: 3rem;
-    z-index: 4;
     font-weight: bold;
     align-items: center;
     width: 100%;
@@ -220,20 +227,19 @@ const Icon = styled.img`
     }
 `
 
-const IconWrapper = styled(Flex)`
+const IconWrapper = styled(Flex)<{isShown: boolean}>`
     position: absolute;
     align-items: center;
-    height: calc(2.6rem - 2px);
+    height: 100%;
     right: 5px;
-    top: 0;
+    top: 2px;
+    z-index: ${props => props.isShown === true && 5 };
     @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { top:2px; }}
 `
 
 const DropdownIcon = styled.img`
     position: relative;
     width: 20px;
-    right: 5px;
-    top: 0px;
     transition: all 0.2s ease;
     margin: 0 2.5px;
     &:hover{

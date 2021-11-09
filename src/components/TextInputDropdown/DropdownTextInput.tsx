@@ -122,7 +122,7 @@ const DropdownTextInput = styled(Flex) <{ index: number, pos: string | null }>`
     width: 100%;
     position: ${props => props.index == 0 ? 'relative' : 'absolute'};
     top: ${props => `${props.index * 2.6}rem`};
-    z-index: 3;
+    z-index: 5;
 `
 
 const IconWrapper = styled(Flex)`
