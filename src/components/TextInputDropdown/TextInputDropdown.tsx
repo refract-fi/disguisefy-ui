@@ -1,51 +1,55 @@
-import { TextInput } from 'components';
-import React, { FC, ChangeEvent, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { Flex, FlexCol, FlexRow } from 'styles/components';
+import { FlexCol} from 'styles/components';
+import { IForm } from 'utils/interface';
 import DropdownTextInput from './DropdownTextInput';
 
-const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, variant?: string, margin?: string, onEnter?: any }> = ({ form, setForm, variant, margin, onEnter }) => {
-
-    const [addresses, setAddresses] = useState(form.address)
+const TextInputDropdownComponent: FC<{ 
+    form: IForm, 
+    setForm: (form: IForm) => void, 
+    variant?: string, 
+    margin?: string, 
+    onEnter?: any }> = ({ 
+        form, 
+        setForm, 
+        variant, 
+        margin, 
+        onEnter }) => {
 
     const [isShown, setIsShown] = useState(false)
 
     const handleInputChange = (e, index) => {
+        e.preventDefault()
         const { name, value } = e.target;
-        const list = [...addresses];
+        const list = [...form.address];
         list[index] = value;
-        setAddresses(list);
         setForm({ ...form, address: list })
-        console.log('caliss')
     };
 
     const handleRemoveClick = index => {
-        const list = [...addresses];
+        const list = [...form.address];
         list.splice(index, 1);
-        setAddresses(list);
         setForm({ ...form, address: list })
     };
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        if(addresses.length < 5){   
+        if(form.address.length < 5){   
             setIsShown(true)
-            setAddresses([...addresses, ""]);
-            setForm({ ...form, address: [...addresses, ""] })
+            setForm({ ...form, address: [...form.address, ""] })
         }
     };
 
     return (
         <TextInputDropdown margin={margin}>
             {
-                addresses.map((item, i) => {
+                form.address.map((item, i) => {
                     if (isShown) {
                         return (
                             <DropdownTextInput
                                 index={i}
                                 key={`${i}-${variant}`}
-                                value={item}
-                                addresses={addresses}
+                                form={form}
                                 onChange={e => handleInputChange(e, i)}
                                 handleAddClick={handleAddClick}
                                 handleRemoveClick={handleRemoveClick}
@@ -61,8 +65,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, 
                                 <DropdownTextInput
                                 index={i}
                                 key={`${i}-${variant}`}
-                                value={item}
-                                addresses={addresses}
+                                form={form}
                                 onChange={e => handleInputChange(e, i)}
                                 handleAddClick={handleAddClick}
                                 handleRemoveClick={handleRemoveClick}

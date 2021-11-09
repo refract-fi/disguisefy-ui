@@ -4,14 +4,14 @@ import styled, { useTheme } from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { Form, FormModal, Help } from "sections/home";
+import { FormModal, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
-import { provider } from "utils/provider";
+import IForm from "utils/interface/form";
 
 export default function Home() {
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IForm>({
     address: [''],
     name: '',
     duration: 3600,
@@ -25,7 +25,6 @@ export default function Home() {
     isSnapshot: false
   })
 
-  console.log(form)
   const [formActive, setFormActive] = useState(false)
   const [durationValue, setDurationValue] = useState(0)
   const [url, setUrl] = useState('')
@@ -74,6 +73,7 @@ export default function Home() {
   }
 
   const onResetClick = () => {
+    setFormMsg('')
     setFormActive(false)
     setForm({
       address: [""],
@@ -89,9 +89,9 @@ export default function Home() {
       isSnapshot: false
     })
     setActive(false)
-    Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = "")
-    );
+    // Array.from(document.querySelectorAll("input")).forEach(
+    //   input => (input.value = "")
+    // );
   }
 
   const postForm = async (addressArray: Array<string>) => {
@@ -237,7 +237,6 @@ export default function Home() {
                   <FormModal 
                   form={form}
                   setForm={setForm}
-                  setFormActive={setFormActive}
                   durationValue={durationValue}
                   onFormSubmit={onFormSubmit}
                   awaitingLink={awaitingLink}

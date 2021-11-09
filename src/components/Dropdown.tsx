@@ -2,14 +2,15 @@ import { Text } from 'components';
 import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'styles/components';
+import { IForm } from 'utils/interface';
 
 const DropdownComponent: FC<{
     title: string,
     options: Array<string>,
     type: string,
-    form: any,
+    form: IForm,
     objectKey: string,
-    setForm: (form: any) => void,
+    setForm: (form: IForm) => void,
     margin?: string
 }> = ({
     title,

@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
 type StyledButton = {
-    readonly width?: string | 'wide'
-    readonly variant?: 'underline' | 'menu'
-    readonly disable?: boolean
-    readonly margin?: string
-    readonly size?: string
-    readonly height?: string
+    width?: string | 'wide'
+    variant?: 'underline' | 'menu'
+    disable?: boolean
+    margin?: string
+    size?: string
+    height?: string
 }
 
 const Button = styled.button<StyledButton>`

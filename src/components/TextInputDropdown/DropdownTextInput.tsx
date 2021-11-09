@@ -5,8 +5,6 @@ import { Flex, FlexCentered } from 'styles/components';
 
 const DropdownTextInputComponent: FC<{
     index: any,
-    addresses: any,
-    value: any,
     handleRemoveClick: any,
     handleAddClick: any,
     onChange: any,
@@ -14,17 +12,17 @@ const DropdownTextInputComponent: FC<{
     isShown: boolean,
     variant?: string,
     onEnter?: any
+    form: any
 }> = ({
     index,
-    addresses,
-    value,
     handleRemoveClick,
     handleAddClick,
     onChange,
     setIsShown,
     isShown,
     variant,
-    onEnter }) => {
+    onEnter,
+    form }) => {
 
         const [position, setPosition] = useState<string | null>(null)
 
@@ -34,10 +32,10 @@ const DropdownTextInputComponent: FC<{
                 if (index == 0) {
                     setPosition("top")
                     console.log(index, position)
-                } else if (index > 0 && addresses.length - 1 != index) {
+                } else if (index > 0 && form.address.length - 1 != index) {
                     setPosition("mid")
                     console.log(index, position)
-                } else if (index > 0 && addresses.length - 1 == index) {
+                } else if (index > 0 && form.address.length - 1 == index) {
                     setPosition("bot")
                     console.log(index, position)
                 } else {
@@ -46,13 +44,13 @@ const DropdownTextInputComponent: FC<{
             } else {
                 setPosition(null)
             }
-        }, [isShown, addresses])
+        }, [isShown, form.address])
 
         useEffect(() => {
-            if (index == 0 && isShown == true && addresses.length == 1) {
+            if (index == 0 && isShown == true && form.address.length == 1) {
                 setIsShown(false)
             }
-        }, [addresses])
+        }, [form.address])
         return (
             <TextInputWrapper>
                 <DropdownTextInput index={index} pos={position}>
@@ -61,7 +59,7 @@ const DropdownTextInputComponent: FC<{
                         onChange={onChange}
                         width="100%"
                         name="address"
-                        value={value}
+                        value={form.address[index]}
                         pos={position}
                         variant={variant}
                         id={variant === "index" && `${index}-index`}
@@ -73,7 +71,7 @@ const DropdownTextInputComponent: FC<{
                     />
                     <IconWrapper>
                         {
-                            addresses.length !== 1 ? (
+                            form.address.length !== 1 ? (
                                 <Icon
                                     onClick={() => handleRemoveClick(index)}
                                     src="remove-icon-red.svg" />
@@ -82,7 +80,7 @@ const DropdownTextInputComponent: FC<{
 
                         {
                             variant === "dark" &&
-                                ((index === 0 && addresses.length > 1) ?
+                                ((index === 0 && form.address.length > 1) ?
                                 <DropdownIcon
                                     onClick={() => setIsShown(!isShown)}
                                     src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
@@ -91,7 +89,7 @@ const DropdownTextInputComponent: FC<{
                         }
                         {
                             variant === "index" &&
-                                ((index === 0 && addresses.length > 1) ?
+                                ((index === 0 && form.address.length > 1) ?
                                 <DropdownIcon
                                     onClick={() => setIsShown(!isShown)}
                                     src={isShown ? 'dropdown-icon-close-red.svg' : 'dropdown-icon-open-red.svg'}
@@ -103,7 +101,7 @@ const DropdownTextInputComponent: FC<{
                 </DropdownTextInput>
                 <AddIconWrapper>
                     {
-                        (index === 0 && addresses.length < 5) && (
+                        (index === 0 && form.address.length < 5) && (
                             <AddIcon
                                 onClick={() => handleAddClick()}
                                 src="add-icon-red.svg" />

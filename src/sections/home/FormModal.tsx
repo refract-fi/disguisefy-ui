@@ -4,14 +4,14 @@ import Spinner from 'components/Spinner';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Flex, FlexColCentered, FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
+import { IForm } from 'utils/interface';
 import { PrivacySelect } from '.';
 import AdvancedForm from './AdvancedForm';
 import StandardForm from './StandardForm';
 
 type FormComponentProps = {
-    form: any
-    setForm: any
-    setFormActive: any
+    form: IForm
+    setForm: (form: IForm) => void
     durationValue: number
     onFormSubmit: any
     awaitingLink: boolean
@@ -19,7 +19,14 @@ type FormComponentProps = {
     onExit: any
 }
 
-const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, formMsg, onExit }) => {
+const FormComponent: FC<FormComponentProps> = ({ 
+    form, 
+    setForm, 
+    durationValue, 
+    onFormSubmit, 
+    awaitingLink, 
+    formMsg, 
+    onExit }) => {
 
     const [isAdvancedActive, setIsAdvancedActive] = useState(false)
 
