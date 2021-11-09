@@ -53,7 +53,6 @@ const DropdownTextInputComponent: FC<{
                 setIsShown(false)
             }
         }, [addresses])
-        
         return (
             <TextInputWrapper>
                 <DropdownTextInput index={index} pos={position}>

@@ -76,7 +76,7 @@ export default function Home() {
   const onResetClick = () => {
     setFormActive(false)
     setForm({
-      address: [''],
+      address: [""],
       name: '',
       duration: 3600,
       preset: null,
@@ -241,6 +241,7 @@ export default function Home() {
                   durationValue={durationValue}
                   onFormSubmit={onFormSubmit}
                   awaitingLink={awaitingLink}
+                  onExit={onResetClick}
                   formMsg={formMsg}
                 />
             )

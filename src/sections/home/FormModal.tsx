@@ -16,29 +16,12 @@ type FormComponentProps = {
     onFormSubmit: any
     awaitingLink: boolean
     formMsg: string
+    onExit: any
 }
 
-const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, formMsg }) => {
+const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, durationValue, onFormSubmit, awaitingLink, formMsg, onExit }) => {
 
     const [isAdvancedActive, setIsAdvancedActive] = useState(false)
-
-    const onExit = () => {
-        setFormActive(false)
-        setIsAdvancedActive(false)
-        setForm({
-            address: [''],
-            name: '',
-            duration: 3600,
-            type: 'All',
-            network: ["All"],
-            preset: null,
-            groupAssetsUnder: 0.1,
-            isGroupAssetsUnder: false,
-            showNFTCollections: false,
-            ignoreNFTs: false,
-            isSnapshot: false
-        })
-    }
 
     return (
         <FormWrapper>

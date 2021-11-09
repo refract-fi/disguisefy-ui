@@ -43,7 +43,6 @@ const DropdownComponent: FC<{
                             setForm({...form, [objectKey]: list});
                         }
                     } else {
-                        // setArrayValues([...arrayValues.filter((n) => n !== 'All'), option])
                         setForm({...form, [objectKey]: [...form[objectKey].filter((n) => n !== 'All'), option]})
                     }
                 }
@@ -90,7 +89,7 @@ const DropdownComponent: FC<{
                             }
                             if (type === "single") {
                                 return (
-                                    <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
+                                    <Option pos={pos} key={`A-${option}-${index}`} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
                                         {
                                             option == form[objectKey] && (
                                                 <Icon
@@ -103,7 +102,7 @@ const DropdownComponent: FC<{
                                 )
                             } else {
                                 return (
-                                    <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
+                                    <Option pos={pos} key={`B-${option}-${index}`} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
                                         {
                                             form[objectKey].includes(option) && (
                                                 <Icon

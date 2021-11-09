@@ -16,6 +16,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, 
         list[index] = value;
         setAddresses(list);
         setForm({ ...form, address: list })
+        console.log('caliss')
     };
 
     const handleRemoveClick = index => {
@@ -42,6 +43,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, 
                         return (
                             <DropdownTextInput
                                 index={i}
+                                key={`${i}-${variant}`}
                                 value={item}
                                 addresses={addresses}
                                 onChange={e => handleInputChange(e, i)}
@@ -58,6 +60,7 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, 
                             return (
                                 <DropdownTextInput
                                 index={i}
+                                key={`${i}-${variant}`}
                                 value={item}
                                 addresses={addresses}
                                 onChange={e => handleInputChange(e, i)}
@@ -79,6 +82,6 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: (form: any) => void, 
 
 export default TextInputDropdownComponent;
 
-const TextInputDropdown = styled(FlexCol)`
+const TextInputDropdown = styled(FlexCol)<{margin}>`
     position: relative;
 `;
