@@ -49,7 +49,6 @@ const DropdownComponent: FC<{
                 }
             }
         }
-        console.log(form[objectKey])
         return (
             <Dropdown onClick={() => onDropdownClick()} margin={margin}>
                 <InputTitleWrapper isShown={isShown}>
