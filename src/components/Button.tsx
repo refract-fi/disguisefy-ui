@@ -103,6 +103,9 @@ export const ExitButton = styled.img`
     ${({ theme }) => theme.mediaWidth.sm`
         width: 20px;
     `};
+    &:hover{
+        opacity: 0.7;
+    }
 `
 
 export const BackButton = styled.img`

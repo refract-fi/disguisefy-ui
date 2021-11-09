@@ -6,19 +6,23 @@ import { Flex, FlexRow, FlexRowCentered } from 'styles/components';
 import { PrivacySelect } from '.';
 
 const StyledCheckbox = withStyles({
-    root:{
+    root: {
         color: "#FFFFFF"
     }
 })(Checkbox);
 
-const StandardFormComponent = ({form, setForm, durationValue, setIsAdvancedActive}) => {
+const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActive }) => {
     const theme = useTheme();
+
+    const dashboard_options = ["All", "DeFi", "NFT"]
+    const network_options = ["All", "Arbitrum", "Avalanche", "BSC", "Celo", "Ethereum", "Fantom", "Harmony", "Optimism", "Polygon"]
+
     return (
         <StandardForm>
-            <TextInputDropdown 
-            variant="dark"
-            form={form}
-            setForm={setForm}
+            <TextInputDropdown
+                variant="dark"
+                form={form}
+                setForm={setForm}
             />
             <TextInput
                 value={form.name}
@@ -26,11 +30,23 @@ const StandardFormComponent = ({form, setForm, durationValue, setIsAdvancedActiv
                 variant="dark"
                 placeholder="Portfolio Name (Optional)"
                 onChange={(event: ChangeEvent<HTMLInputElement>): void => setForm({ ...form, name: event.target.value })}
+                margin="1.5rem 0 1.5rem 0"
             />
             <Dropdown
-            form={form}
-            setForm={setForm}
-            
+                title="Dashboard Type"
+                options={dashboard_options}
+                type="single"
+                form={form}
+                setForm={setForm}
+                margin="0 0 1.5rem 0"
+            />
+            <Dropdown
+                title="Network"
+                options={network_options}
+                type="multi"
+                form={form}
+                setForm={setForm}
+
             />
             <Text align="center" margin="20px 0 15px 0" variant="subtitle">Privacy Level</Text>
             <PrivacySelect level={form.preset} form={form} setForm={setForm} />
@@ -63,7 +79,7 @@ const StandardFormComponent = ({form, setForm, durationValue, setIsAdvancedActiv
                 </CheckboxWrapper>
             </CheckboxRow>
             <AdvancedSettingsBlock>
-                <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>Advanced Settings → </StyledText>
+                <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>⇠Advanced Form</StyledText>
             </AdvancedSettingsBlock>
         </StandardForm>
     );
@@ -73,10 +89,6 @@ export default StandardFormComponent;
 
 const StandardForm = styled.div`
     width: 100%;
-    height: 330px;
-    ${({ theme }) => theme.mediaWidth.sm`
-        height: 315px;
-    `};
 `;
 
 const CheckboxRow = styled(FlexRowCentered)`
@@ -100,7 +112,8 @@ const StyledText = styled(Text)`
 `
 
 const AdvancedSettingsBlock = styled(FlexRow)`
-  justify-content: flex-end;
-  width: 100%;
-  margin-top: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem 0 0 1rem;
 `

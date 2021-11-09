@@ -29,6 +29,8 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
             ...form,
             name: '',
             duration: 3600,
+            type: 'All',
+            network: ["All"],
             preset: null,
             groupAssetsUnder: 0.1,
             isGroupAssetsUnder: false,
@@ -41,8 +43,8 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
     return (
         <FormWrapper>
             <StyledBlock>
-                <ExitButton onClick={() => onExit()} src="/exit.svg" />
-                <Text variant="title">Personalize your Dashboard</Text>
+                <ExitButton onClick={() => onExit()} src="/remove-icon-red.svg" />
+                <Text variant="title" margin="1rem 0 1rem 0">Personalize your Dashboard</Text>
                 {
                     isAdvancedActive ? (
                         <AdvancedForm
@@ -70,14 +72,12 @@ const FormComponent: FC<FormComponentProps> = ({ form, setForm, setFormActive, d
 
 export default FormComponent;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled(Flex)`
   position: absolute;
-  width: 630px;
-  z-index: 2;
-  ${({ theme }) => theme.mediaWidth.sm`
-        width: 100%;
-        margin-top: -15px;
-  `};
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 `
 
 const StyledBlock = styled(Block)`

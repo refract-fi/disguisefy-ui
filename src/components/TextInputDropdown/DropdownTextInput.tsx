@@ -1,7 +1,7 @@
 import { TextInput } from 'components';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Flex } from 'styles/components';
+import { Flex, FlexCentered } from 'styles/components';
 
 const DropdownTextInputComponent: FC<{
     index: any,
@@ -73,59 +73,77 @@ const DropdownTextInputComponent: FC<{
         }, [addresses])
 
         return (
-            <DropdownTextInput index={index} pos={position}>
-                <TextInput
-                    placeholder="0x... or enter an ENS name*"
-                    onChange={onChange}
-                    width="100%"
-                    name="address"
-                    value={value}
-                    pos={position}
-                    variant={variant}
-                    onKeyDown={(e) => {
-                        if (e.code == "Enter") {
-                            onEnterPress()
+            <TextInputWrapper>
+                <DropdownTextInput index={index} pos={position}>
+                    <TextInput
+                        placeholder="0x... or enter an ENS name*"
+                        onChange={onChange}
+                        width="100%"
+                        name="address"
+                        value={value}
+                        pos={position}
+                        variant={variant}
+                        onKeyDown={(e) => {
+                            if (e.code == "Enter") {
+                                onEnterPress()
+                            }
+                        }}
+                    />
+                    <IconWrapper>
+                        {
+                            addresses.length !== 1 ? (
+                                <Icon
+                                    onClick={() => handleRemoveClick(index)}
+                                    src="remove-icon-red.svg" />
+                            ) : <Icon />
                         }
-                    }}
-                />
-                <IconWrapper>
+
+                        {
+                            variant === "dark" &&
+                                ((index === 0 && addresses.length > 1) ?
+                                <DropdownIcon
+                                    onClick={() => setIsShown(!isShown)}
+                                    src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                                /> :
+                                <DropdownIcon />)
+                        }
+                        {
+                            variant === "index" &&
+                                ((index === 0 && addresses.length > 1) ?
+                                <DropdownIcon
+                                    onClick={() => setIsShown(!isShown)}
+                                    src={isShown ? 'dropdown-icon-close-red.svg' : 'dropdown-icon-open-red.svg'}
+                                /> :
+                                <DropdownIcon />)
+                        }
+
+                    </IconWrapper>
+                </DropdownTextInput>
+                <AddIconWrapper>
                     {
-                        (addresses.length - 1 === index && index != 4) ? (
-                            <Icon
+                        (index === 0 && addresses.length < 5) && (
+                            <AddIcon
                                 onClick={() => handleAddClick()}
                                 src="add-icon-red.svg" />
-                        ) : <Icon />
+                        )
                     }
-                    {
-                        addresses.length !== 1 ? (
-                            <Icon
-                                onClick={() => handleRemoveClick(index)}
-                                src="remove-icon-red.svg" />
-                        ) : <Icon />
-                    }
-
-
-                    {
-                        ((isShown && index == addresses.length - 1 && index > 0) || (!isShown && addresses.length > 1)) ?
-                            <Icon
-                                onClick={() => setIsShown(!isShown)}
-                                src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
-                            /> :
-                            <Icon />
-                    }
-
-                </IconWrapper>
-            </DropdownTextInput>
+                </AddIconWrapper>
+            </TextInputWrapper>
         );
     }
 
 export default DropdownTextInputComponent;
 
+const TextInputWrapper = styled.div`
+    display: flex;
+`
+
+
 const DropdownTextInput = styled(Flex) <{ index: number, pos: string | null }>`
     width: 100%;
     position: ${props => props.index == 0 ? 'relative' : 'absolute'};
     top: ${props => `${props.index * 2.6}rem`};
-    z-index: 2;
+    z-index: 3;
 `
 
 const IconWrapper = styled(Flex)`
@@ -136,8 +154,35 @@ const IconWrapper = styled(Flex)`
     @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { top:2px; }}
 `
 
+const DropdownIcon = styled.img`
+    position: relative;
+    width: 20px;
+    transition: all 0.2s ease;
+    margin: 0 2.5px;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
+`
+
 const Icon = styled.img`
     position: relative;
+    width: 20px;
+    transition: all 0.2s ease;
+    margin: 0 2.5px;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
+`
+
+const AddIconWrapper = styled(FlexCentered)`
+    position: absolute;
+    height: 100%;
+    right: -2rem;
+`
+
+const AddIcon = styled.img`
     width: 20px;
     transition: all 0.2s ease;
     margin: 0 2.5px;

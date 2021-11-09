@@ -52,8 +52,8 @@ const TextInput = styled.input<TextInputProps>`
     ${props =>
         props.pos == 'top' &&
         css`
-            border-radius: 3px 3px 0px 0px;
-            border-bottom-width: 0px;
+            border-radius: 5px 5px 0px 0px;
+            border-bottom-width: 1px;
         `
     }
     ${props =>
@@ -74,7 +74,7 @@ const TextInput = styled.input<TextInputProps>`
             top: -1px;
             border-top-width: 1px;
             border-top-color: gray;
-            border-radius: 0px 0px 3px 3px;
+            border-radius: 0px 0px 5px 5px;
         `
     }
     

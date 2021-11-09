@@ -1,94 +1,184 @@
 import { Text } from 'components';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Flex } from 'styles/components';
 
 
 
-const DropdownComponent = ({ form, setForm }) => {
-    const [value, setValue] = useState('All');
-    const [isShown, setIsShown] = useState(false);
+const DropdownComponent: FC<{
+    title: string,
+    options: Array<string>,
+    type: string,
+    form: any,
+    setForm: (form: any) => void,
+    margin?: string
+}> = ({
+    title,
+    options,
+    type,
+    form,
+    setForm,
+    margin }) => {
+        const [value, setValue] = useState('All');
+        const [arrayValues, setArrayValues] = useState<Array<string>>(["All"])
+        const [isShown, setIsShown] = useState(false);
 
-    const values = ['All', 'DeFi', 'NFT']
-
-    const onDropdownClick = () => {
-        if (!isShown) {
-            setIsShown(true)
+        const onDropdownClick = () => {
+            if (!isShown) {
+                setIsShown(true)
+            }
         }
-    }
 
-    return (
-        <Dropdown onClick={() => onDropdownClick()}>
-            <InputTitleWrapper>
-                <InputTitle size="1.3rem">Dashboard Type</InputTitle>
-            </InputTitleWrapper>
-            <Options isShown={isShown}>
-                <Option>
-                    <Text variant={"large"}>{value}</Text>
-                </Option>
-                {
-                    values.map((type) => {
-                        return (
-                            <Option>
-                                {
-                                    type == value && (
-                                        <Icon
-                                            src="checkmark-icon.svg"
-                                        />
-                                    )
-                                }
-                                <Text variant={"large"}>{type}</Text>
-                            </Option>
-                        )
-                    })
+        const onValueChange = (type: string, option: string, index: number) => {
+            if (type === "single") {
+                setValue(option)
+            } else if (type === "multi") {
+                if (option === "All") {
+                    setArrayValues(["All"])
+                } else {
+                    if (arrayValues.includes(option)) {
+                        const list = [...arrayValues];
+                        list.splice(list.findIndex((value) => value === option), 1);
+                        if (list.length === 0) {
+                            setArrayValues(["All"])
+                        } else {
+                            setArrayValues(list);
+                        }
+                    } else {
+                        setArrayValues([...arrayValues.filter((n) => n !== 'All'), option])
+                    }
                 }
-            </Options>
-            <IconWrapper>
-                <DropdownIcon
-                    onClick={() => setIsShown(!isShown)}
-                    src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
-                />
-            </IconWrapper>
-        </Dropdown>
-    );
-}
+            }
+        }
+        console.log(arrayValues)
+        return (
+            <Dropdown onClick={() => onDropdownClick()} margin={margin}>
+                <InputTitleWrapper isShown={isShown}>
+                    <InputTitle size="1.2rem">{title}</InputTitle>
+                </InputTitleWrapper>
+                <Options isShown={isShown}>
+                    <Option pos="top" isShown={isShown} onClick={() => setIsShown(!isShown)}>
+                        <Text variant={"large"}>
+                            {
+                                type === 'single' &&
+                                value
+                            }
+                            {
+                                type === "multi" && (
+                                    arrayValues.map((value, index) => {
+                                        if ((index === 0 && arrayValues.length > 1) || (arrayValues.length - 1 !== index && index !== 0)) {
+                                            return (
+                                                `${value}, `
+                                            )
+                                        } else {
+                                            return (
+                                                value
+                                            )
+                                        }
+                                    })
+                                )
+                            }
+
+                        </Text>
+                    </Option>
+                    {
+                        options.map((option, index) => {
+                            let pos;
+                            if (index > 0 && options.length - 1 === index) {
+                                pos = 'bot'
+                            } else {
+                                pos = 'mid'
+                            }
+                            if (type === "single") {
+                                return (
+                                    <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
+                                        {
+                                            option == value && (
+                                                <Icon
+                                                    src="checkmark-icon.svg"
+                                                />
+                                            )
+                                        }
+                                        <Text variant={"large"}>{option}</Text>
+                                    </Option>
+                                )
+                            } else {
+                                return (
+                                    <Option pos={pos} isShown={isShown} onClick={() => onValueChange(type, option, index)}>
+                                        {
+                                            arrayValues.includes(option) && (
+                                                <Icon
+                                                    src="checkmark-icon.svg"
+                                                />
+                                            )
+                                        }
+                                        <Text variant={"large"}>{option}</Text>
+                                    </Option>
+                                )
+                            }
+                        })
+                    }
+                </Options>
+                <IconWrapper>
+                    <DropdownIcon
+                        onClick={() => setIsShown(!isShown)}
+                        src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                    />
+                </IconWrapper>
+            </Dropdown>
+        );
+    }
 
 export default DropdownComponent;
 
-const Dropdown = styled.div`
+const Dropdown = styled.div<{ margin?: string }>`
     position: relative;
-    border: 1px solid white;
-    border-radius: 5px;
     height: 2.6rem;
+    margin: ${props => props.margin && props.margin};
 `
 
 const Options = styled.div<{ isShown: boolean }>`
     position: absolute;
     top: 0;
+    z-index: ${props => props.isShown && 4};
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid white;
+    /* transition: 0.15s linear all; */
+    box-shadow: ${props => props.isShown && "0px 0px 6px rgba(256,256,256, 0.5)"};
+    
+    
 `;
 
-const Option = styled.div<{pos?: string}>`
+const Option = styled.div<{ pos?: string, isShown: boolean }>`
     height: 2.6rem;
-    display: flex;
-    padding-left: 2rem;
+    padding-left: 3rem;
+    z-index: 4;
     font-weight: bold;
     align-items: center;
+    width: 100%;
+    display: ${props => (props.isShown || props.pos === 'top') ? 'flex' : 'none'};
+    background-color: ${({ theme }) => theme.bg16};
+    border-radius: 3px;
     ${props =>
-        props.pos == 'top' &&
+        (props.pos == 'top' && props.isShown == true) &&
         css`
             border-radius: 3px 3px 0px 0px;
-            border-bottom-width: 0px;
+            border-bottom: 1px solid gray;
         `
     }
     ${props =>
         props.pos == 'mid' &&
         css`
             position: relative;
-            top: -1px;
+            /* top: -1px; */
             border-top-width: 1px;
             border-top-color: gray;
             border-bottom-width: 0px;
             border-radius: 0px 0px 0px 0px;
+            &:hover{
+                cursor: pointer;
+            }
         `
     }
     ${props =>
@@ -99,14 +189,18 @@ const Option = styled.div<{pos?: string}>`
             border-top-width: 1px;
             border-top-color: gray;
             border-radius: 0px 0px 3px 3px;
+            &:hover{
+                cursor: pointer;
+            }
         `
     }
 `
 
-const InputTitleWrapper = styled.div`
+const InputTitleWrapper = styled.div<{ isShown: boolean }>`
     position: relative;
-    top: -0.9rem;
+    top: -0.6rem;
     left: 1rem;
+    z-index: ${props => props.isShown ? 5 : 2};
     background-color: ${({ theme }) => theme.bg16};
     width: fit-content;
     padding: 0 0.4rem;
@@ -119,7 +213,7 @@ const InputTitle = styled(Text)`
 const Icon = styled.img`
     position: absolute;
     width: 20px;
-    left: 0px;
+    left: 0.5rem;
     transition: all 0.2s ease;
     margin: 0 2.5px;
     &:hover{

@@ -203,6 +203,7 @@ export default function Home() {
               form={form}
               setForm={setForm}
               onDisguiseClick={onDisguiseClick}
+              variant="index"
             />
           </TextInputWrapper>
           <Button width="wide" margin="17px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
@@ -217,6 +218,13 @@ export default function Home() {
             <ErrorText color={"red"}>{(formMsg && !formActive) && formMsg}</ErrorText>
           }
           {
+            helpActive && (
+              <Help setHelpActive={setHelpActive} />
+            )
+          }
+        </Content>
+      </Wrapper>
+      {
             formActive && (
 
                   <FormModal 
@@ -230,19 +238,12 @@ export default function Home() {
                 />
             )
           }
-          {
-            helpActive && (
-              <Help setHelpActive={setHelpActive} />
-            )
-          }
-        </Content>
-      </Wrapper>
     </>
   )
 }
 
 const Wrapper = styled(FlexCentered)`
-  min-height: calc(100vh - 120px);
+  min-height: 100vh;
   ${({ theme }) => theme.mediaWidth.sm`
         width: 90%;
         align-items: flex-start
