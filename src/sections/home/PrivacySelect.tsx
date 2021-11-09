@@ -41,22 +41,24 @@ export default PrivacySelectComponent;
 
 const PrivacySelect = styled(Flex)`
     width: 100%;
+    margin-bottom: 1.5rem;
 `;
 
 const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
     display: flex;
-    flex: 1;
     border-radius: 0px;
     color: black;
-    border: 3px solid #00000000;
+    border: 2px solid #00000000;
     padding: 6px 0;
-    margin: 0px;
+    margin: 0px 0.4rem;
     align-items: center;
     justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
     ${props => props.level == 10 &&
         css`
         background-color: ${({ theme }) => theme.level1};
-        border-radius: 8px 0px 0px 8px;
         &:hover{
             background-color: ${({ theme }) => theme.level1Hover};
         }
@@ -64,7 +66,6 @@ const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
     ${props => props.level == 20 &&
         css`
         background-color: ${({ theme }) => theme.level2};
-        // background-color: ${({ theme }) => theme.disabled};
         &:hover{
             background-color: ${({ theme }) => theme.level2Hover};
         }
@@ -84,22 +85,21 @@ const LevelButton = styled(Button) <{ border?: string, level: number, active }>`
         &:hover{
             background-color: ${({ theme }) => theme.level4Hover};
         } */
-        border-radius: 0px 8px 8px 0px;
     `};
     ${props => (props.active && props.level == 10) &&
         css`
-            border: ${props => `3px solid ${props.theme.level1Active}`};
+            border: ${props => `2px solid ${props.theme.level1Active}`};
             background-color: ${({ theme }) => theme.level1Hover};
         `    
     }
     ${props => (props.active && props.level == 20) &&
         css`
-            border: ${props => `3px solid ${props.theme.level2Active}`};
+            border: ${props => `2px solid ${props.theme.level2Active}`};
             background-color: ${({ theme }) => theme.level2Hover};
         `    
     }
 `
 
 const HeroIcon = styled.img`
-    width: 33px;
+    height: 25px;
 `

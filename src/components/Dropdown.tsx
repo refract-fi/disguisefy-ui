@@ -50,13 +50,13 @@ const DropdownComponent: FC<{
             }
         }
         return (
-            <Dropdown onClick={() => onDropdownClick()} margin={margin}>
+            <Dropdown onClick={() => onDropdownClick()} margin={margin} type={type}>
                 <InputTitleWrapper isShown={isShown}>
                     <InputTitle size="1.2rem">{title}</InputTitle>
                 </InputTitleWrapper>
                 <Options isShown={isShown}>
                     <Option pos="top" isShown={isShown} onClick={() => setIsShown(!isShown)}>
-                        <Text variant={"large"}>
+                        <Text size="1.1rem">
                             {
                                 type === 'single' &&
                                 form[objectKey]
@@ -103,7 +103,7 @@ const DropdownComponent: FC<{
                                                 />
                                             )
                                         }
-                                        <Text variant={"large"}>{option}</Text>
+                                        <Text size="1.1rem">{option}</Text>
                                     </Option>
                                 )
                             } else {
@@ -116,7 +116,7 @@ const DropdownComponent: FC<{
                                                 />
                                             )
                                         }
-                                        <Text variant={"large"}>{option}</Text>
+                                        <Text size="1.1rem">{option}</Text>
                                     </Option>
                                 )
                             }
@@ -137,10 +137,11 @@ const DropdownComponent: FC<{
 
 export default DropdownComponent;
 
-const Dropdown = styled.div<{ margin?: string }>`
+const Dropdown = styled.div<{ margin?: string, type?: string }>`
     position: relative;
     height: 2.6rem;
     margin: ${props => props.margin && props.margin};
+    flex: ${props => props.type === "multi" ? 2 : 1};
 `
 
 const Options = styled.div<{ isShown: boolean }>`
@@ -158,8 +159,8 @@ const Options = styled.div<{ isShown: boolean }>`
 
 const Option = styled.div<{ pos?: string, isShown: boolean }>`
     height: 2.6rem;
-    padding-left: 3rem;
-    font-weight: bold;
+    padding-left: ${props => props.pos === "top" ? "1.5rem" : "3rem"};
+    font-weight: ${props => props.pos === "top" ? 'bold' : 'normal'};
     align-items: center;
     width: 100%;
     display: ${props => (props.isShown || props.pos === 'top') ? 'flex' : 'none'};

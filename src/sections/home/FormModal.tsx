@@ -17,6 +17,9 @@ type FormComponentProps = {
     awaitingLink: boolean
     formMsg: string
     onExit: any
+    linkActive: boolean
+    setLinkActive: (linkActive: boolean) => void
+    url: string
 }
 
 const FormComponent: FC<FormComponentProps> = ({ 
@@ -68,11 +71,13 @@ const FormWrapper = styled(Flex)`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
+  background-color: #263143B3;
 `
 
 const StyledBlock = styled(Block)`
     border: 1px solid ${props => props.theme.accent};
-    padding: 25px 50px;
+    padding: 25px 40px;
     /* background-image: radial-gradient(farthest-corner at 1400px -1400px,#cf6363 0%, #141C2A 95%); */
     background-color: ${({ theme }) => theme.bg16};;
   ${({ theme }) => theme.mediaWidth.sm`

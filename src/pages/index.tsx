@@ -195,7 +195,7 @@ export default function Home() {
 
   return (
     <>
-      <LinkModal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
+      {/* <LinkModal active={active} setActive={setActive} url={url} onResetClick={onResetClick} /> */}
       <Wrapper>
         <Content>
           <Text
@@ -233,7 +233,6 @@ export default function Home() {
       </Wrapper>
       {
             formActive && (
-
                   <FormModal 
                   form={form}
                   setForm={setForm}
@@ -242,6 +241,9 @@ export default function Home() {
                   awaitingLink={awaitingLink}
                   onExit={onResetClick}
                   formMsg={formMsg}
+                  linkActive={active}
+                  setLinkActive={setActive}
+                  url={url}
                 />
             )
           }
