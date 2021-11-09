@@ -19,7 +19,6 @@ const DropdownComponent: FC<{
     form,
     setForm,
     margin }) => {
-        // const [value, setValue] = useState('All');
         const [isShown, setIsShown] = useState(false);
 
         const onDropdownClick = () => {
