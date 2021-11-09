@@ -1,11 +1,10 @@
-import { Block, Button, CopyLink, ExitButton, Text, TextInput } from 'components';
+import { Block, Button, CopyLink, ExitButton, Text, TextInput, ResetButton } from 'components';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
-import { ResetButton } from './Button';
 
-const ModalComponent = ({ active, setActive, url, onResetClick }) => {
+const LinkModalComponent = ({ active, setActive, url, onResetClick }) => {
 
     const [width, setWidth] = useState(0);
     const [location, setLocation] = useState<string>();
@@ -56,7 +55,7 @@ const ModalComponent = ({ active, setActive, url, onResetClick }) => {
     );
 }
 
-export default ModalComponent;
+export default LinkModalComponent;
 
 const Modal = styled(FlexColAllCentered) <{ active?: boolean }>`
     display: ${props => props.active ? 'flex' : 'none'};

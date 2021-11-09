@@ -44,7 +44,7 @@ const TextInput = styled.input<TextInputProps>`
         `}
     ${props => props.variant == 'dark' &&
         css`
-            background-color: ${({ theme }) => theme.bg16};
+            background-color: ${({ theme }) => theme.bg16}; 
             color: white;
             border: 1px solid white;
             &:focus{

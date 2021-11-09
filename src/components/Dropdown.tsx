@@ -165,6 +165,11 @@ const Option = styled.div<{ pos?: string, isShown: boolean }>`
     display: ${props => (props.isShown || props.pos === 'top') ? 'flex' : 'none'};
     background-color: ${({ theme }) => theme.bg16};
     border-radius: 3px;
+    &:hover{
+        p{
+            opacity: 0.7;
+        }
+    }
     ${props =>
         (props.pos == 'top' && props.isShown == true) &&
         css`

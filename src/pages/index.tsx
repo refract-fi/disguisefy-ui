@@ -1,10 +1,10 @@
-import { Button, Modal, Text, TextInputDropdown } from "components";
-import { ChangeEvent, useEffect, useState } from "react";
-import styled, { useTheme } from 'styled-components';
+import { Button, Text, TextInputDropdown } from "components";
+import { useEffect, useState } from "react";
+import styled from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { FormModal, Help } from "sections/home";
+import { FormModal, Help, LinkModal } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
 import IForm from "utils/interface/form";
@@ -195,7 +195,7 @@ export default function Home() {
 
   return (
     <>
-      <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
+      <LinkModal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
       <Wrapper>
         <Content>
           <Text

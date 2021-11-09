@@ -4,11 +4,10 @@ import TextInput from './TextInput';
 import Block from './Block';
 import Text from './Text';
 import Slider from './Slider';
-import Modal from './Modal';
 import DonutChart from './Charts/DonutChart';
 import LineChart from './Charts/LineChart';
 import Label from './Charts/Label';
-import { ExitButton, BackButton } from './Button';
+import { ExitButton, BackButton, ResetButton } from './Button';
 import { Bold } from './Text';
 import { Logo } from './Images' ;
 import CopyLink from './CopyLink';
@@ -16,4 +15,22 @@ import Tooltip from './Tooltip';
 import TextInputDropdown from './TextInputDropdown/TextInputDropdown';
 import Dropdown from './Dropdown';
 
-export {Button, Layout, TextInput, Block, Text, Slider, Modal, ExitButton, Bold, Logo, DonutChart, LineChart, Label, CopyLink, BackButton, Tooltip, TextInputDropdown, Dropdown};
+export {
+    Button, 
+    Layout, 
+    TextInput, 
+    Block, 
+    Text, 
+    Slider, 
+    ExitButton, 
+    Bold, 
+    Logo, 
+    DonutChart, 
+    LineChart, 
+    Label, 
+    CopyLink, 
+    BackButton, 
+    Tooltip, 
+    TextInputDropdown, 
+    Dropdown, 
+    ResetButton};

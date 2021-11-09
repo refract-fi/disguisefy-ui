@@ -64,6 +64,8 @@ const DropdownTextInputComponent: FC<{
                         variant={variant}
                         onKeyDown={(e) => {
                             if (e.code == "Enter") {
+                                variant === 'dark' ?
+                                setIsShown(!isShown):
                                 onEnter()
                             }
                         }}
