@@ -54,7 +54,7 @@ const LinkComponent = ({ active, setActive, url, onReset, onExit }) => {
 export default LinkComponent;
 
 const Wrapper = styled.div`
-    width: 475px;
+    width: 400px;
 `
 
 const TextInputContainer = styled.div`
@@ -107,16 +107,4 @@ const DisLogo = styled.img`
 const CustomTextInput = styled(TextInput)`
     position: relative;
     z-index:2;
-`
-
-const StyledBlock = styled(Block)`
-    position: relative;
-    width: 500px;
-    padding: 30px 40px;
-    z-index: 3;
-    ${({ theme }) => theme.mediaWidth.sm`
-        width:95%;
-        max-width: 500px;
-        padding: 30px 20px;
-    `};
 `

@@ -22,7 +22,6 @@ const AdvancedFormComponent = ({form, setForm, setIsAdvancedActive}) => {
                 />
                 <Text size="1.1rem">One time snapshot with IPFS</Text>
                 <Tooltip
-                    type="blue"
                     content1="Data is frozen in time at link creation."
                     content2="This data is stored in decentralized storage." />
             </CheckboxWrapper>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { FormModal, Help } from "sections/home";
+import { Modal, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
 import IForm from "utils/interface/form";
@@ -257,7 +257,7 @@ export default function Home() {
       </Wrapper>
       {
         formActive && (
-          <FormModal
+          <Modal
             form={form}
             setForm={setForm}
             durationValue={durationValue}

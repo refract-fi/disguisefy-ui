@@ -8,7 +8,7 @@ import Form from './Form';
 import Link from 'next/link';
 import LinkComponent from './Link';
 
-type FormComponentProps = {
+type ModalComponentProps = {
     form: IForm
     setForm: (form: IForm) => void
     durationValue: number
@@ -22,7 +22,7 @@ type FormComponentProps = {
     url: string
 }
 
-const FormComponent: FC<FormComponentProps> = ({
+const ModalComponent: FC<ModalComponentProps> = ({
     form,
     setForm,
     durationValue,
@@ -36,7 +36,7 @@ const FormComponent: FC<FormComponentProps> = ({
     url }) => {
 
     return (
-        <FormWrapper>
+        <Modal>
             <StyledBlock>
                 <ResetButton onClick={() => onReset()} src="/reset.svg" />
                 <ExitButton onClick={() => onExit()} src="/remove-icon-red.svg" />
@@ -65,13 +65,13 @@ const FormComponent: FC<FormComponentProps> = ({
                 }
 
             </StyledBlock>
-        </FormWrapper >
+        </Modal >
     );
 }
 
-export default FormComponent;
+export default ModalComponent;
 
-const FormWrapper = styled(Flex)`
+const Modal = styled(Flex)`
   position: absolute;
   z-index: 10;
   align-items: center;
