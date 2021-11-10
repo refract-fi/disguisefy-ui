@@ -114,12 +114,11 @@ export const BackButton = styled.img`
     position: absolute;
     left: 10px;
     top: 10px;
-    opacity: 0.8;
     ${({ theme }) => theme.mediaWidth.sm`
         width: 20px;
     `};
     &:hover{
-        opacity:1;
+        opacity:0.7;
     }
 `
 
@@ -133,4 +132,7 @@ export const ResetButton = styled.img`
         width: 20px;
         right: 32px;
     `};
+    &:hover{
+        opacity: 0.7;
+    }
 `

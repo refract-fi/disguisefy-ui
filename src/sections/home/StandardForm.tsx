@@ -80,7 +80,7 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
                 <Text size="1.1rem">Ignore NFT assets</Text>
             </CheckboxWrapper>
             <AdvancedSettingsBlock>
-                <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>⇠Advanced Form</StyledText>
+                <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>⇠Advanced Settings</StyledText>
             </AdvancedSettingsBlock>
         </StandardForm>
     );
@@ -90,17 +90,12 @@ export default StandardFormComponent;
 
 const StandardForm = styled.div`
     width: 100%;
-    min-width: 475px;
+    height: 100%;
 `;
 
 const DropdownRow = styled(Flex)`
     flex-wrap: wrap;
 `
-
-const CheckboxRow = styled(FlexRowCentered)`
-  width: 100%;
-  justify-content: space-around;
-`;
 
 export const CheckboxWrapper = styled(Flex)`
   align-items: center;
@@ -113,7 +108,7 @@ const StyledText = styled(Text)`
   cursor: pointer;
   /* color: ${({ theme }) => theme.bg}; */
   &:hover{
-    color: black;
+    opacity: 0.7;
   }
 `
 

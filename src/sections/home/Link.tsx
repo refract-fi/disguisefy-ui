@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Flex, FlexColAllCentered, FlexRow, FlexRowSpaceBetween } from 'styles/components';
 
-const LinkModalComponent = ({ active, setActive, url, onResetClick }) => {
+const LinkComponent = ({ active, setActive, url, onReset, onExit }) => {
 
     const [width, setWidth] = useState(0);
     const [location, setLocation] = useState<string>();
@@ -26,45 +26,36 @@ const LinkModalComponent = ({ active, setActive, url, onResetClick }) => {
     })
 
     return (
-        <Modal active={active}>
-            <StyledBlock>
-                <ExitButton onClick={() => setActive(false)} src="/exit.svg" />
-                <ResetButton onClick={() => onResetClick()} src="/reset.svg" />
-                <Text variant="title" color="black">You've been disguisefied!</Text>
-                <StyledRow>
-                    <TextInputContainer>
-                        <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `${location}/${url}` : `${location}/${url}`} width="100%" readOnly />
-                        <DisLogo src="disguisefy_logo.svg" />
-                        <ExternalLinkWrapper>
-                            <Link href={url}>
-                                <a target="_blank">
-                                    <Img src="open-outline.svg" />
-                                </a>
-                            </Link>
-                        </ExternalLinkWrapper>
-                        <CopyLinkWrapper>
-                            <CopyLink host={location} url={url} />
-                        </CopyLinkWrapper>
-                    </TextInputContainer>
-                    <Link href={`/${url}`}>
-                        <Button width="40px" height="40px" margin="25px 0 0px 10px">Go</Button>
-                    </Link>
-                </StyledRow>
-            </StyledBlock>
-        </Modal>
+        <Wrapper>
+            <Text variant="subtitle" align="center">You've been disguisefied!</Text>
+            <StyledRow>
+                <TextInputContainer>
+                    <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `${location}/${url}` : `${location}/${url}`} width="100%" readOnly />
+                    {/* <DisLogo src="disguisefy_logo.svg" /> */}
+                    <ExternalLinkWrapper>
+                        <Link href={url}>
+                            <a target="_blank">
+                                <Img src="open-outline.svg" />
+                            </a>
+                        </Link>
+                    </ExternalLinkWrapper>
+                    <CopyLinkWrapper>
+                        <CopyLink host={location} url={url} />
+                    </CopyLinkWrapper>
+                </TextInputContainer>
+                <Link href={`/${url}`}>
+                    <Button width="40px" height="40px" margin="25px 0 0px 10px">Go</Button>
+                </Link>
+            </StyledRow>
+        </Wrapper>
     );
 }
 
-export default LinkModalComponent;
+export default LinkComponent;
 
-const Modal = styled(FlexColAllCentered) <{ active?: boolean }>`
-    display: ${props => props.active ? 'flex' : 'none'};
-    position: fixed;
-    z-index: 20;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.3);
-`;
+const Wrapper = styled.div`
+    width: 475px;
+`
 
 const TextInputContainer = styled.div`
     position:relative;

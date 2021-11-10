@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { FormModal, Help, LinkModal } from "sections/home";
+import { FormModal, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
 import IForm from "utils/interface/form";
@@ -15,7 +15,7 @@ export default function Home() {
     address: [''],
     name: '',
     duration: 3600,
-    preset: null,    
+    preset: null,
     type: "All",
     chains: ["All"],
     groupAssetsUnder: 0.1,
@@ -73,6 +73,25 @@ export default function Home() {
   }
 
   const onResetClick = () => {
+    setFormMsg('')
+    setFormActive(true)
+    setForm({
+      address: [""],
+      name: '',
+      duration: 3600,
+      preset: null,
+      type: "All",
+      chains: ["All"],
+      groupAssetsUnder: 0.1,
+      isGroupAssetsUnder: false,
+      ignoreNFTs: false,
+      showNFTCollections: false,
+      isSnapshot: false
+    })
+    setActive(false)
+  }
+
+  const onExitClick = () => {
     setFormMsg('')
     setFormActive(false)
     setForm({
@@ -138,6 +157,12 @@ export default function Home() {
       setAwaitingLink(false)
       return;
     }
+    if(form.address.every((address) => address == "")){
+      console.log("[ERROR] All address inputs are empty")
+      setFormMsg("Please input at least one address")
+      setAwaitingLink(false)
+      return;
+    }
     if (form.address.every(isAddress)) {
       postForm(form.address)
     } else {
@@ -195,7 +220,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <LinkModal active={active} setActive={setActive} url={url} onResetClick={onResetClick} /> */}
       <Wrapper>
         <Content>
           <Text
@@ -232,21 +256,22 @@ export default function Home() {
         </Content>
       </Wrapper>
       {
-            formActive && (
-                  <FormModal 
-                  form={form}
-                  setForm={setForm}
-                  durationValue={durationValue}
-                  onFormSubmit={onFormSubmit}
-                  awaitingLink={awaitingLink}
-                  onExit={onResetClick}
-                  formMsg={formMsg}
-                  linkActive={active}
-                  setLinkActive={setActive}
-                  url={url}
-                />
-            )
-          }
+        formActive && (
+          <FormModal
+            form={form}
+            setForm={setForm}
+            durationValue={durationValue}
+            onFormSubmit={onFormSubmit}
+            awaitingLink={awaitingLink}
+            onExit={onExitClick}
+            onReset={onResetClick}
+            formMsg={formMsg}
+            linkActive={active}
+            setLinkActive={setActive}
+            url={url}
+          />
+        )
+      }
     </>
   )
 }

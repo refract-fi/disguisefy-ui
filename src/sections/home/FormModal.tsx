@@ -1,13 +1,12 @@
-import { Checkbox } from '@material-ui/core';
-import { BackButton, Block, Button, ExitButton, Slider, Text, TextInput, Tooltip } from 'components';
+import { BackButton, Block, Button, ExitButton, ResetButton, Text, TextInput } from 'components';
 import Spinner from 'components/Spinner';
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Flex, FlexColCentered, FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import { IForm } from 'utils/interface';
-import { PrivacySelect } from '.';
-import AdvancedForm from './AdvancedForm';
-import StandardForm from './StandardForm';
+import Form from './Form';
+import Link from 'next/link';
+import LinkComponent from './Link';
 
 type FormComponentProps = {
     form: IForm
@@ -17,47 +16,54 @@ type FormComponentProps = {
     awaitingLink: boolean
     formMsg: string
     onExit: any
+    onReset: any
     linkActive: boolean
     setLinkActive: (linkActive: boolean) => void
     url: string
 }
 
-const FormComponent: FC<FormComponentProps> = ({ 
-    form, 
-    setForm, 
-    durationValue, 
-    onFormSubmit, 
-    awaitingLink, 
-    formMsg, 
-    onExit }) => {
-
-    const [isAdvancedActive, setIsAdvancedActive] = useState(false)
+const FormComponent: FC<FormComponentProps> = ({
+    form,
+    setForm,
+    durationValue,
+    onFormSubmit,
+    awaitingLink,
+    formMsg,
+    onExit,
+    onReset,
+    linkActive,
+    setLinkActive,
+    url }) => {
 
     return (
         <FormWrapper>
             <StyledBlock>
+                <ResetButton onClick={() => onReset()} src="/reset.svg" />
                 <ExitButton onClick={() => onExit()} src="/remove-icon-red.svg" />
-                <Text variant="title" margin="1rem 0 1rem 0">Personalize your Dashboard</Text>
                 {
-                    isAdvancedActive ? (
-                        <AdvancedForm
-                            form={form}
-                            setForm={setForm}
-                            setIsAdvancedActive={setIsAdvancedActive}
+                    linkActive ? (
+                        <LinkComponent
+                            active={linkActive}
+                            setActive={setLinkActive}
+                            onExit={onExit}
+                            onReset={onReset}
+                            url={url}
                         />
                     ) : (
-                        <StandardForm 
-                        form={form}
-                        setForm={setForm}
-                        durationValue={durationValue}
-                        setIsAdvancedActive={setIsAdvancedActive}
-                        />
+                        <>
+                            <Form
+                                durationValue={durationValue}
+                                form={form}
+                                setForm={setForm}
+                            />
+                            <ButtonWrapper>
+                                <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
+                                <Text position={"absolute"} top="4rem" color={formMsg == "Don't worry, this can take a few seconds" ? "white" : "red"} margin="5px 0 0 0">{formMsg && formMsg}</Text>
+                            </ButtonWrapper>
+                        </>
                     )
                 }
-                <ButtonWrapper>
-                    <Button onClick={() => onFormSubmit()} width="45%" size="medium" margin="12px 0 0 0">{awaitingLink ? <Spinner variant="button" /> : "Create url"}</Button>
-                    <Text position={"absolute"} top="4rem" color={formMsg == "Don't worry, this can take a few seconds" ? "white" : "red"} margin="5px 0 0 0">{formMsg && formMsg}</Text>
-                </ButtonWrapper>
+
             </StyledBlock>
         </FormWrapper >
     );
@@ -77,19 +83,18 @@ const FormWrapper = styled(Flex)`
 
 const StyledBlock = styled(Block)`
     border: 1px solid ${props => props.theme.accent};
-    padding: 25px 40px;
+    padding: 40px 45px;
     /* background-image: radial-gradient(farthest-corner at 1400px -1400px,#cf6363 0%, #141C2A 95%); */
     background-color: ${({ theme }) => theme.bg16};;
-  ${({ theme }) => theme.mediaWidth.sm`
-        padding: 30px 25px 20px;
-        min-height: 380px;
-  `};
-  ${({ theme }) => theme.mediaWidth.xs`
-        padding: 30px 25px 30px;
-        min-height: 380px;
-  `};
+    ${({ theme }) => theme.mediaWidth.sm`
+          padding: 30px 25px 20px;
+          min-height: 380px;
+    `};
+    ${({ theme }) => theme.mediaWidth.xs`
+          padding: 30px 25px 30px;
+          min-height: 380px;
+    `};
 `
-
 const ButtonWrapper = styled(FlexColCentered)`
   width: 100%;
   margin-top: 10px;
