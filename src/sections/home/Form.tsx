@@ -39,6 +39,5 @@ const FormComponent: FC<FormProps> = ({ form, setForm, durationValue }) => {
 export default FormComponent;
 
 const Form = styled.div`
-    width: 475px;
-    height: 500px;
+    width: 100%;
 `;

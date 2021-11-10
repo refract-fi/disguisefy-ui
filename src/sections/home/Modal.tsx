@@ -1,7 +1,7 @@
 import { BackButton, Block, Button, ExitButton, ResetButton, Text, TextInput } from 'components';
 import Spinner from 'components/Spinner';
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Flex, FlexColCentered, FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import { IForm } from 'utils/interface';
 import Form from './Form';
@@ -35,9 +35,11 @@ const ModalComponent: FC<ModalComponentProps> = ({
     setLinkActive,
     url }) => {
 
+        console.log(linkActive)
+
     return (
         <Modal>
-            <StyledBlock>
+            <StyledBlock linkActive={linkActive}>
                 <ResetButton onClick={() => onReset()} src="/reset.svg" />
                 <ExitButton onClick={() => onExit()} src="/remove-icon-red.svg" />
                 {
@@ -76,24 +78,34 @@ const Modal = styled(Flex)`
   z-index: 10;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   background-color: #263143B3;
 `
 
-const StyledBlock = styled(Block)`
+const StyledBlock = styled(Block)<{linkActive: boolean}>`
     border: 1px solid ${props => props.theme.accent};
     padding: 40px 45px;
     /* background-image: radial-gradient(farthest-corner at 1400px -1400px,#cf6363 0%, #141C2A 95%); */
-    background-color: ${({ theme }) => theme.bg16};;
+    background-color: ${({ theme }) => theme.bg16};
+    max-width: 600px;
+    width: 80%;
+    ${({ theme }) => theme.mediaWidth.md`
+        width: 80%;
+        padding: 35px 30px;
+    `};
     ${({ theme }) => theme.mediaWidth.sm`
-          padding: 30px 25px 20px;
-          min-height: 380px;
+        margin: 30px 0;
+        width: 95%;
     `};
-    ${({ theme }) => theme.mediaWidth.xs`
-          padding: 30px 25px 30px;
-          min-height: 380px;
-    `};
+    ${props => (props.linkActive === true ) && 
+        props.theme.mediaWidth.sm`
+        padding: 30px 10px;
+        `};
+    ${props => (props.linkActive === true ) && 
+        css`
+            max-width: 450px;
+        `};
 `
 const ButtonWrapper = styled(FlexColCentered)`
   width: 100%;

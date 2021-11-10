@@ -40,7 +40,5 @@ export default AdvancedFormComponent;
 
 const AdvancedForm = styled.div`
     width: 100%;
-    ${({ theme }) => theme.mediaWidth.sm`
-        height: 315px;
-    `};
+    min-height: 450px;
 `;

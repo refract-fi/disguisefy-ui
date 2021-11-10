@@ -30,7 +30,7 @@ const LinkComponent = ({ active, setActive, url, onReset, onExit }) => {
             <Text variant="subtitle" align="center">You've been disguisefied!</Text>
             <StyledRow>
                 <TextInputContainer>
-                    <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `${location}/${url}` : `${location}/${url}`} width="100%" readOnly />
+                    <CustomTextInput align="center" height="40px" margin="25px 0px 0px 0px" value={width < 500 ? `/${url}` : `${location}/${url}`} width="100%" readOnly />
                     {/* <DisLogo src="disguisefy_logo.svg" /> */}
                     <ExternalLinkWrapper>
                         <Link href={url}>
@@ -55,6 +55,9 @@ export default LinkComponent;
 
 const Wrapper = styled.div`
     width: 400px;
+    ${({ theme }) => theme.mediaWidth.md`
+        width: 95%;
+    `};
 `
 
 const TextInputContainer = styled.div`
@@ -93,7 +96,7 @@ const CopyLinkWrapper = styled.div`
 `
 
 const Img = styled.img`
-        height: 20px;
+    height: 20px;
     width: 20px;
 `
 

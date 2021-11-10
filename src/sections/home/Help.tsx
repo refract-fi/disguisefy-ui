@@ -69,13 +69,13 @@ const Help = styled.div`
   width: 630px;
   top: 182px;
   margin-bottom: 25px;
+  width: 100%;
   @media (max-height: 768px){
       position: relative;
       top: 0px;
   }
   ${({ theme }) => theme.mediaWidth.sm`
-        margin-top: -15px;
-        width: 100%;
+        margin-top: 15px;
   `};
     @media(min-height: 769px){
     ${({ theme }) => theme.mediaWidth.sm`

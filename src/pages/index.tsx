@@ -278,16 +278,22 @@ export default function Home() {
 
 const Wrapper = styled(FlexCentered)`
   min-height: 100vh;
+  min-width: 225px;
   ${({ theme }) => theme.mediaWidth.sm`
-        width: 90%;
-        align-items: flex-start
+        width: 85%;
+        align-items: flex-start;
+  `};
+  ${({ theme }) => theme.mediaWidth.md`
+        width: 80%;
+  `};
+  ${({ theme }) => theme.mediaWidth.xs`
+
   `};
   @media(min-height: 769px){
-
     ${({ theme }) => theme.mediaWidth.sm`
         align-items: center;
     `};
-    }
+  }
 `
 
 const Content = styled(FlexCol)`

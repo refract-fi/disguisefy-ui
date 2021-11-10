@@ -49,7 +49,6 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
                     form={form}
                     setForm={setForm}
                     objectKey={"type"}
-                    margin="0 0 0 1.5rem"
                 />
             </DropdownRow>
             <Text margin="20px 0 15px 0" size="1.2rem">Privacy Level</Text>
@@ -91,10 +90,14 @@ export default StandardFormComponent;
 const StandardForm = styled.div`
     width: 100%;
     height: 100%;
+    min-height: 450px;
 `;
 
 const DropdownRow = styled(Flex)`
-    flex-wrap: wrap;
+    ${({ theme }) => theme.mediaWidth.md`
+        display: block;
+    `};
+    
 `
 
 export const CheckboxWrapper = styled(Flex)`
