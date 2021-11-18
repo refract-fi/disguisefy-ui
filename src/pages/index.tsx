@@ -131,7 +131,7 @@ export default function Home() {
       ignoreNFTs: form.ignoreNFTs,
       showNFTCollections: form.showNFTCollections,
       isSnapshot: form.isSnapshot,
-      assetCategories: ["*"]
+      assetCategories: ["all"]
     }).then(function (response) {
       setUrl(response.data.url)
       setAwaitingLink(false)

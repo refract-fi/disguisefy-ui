@@ -40,6 +40,8 @@ const Dashboard = () => {
             getBalances()
         }
     }, [id])
+
+    console.log(data)
     
     return (
         <Wrapper>
