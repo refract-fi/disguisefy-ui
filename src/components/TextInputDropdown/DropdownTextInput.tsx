@@ -31,13 +31,10 @@ const DropdownTextInputComponent: FC<{
             if (isShown) {
                 if (index == 0) {
                     setPosition("top")
-                    console.log(index, position)
                 } else if (index > 0 && form.address.length - 1 != index) {
                     setPosition("mid")
-                    console.log(index, position)
                 } else if (index > 0 && form.address.length - 1 == index) {
                     setPosition("bot")
-                    console.log(index, position)
                 } else {
                     setPosition(null)
                 }

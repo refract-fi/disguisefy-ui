@@ -1,8 +1,8 @@
-import { BackButton, Block, Button, ExitButton, ResetButton, Text, TextInput } from 'components';
+import { Block, Button, ExitButton, ResetButton, Text } from 'components';
 import Spinner from 'components/Spinner';
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
-import { Flex, FlexColCentered, FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
+import { Flex, FlexColCentered } from 'styles/components';
 import { IForm } from 'utils/interface';
 import Form from './Form';
 import Link from 'next/link';
@@ -34,8 +34,6 @@ const ModalComponent: FC<ModalComponentProps> = ({
     linkActive,
     setLinkActive,
     url }) => {
-
-        console.log(linkActive)
 
     return (
         <Modal>

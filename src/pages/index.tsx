@@ -124,13 +124,14 @@ export default function Home() {
       name: form.name,
       duration: form.duration,
       preset: form.preset,
-      type: form.type,
+      // type: form.type,
       chains: form.chains.map(chain => chain.toLowerCase()),
       isGroupAssetsUnder: form.isGroupAssetsUnder,
       groupAssetsUnder: form.groupAssetsUnder,
       ignoreNFTs: form.ignoreNFTs,
       showNFTCollections: form.showNFTCollections,
-      isSnapshot: form.isSnapshot
+      isSnapshot: form.isSnapshot,
+      assetCategories: ["*"]
     }).then(function (response) {
       setUrl(response.data.url)
       setAwaitingLink(false)

@@ -42,14 +42,14 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
                     objectKey={"chains"}
 
                 />
-                <Dropdown
+                {/* <Dropdown
                     title="Dashboard Type"
                     options={dashboard_options}
                     type="single"
                     form={form}
                     setForm={setForm}
                     objectKey={"type"}
-                />
+                /> */}
             </DropdownRow>
             <Text margin="20px 0 15px 0" size="1.2rem">Privacy Level</Text>
             <PrivacySelect level={form.preset} form={form} setForm={setForm} />
