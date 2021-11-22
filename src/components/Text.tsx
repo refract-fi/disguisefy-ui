@@ -55,6 +55,11 @@ const Text = styled.p<TextProps>`
             line-height: 1.4rem;
 	`}
     ${(props) =>
+        props.variant == 'large' &&
+        css`
+            font-size: 1.3rem;
+	`}
+    ${(props) =>
         props.variant == 'cell' &&
         css`
             font-size: 1.2rem;

@@ -1,129 +1,127 @@
 import { TextInput } from 'components';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Flex } from 'styles/components';
+import { Flex, FlexCentered } from 'styles/components';
 
 const DropdownTextInputComponent: FC<{
     index: any,
-    addresses: any,
-    value: any,
     handleRemoveClick: any,
     handleAddClick: any,
     onChange: any,
     setIsShown: any,
     isShown: boolean,
-    onDisguiseClick: any
+    variant?: string,
+    onEnter?: any
+    form: any
 }> = ({
     index,
-    addresses,
-    value,
     handleRemoveClick,
     handleAddClick,
     onChange,
     setIsShown,
     isShown,
-    onDisguiseClick }) => {
+    variant,
+    onEnter,
+    form }) => {
 
         const [position, setPosition] = useState<string | null>(null)
-
-        const onEnterPress = () => {
-            setIsShown(false)
-            onDisguiseClick()
-        }
-
-        const onMouseOver = (type, e) => {
-            if (type == 'in') {
-                if (isShown) {
-                    e.currentTarget.src = 'dropdown-close-hover.svg'
-                } else {
-                    e.currentTarget.src = 'dropdown-hover.svg'
-                }
-            } else {
-                if (isShown) {
-                    e.currentTarget.src = 'dropdown-close.svg'
-                } else {
-                    e.currentTarget.src = 'dropdown.svg'
-                }
-            }
-        }
 
 
         useEffect(() => {
             if (isShown) {
                 if (index == 0) {
                     setPosition("top")
-                    console.log(index, position)
-                } else if (index > 0 && addresses.length - 1 != index) {
+                } else if (index > 0 && form.address.length - 1 != index) {
                     setPosition("mid")
-                    console.log(index, position)
-                } else if (index > 0 && addresses.length - 1 == index) {
+                } else if (index > 0 && form.address.length - 1 == index) {
                     setPosition("bot")
-                    console.log(index, position)
                 } else {
                     setPosition(null)
                 }
             } else {
                 setPosition(null)
             }
-        }, [isShown, addresses])
+        }, [isShown, form.address])
 
         useEffect(() => {
-            if (index == 0 && isShown == true && addresses.length == 1) {
+            if (index == 0 && isShown == true && form.address.length == 1) {
                 setIsShown(false)
             }
-        }, [addresses])
-
+        }, [form.address])
         return (
-            <DropdownTextInput index={index} pos={position}>
-                <TextInput
-                    placeholder="0x... or enter an ENS name*"
-                    onChange={onChange}
-                    width="100%"
-                    name="address"
-                    value={value}
-                    pos={position}
-                    onKeyDown={(e) => {
-                        if (e.code == "Enter") {
-                            onEnterPress()
+            <TextInputWrapper>
+                <DropdownTextInput index={index} pos={position}>
+                    <TextInput
+                        placeholder="0x... or enter an ENS name*"
+                        onChange={onChange}
+                        width="100%"
+                        name="address"
+                        value={form.address[index]}
+                        pos={position}
+                        variant={variant}
+                        onKeyDown={(e) => {
+                            if (e.code == "Enter") {
+                                variant === 'dark' ?
+                                setIsShown(!isShown):
+                                onEnter()
+                            }
+                        }}
+                    />
+                    <IconWrapper>
+                        {
+                            form.address.length !== 1 ? (
+                                <Icon
+                                    onClick={() => handleRemoveClick(index)}
+                                    src="remove-icon-red.svg" />
+                            ) : <Icon />
                         }
-                    }}
-                />
-                <IconWrapper>
+
+                        {
+                            variant === "dark" &&
+                                ((index === 0 && form.address.length > 1) ?
+                                <DropdownIcon
+                                    onClick={() => setIsShown(!isShown)}
+                                    src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                                /> :
+                                <DropdownIcon />)
+                        }
+                        {
+                            variant === "index" &&
+                                ((index === 0 && form.address.length > 1) ?
+                                <DropdownIcon
+                                    onClick={() => setIsShown(!isShown)}
+                                    src={isShown ? 'dropdown-icon-close-red.svg' : 'dropdown-icon-open-red.svg'}
+                                /> :
+                                <DropdownIcon />)
+                        }
+
+                    </IconWrapper>
+                </DropdownTextInput>
+                <AddIconWrapper>
                     {
-                        addresses.length !== 1 && (
-                            <Icon
-                                onClick={() => handleRemoveClick(index)}
-                                src="remove-icon.svg" />
-                        )
-                    }
-                    {
-                        (addresses.length - 1 === index && index != 4) && (
-                            <Icon
+                        (index === 0 && form.address.length < 5) && (
+                            <AddIcon
                                 onClick={() => handleAddClick()}
-                                src="add-icon.svg" />
+                                src="add-icon-red.svg" />
                         )
                     }
-                </IconWrapper>
-                {
-                    ((isShown && index == addresses.length - 1 && index > 0) || (!isShown && addresses.length > 1)) &&
-                    <HideDropdownWrapper>
-                        <HideDropdownIcon src={isShown ? 'dropdown-close.svg' : 'dropdown.svg'}
-                            onMouseEnter={e => onMouseOver('in', e)}
-                            onMouseOut={e => onMouseOver('out', e)}
-                            onClick={() => setIsShown(!isShown)} />
-                    </HideDropdownWrapper>
-                }
-            </DropdownTextInput>
+                </AddIconWrapper>
+            </TextInputWrapper>
         );
     }
 
 export default DropdownTextInputComponent;
 
+const TextInputWrapper = styled.div`
+    display: flex;
+`
+
+
 const DropdownTextInput = styled(Flex) <{ index: number, pos: string | null }>`
     width: 100%;
     position: ${props => props.index == 0 ? 'relative' : 'absolute'};
     top: ${props => `${props.index * 2.6}rem`};
-    z-index: 2;
+    z-index: 5;
 `
 
 const IconWrapper = styled(Flex)`
@@ -134,7 +132,8 @@ const IconWrapper = styled(Flex)`
     @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { top:2px; }}
 `
 
-const Icon = styled.img`
+const DropdownIcon = styled.img`
+    position: relative;
     width: 20px;
     transition: all 0.2s ease;
     margin: 0 2.5px;
@@ -142,22 +141,31 @@ const Icon = styled.img`
         cursor: pointer;
         opacity: 0.7;
     }
-    
-`
-const HideDropdownWrapper = styled(Flex)`
-    position: absolute;
-    width: 100%;
-    justify-content: center;
-    z-index: 1;
-    bottom: -14px;
-    @media not all and (min-resolution:.001dpcm){ @supports (-webkit-appearance:none) { bottom: -12px; }}
 `
 
-const HideDropdownIcon = styled.img`
+const Icon = styled.img`
     position: relative;
-    z-index: 1;
-    height: 15px;
-    cursor: pointer;
+    width: 20px;
     transition: all 0.2s ease;
-    background-image: url("dropdown-close.svg") no-repeat;
+    margin: 0 2.5px;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
+`
+
+const AddIconWrapper = styled(FlexCentered)`
+    position: absolute;
+    height: 100%;
+    right: -2rem;
+`
+
+const AddIcon = styled.img`
+    width: 20px;
+    transition: all 0.2s ease;
+    margin: 0 2.5px;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
 `

@@ -3,6 +3,7 @@ import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core';
 import { Text } from 'components';
 import moment from 'moment';
+import styled from 'styled-components';
 
 const marks = [
     {
@@ -42,7 +43,7 @@ const StyledSlider = withStyles({
         backgroundColor: '#fff',
         border: '2px solid currentColor',
         marginTop: -7,
-        marginLeft: -12,
+        marginLeft: 0,
         '&:focus, &:hover, &$active': {
             boxShadow: 'inherit',
         },
@@ -73,7 +74,8 @@ const SliderComponent = ({ duration, form, setForm, durationValue }) => {
     };
 
     return (
-        <>
+        <SliderWrapper>
+            <Text size="1.2rem" margin="0 0 1rem 0">Link Duration</Text>
             <StyledSlider
                 defaultValue={durationValue}
                 aria-labelledby="discrete-slider"
@@ -81,9 +83,13 @@ const SliderComponent = ({ duration, form, setForm, durationValue }) => {
                 valueLabelDisplay="off"
                 onChange={handleChange}
             />
-            <Text color="black">{moment.duration(duration, 'seconds').humanize()}</Text>
-        </>
+            <Text weight="bold">{moment.duration(duration, 'seconds').humanize()}</Text>
+        </SliderWrapper>
     );
 }
 
 export default SliderComponent;
+
+const SliderWrapper = styled.div`
+    width: 250px;
+`;

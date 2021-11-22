@@ -1,21 +1,23 @@
-import { Button, Modal, Text, TextInputDropdown } from "components";
-import { ChangeEvent, useEffect, useState } from "react";
-import styled, { useTheme } from 'styled-components';
+import { Button, Text, TextInputDropdown } from "components";
+import { useEffect, useState } from "react";
+import styled from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
 import axios from 'axios';
-import { Form, Help } from "sections/home";
+import { Modal, Help } from "sections/home";
 import { isENS } from "functions/isENS";
 import Spinner from "components/Spinner";
-import { provider } from "utils/provider";
+import IForm from "utils/interface/form";
 
 export default function Home() {
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IForm>({
     address: [''],
     name: '',
     duration: 3600,
     preset: null,
+    type: "All",
+    chains: ["All"],
     groupAssetsUnder: 0.1,
     isGroupAssetsUnder: false,
     ignoreNFTs: false,
@@ -71,12 +73,15 @@ export default function Home() {
   }
 
   const onResetClick = () => {
-    setFormActive(false)
+    setFormMsg('')
+    setFormActive(true)
     setForm({
-      address: [''],
+      address: [""],
       name: '',
       duration: 3600,
       preset: null,
+      type: "All",
+      chains: ["All"],
       groupAssetsUnder: 0.1,
       isGroupAssetsUnder: false,
       ignoreNFTs: false,
@@ -84,9 +89,28 @@ export default function Home() {
       isSnapshot: false
     })
     setActive(false)
-    Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = "")
-    );
+  }
+
+  const onExitClick = () => {
+    setFormMsg('')
+    setFormActive(false)
+    setForm({
+      address: [""],
+      name: '',
+      duration: 3600,
+      preset: null,
+      type: "All",
+      chains: ["All"],
+      groupAssetsUnder: 0.1,
+      isGroupAssetsUnder: false,
+      ignoreNFTs: false,
+      showNFTCollections: false,
+      isSnapshot: false
+    })
+    setActive(false)
+    // Array.from(document.querySelectorAll("input")).forEach(
+    //   input => (input.value = "")
+    // );
   }
 
   const postForm = async (addressArray: Array<string>) => {
@@ -100,11 +124,14 @@ export default function Home() {
       name: form.name,
       duration: form.duration,
       preset: form.preset,
+      // type: form.type,
+      chains: form.chains.map(chain => chain.toLowerCase()),
       isGroupAssetsUnder: form.isGroupAssetsUnder,
       groupAssetsUnder: form.groupAssetsUnder,
       ignoreNFTs: form.ignoreNFTs,
       showNFTCollections: form.showNFTCollections,
-      isSnapshot: form.isSnapshot
+      isSnapshot: form.isSnapshot,
+      assetCategories: ["all"]
     }).then(function (response) {
       setUrl(response.data.url)
       setAwaitingLink(false)
@@ -128,6 +155,12 @@ export default function Home() {
     if (!form.preset) {
       console.log("[ERROR] No Privacy Level Selected")
       setFormMsg("No Privacy Level Selected")
+      setAwaitingLink(false)
+      return;
+    }
+    if(form.address.every((address) => address == "")){
+      console.log("[ERROR] All address inputs are empty")
+      setFormMsg("Please input at least one address")
       setAwaitingLink(false)
       return;
     }
@@ -188,7 +221,6 @@ export default function Home() {
 
   return (
     <>
-      <Modal active={active} setActive={setActive} url={url} onResetClick={onResetClick} />
       <Wrapper>
         <Content>
           <Text
@@ -202,7 +234,8 @@ export default function Home() {
             <TextInputDropdown
               form={form}
               setForm={setForm}
-              onDisguiseClick={onDisguiseClick}
+              onEnter={onDisguiseClick}
+              variant="index"
             />
           </TextInputWrapper>
           <Button width="wide" margin="17px 0 0 0" onClick={() => onDisguiseClick()} disable={formActive && true}>Disguisefy</Button>
@@ -217,41 +250,51 @@ export default function Home() {
             <ErrorText color={"red"}>{(formMsg && !formActive) && formMsg}</ErrorText>
           }
           {
-            formActive && (
-              <Form
-                form={form}
-                setForm={setForm}
-                setFormActive={setFormActive}
-                durationValue={durationValue}
-                onFormSubmit={onFormSubmit}
-                awaitingLink={awaitingLink}
-                formMsg={formMsg}
-              />
-            )
-          }
-          {
             helpActive && (
               <Help setHelpActive={setHelpActive} />
             )
           }
         </Content>
       </Wrapper>
+      {
+        formActive && (
+          <Modal
+            form={form}
+            setForm={setForm}
+            durationValue={durationValue}
+            onFormSubmit={onFormSubmit}
+            awaitingLink={awaitingLink}
+            onExit={onExitClick}
+            onReset={onResetClick}
+            formMsg={formMsg}
+            linkActive={active}
+            setLinkActive={setActive}
+            url={url}
+          />
+        )
+      }
     </>
   )
 }
 
 const Wrapper = styled(FlexCentered)`
-  min-height: calc(100vh - 120px);
+  min-height: 100vh;
+  min-width: 225px;
   ${({ theme }) => theme.mediaWidth.sm`
-        width: 90%;
-        align-items: flex-start
+        width: 85%;
+        align-items: flex-start;
+  `};
+  ${({ theme }) => theme.mediaWidth.md`
+        width: 80%;
+  `};
+  ${({ theme }) => theme.mediaWidth.xs`
+
   `};
   @media(min-height: 769px){
-
     ${({ theme }) => theme.mediaWidth.sm`
         align-items: center;
     `};
-    }
+  }
 `
 
 const Content = styled(FlexCol)`

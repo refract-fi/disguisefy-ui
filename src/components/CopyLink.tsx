@@ -5,7 +5,13 @@ import Image from 'next/image';
 import { Text } from 'components';
 
 
-const CopyLinkComponent: FC<{ url: string, variant?: string, host?: string }> = ({ url, variant, host }) => {
+const CopyLinkComponent: FC<{ 
+    url: string, 
+    variant?: string, 
+    host: string }> = ({ 
+        url, 
+        variant, 
+        host }) => {
     const [tooltipActive, setTooltipActive] = useState(false);
 
     const onCopyClick = async () => {

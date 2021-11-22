@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
 type StyledButton = {
-    readonly width?: string | 'wide'
-    readonly variant?: 'underline' | 'menu'
-    readonly disable?: boolean
-    readonly margin?: string
-    readonly size?: string
-    readonly height?: string
+    width?: string | 'wide'
+    variant?: 'underline' | 'menu'
+    disable?: boolean
+    margin?: string
+    size?: string
+    height?: string
 }
 
 const Button = styled.button<StyledButton>`
@@ -103,6 +103,9 @@ export const ExitButton = styled.img`
     ${({ theme }) => theme.mediaWidth.sm`
         width: 20px;
     `};
+    &:hover{
+        opacity: 0.7;
+    }
 `
 
 export const BackButton = styled.img`
@@ -111,12 +114,11 @@ export const BackButton = styled.img`
     position: absolute;
     left: 10px;
     top: 10px;
-    opacity: 0.8;
     ${({ theme }) => theme.mediaWidth.sm`
         width: 20px;
     `};
     &:hover{
-        opacity:1;
+        opacity:0.7;
     }
 `
 
@@ -130,4 +132,7 @@ export const ResetButton = styled.img`
         width: 20px;
         right: 32px;
     `};
+    &:hover{
+        opacity: 0.7;
+    }
 `

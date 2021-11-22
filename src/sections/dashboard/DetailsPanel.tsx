@@ -1,6 +1,6 @@
 import { Button, CopyLink, Text, Tooltip } from 'components';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Links, Menu } from 'sections/shared';
 import styled, { css, useTheme } from 'styled-components';
 import { Flex, FlexCol, FlexRow, FlexRowCentered } from 'styles/components';
@@ -11,6 +11,17 @@ const DetailsPanelComponent = ({ loading, data }) => {
 
     const theme = useTheme()
 
+    const [location, setLocation] = useState<string>();
+
+    useEffect(() => {
+
+        if (typeof window !== undefined) {
+            setLocation(window.location.host)
+        } else {
+            setLocation("disguisefy.xyz/")
+        }
+    })
+
     return (
         <Wrapper>
             <DisLogo src="disguisefy_logo.svg" />
@@ -20,8 +31,8 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         <div>
                             <Text variant="subtitle">{data?.disguise?.name}</Text>
                             <StyledFlexRowCentered margin="5px 0 0 0">
-                                <Text color={theme.accent} variant="normal">disguisefy.xyz/{data?.disguise?.url}</Text>
-                                <CopyLink variant="details" url={`${data?.disguise?.url}`} />
+                                <Text color={theme.accent} variant="normal">{location}/{data?.disguise?.url}</Text>
+                                <CopyLink variant="details" host={location} url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
                             {
@@ -40,9 +51,15 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                         <Text margin="0 0 0 0" variant="normal" color="lightgrey">{data && moment.unix(data?.disguise?.generation).format("MMMM Do YYYY, h:mm a")}</Text>
                                     </div>
                                 </FlexRowCentered>}
+                            {
+                                data?.disguise?.options.chains &&
+                                <Text margin="5px 0 0 0" variant="normal" color="lightgrey">{data?.disguise?.options.chains}</Text>
+                            }
                         </div>
                     )
                 }
+
+
                 <Mobile>
                     <Link href="/">
                         <Button width="85px" size="small">New</Button>

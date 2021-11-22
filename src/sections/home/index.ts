@@ -1,6 +1,7 @@
 import Help from './Help';
 import PrivacySelect from './PrivacySelect';
-import Form from './Form';
+import Modal from './Modal';
+import Link from './Link';
 
-export {Help, PrivacySelect, Form};
+export {Help, PrivacySelect, Modal, Link};
 

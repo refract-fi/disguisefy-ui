@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 import ReactTooltip from "react-tooltip";
 
-const TooltipComponent:FC<{type: string, content1: string, content2?: string, variant?: string}> = ({type, content1, content2, variant}) => {
+const TooltipComponent:FC<{type?: string, content1: string, content2?: string, variant?: string}> = ({type, content1, content2, variant}) => {
 
     return (
         <Tooltip variant={variant}>

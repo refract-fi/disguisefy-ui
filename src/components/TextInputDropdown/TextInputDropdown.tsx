@@ -1,55 +1,62 @@
-import { TextInput } from 'components';
-import React, { FC, ChangeEvent, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { Flex, FlexCol, FlexRow } from 'styles/components';
+import { FlexCol} from 'styles/components';
+import { IForm } from 'utils/interface';
 import DropdownTextInput from './DropdownTextInput';
 
-const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick: any }> = ({ form, setForm, onDisguiseClick }) => {
-
-    const [addresses, setAddresses] = useState([""])
+const TextInputDropdownComponent: FC<{ 
+    form: IForm, 
+    setForm: (form: IForm) => void, 
+    variant?: string, 
+    margin?: string, 
+    onEnter?: any }> = ({ 
+        form, 
+        setForm, 
+        variant, 
+        margin, 
+        onEnter }) => {
 
     const [isShown, setIsShown] = useState(false)
 
     const handleInputChange = (e, index) => {
+        e.preventDefault()
         const { name, value } = e.target;
-        const list = [...addresses];
+        const list = [...form.address];
         list[index] = value;
-        setAddresses(list);
         setForm({ ...form, address: list })
     };
 
     const handleRemoveClick = index => {
-        const list = [...addresses];
+        const list = [...form.address];
         list.splice(index, 1);
-        setAddresses(list);
         setForm({ ...form, address: list })
     };
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        if(addresses.length < 5){   
+        if(form.address.length < 5){   
             setIsShown(true)
-            setAddresses([...addresses, ""]);
-            setForm({ ...form, address: [...addresses, ""] })
+            setForm({ ...form, address: [...form.address, ""] })
         }
     };
 
     return (
-        <TextInputDropdown>
+        <TextInputDropdown margin={margin}>
             {
-                addresses.map((item, i) => {
+                form.address.map((item, i) => {
                     if (isShown) {
                         return (
                             <DropdownTextInput
                                 index={i}
-                                value={item}
-                                addresses={addresses}
+                                key={`${i}-${variant}`}
+                                form={form}
                                 onChange={e => handleInputChange(e, i)}
                                 handleAddClick={handleAddClick}
                                 handleRemoveClick={handleRemoveClick}
                                 setIsShown={setIsShown}
                                 isShown={isShown}
-                                onDisguiseClick={onDisguiseClick}
+                                variant={variant}
+                                onEnter={onEnter}
                             />
                         )
                     } else {
@@ -57,14 +64,15 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick:
                             return (
                                 <DropdownTextInput
                                 index={i}
-                                value={item}
-                                addresses={addresses}
+                                key={`${i}-${variant}`}
+                                form={form}
                                 onChange={e => handleInputChange(e, i)}
                                 handleAddClick={handleAddClick}
                                 handleRemoveClick={handleRemoveClick}
                                 setIsShown={setIsShown}
                                 isShown={isShown}
-                                onDisguiseClick={onDisguiseClick}
+                                variant={variant}
+                                onEnter={onEnter}
                                 />
                                 )
                             }
@@ -77,6 +85,6 @@ const TextInputDropdownComponent: FC<{ form: any, setForm: any, onDisguiseClick:
 
 export default TextInputDropdownComponent;
 
-const TextInputDropdown = styled(FlexCol)`
+const TextInputDropdown = styled(FlexCol)<{margin}>`
     position: relative;
 `;
