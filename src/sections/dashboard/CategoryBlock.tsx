@@ -9,8 +9,9 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
         return Math.round((value + Number.EPSILON) * 100) / 100;
     }
     
+    console.log(title)
     return (
-        <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px">
+        <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px" title={title}>
             <FlexRowSpaceBetween width="100%">
                 <Text variant="block-title" color="white" margin="0 0 5px 0">{title == 'Claimable' ? 'Yield Farming' : title}</Text>
                 <Text variant="block-title" color="white" margin="0 0 5px 0">{(categoryData < 0.5) ? "< 0.5" : round(categoryData)}%</Text>
@@ -36,7 +37,7 @@ const CategoryBlockComponent = ({ title, categoryData, assetData, display, prese
 
 export default CategoryBlockComponent;
 
-const CategoryBlock = styled(Block) <{ display?: boolean }>`
+const CategoryBlock = styled(Block) <{ display?: boolean, title: string }>`
     margin: 10px;
     display: ${props => props.display ? 'none' : 'flex'};
     justify-content: flex-start;
@@ -44,5 +45,5 @@ const CategoryBlock = styled(Block) <{ display?: boolean }>`
     min-width: 31%;
     /* max-width: 80%; */
     min-width: 250px;
-    height: fit-content;
+    height: ${props => props.title === 'NFTs' ? 'fit-content' : 'auto'};
 `
