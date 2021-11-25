@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
-import useSWR, { SWRConfiguration, SWRResponse } from "swr"
+import useSWRImmutable, { SWRConfiguration, SWRResponse } from "swr"
 
 export type GetRequest = AxiosRequestConfig | null
 
@@ -24,7 +24,7 @@ export default function useRequest<Data = unknown, Error = unknown>(
   request: GetRequest,
   { fallbackData, ...config }: Config<Data, Error> = {}
 ): Return<Data, Error> {
-  const { data: response, error, isValidating, mutate } = useSWR<
+  const { data: response, error, isValidating, mutate } = useSWRImmutable<
     AxiosResponse<Data>,
     AxiosError<Error>
   >(

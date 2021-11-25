@@ -18,11 +18,20 @@ const Dashboard = () => {
 
     const { data, error, isValidating } = useDisguise(id)
 
+    const [isFirstValidation, setIsFirstValidation] = useState(true)
+
+    //Remove reload indicator if data was fetched before
+    useEffect(() => {
+        if(isFirstValidation && !isValidating){
+            setIsFirstValidation(false)
+        }
+    }, [data])
+
     return (
         <Wrapper>
             <Menu />
-            <DetailsPanel data={data} loading={isValidating} />
-            <MainPanel data={data} error={error} loading={isValidating} />
+            <DetailsPanel data={data} loading={isFirstValidation && isValidating} />
+            <MainPanel data={data} error={error} loading={isFirstValidation && isValidating} />
             <Footer />
         </Wrapper>
     );
