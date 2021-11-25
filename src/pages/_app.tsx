@@ -4,7 +4,10 @@ import ThemeProvider from "styles";
 import { GlobalStyle } from "styles/globals";
 
 function MyApp({ Component, pageProps }) {
-  return (
+
+  const getLayout = Component.getLayout || ((page) => page)
+
+  return getLayout(
     <>
       <ThemeProvider>
         <Head>

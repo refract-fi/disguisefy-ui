@@ -1,7 +1,10 @@
 
 import axios from 'axios';
+import { Layout } from 'components';
+import useDisguise from 'hooks/useDisguise';
+import useRequest from 'hooks/useRequest';
 import { Router, useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { MainPanel, DetailsPanel } from 'sections/dashboard';
 import { Footer, Menu } from 'sections/shared';
 import styled from 'styled-components';
@@ -13,47 +16,17 @@ const Dashboard = () => {
 
     const { id } = router.query
 
-    const [data, setData] = useState();
-    const [error, setError] = useState<string | number>();
-    const [loading, setLoading] = useState<boolean>(true);
+    const { data, error, isValidating } = useDisguise(id)
 
-    const checkPercent = (percent) => {
-        return percent == 0
-    }
-
-    const getBalances = async () => {
-        await axios.get('/api/disguise', {params: {id: id}}).then(function (response) {
-            setData(response.data)
-            let isEthCompatible = !Object.values(response.data.percentages).every(checkPercent)
-            if(!isEthCompatible){
-                setError(999)
-            }
-        }).catch(function (error) {
-            setData(null)
-            setError(error.response!.status)
-            setLoading(false)
-        });
-        await setLoading(false)
-    }
-    useEffect(() => {
-        if(id){
-            getBalances()
-        }
-    }, [id])
-
-    console.log(data)
-    
     return (
         <Wrapper>
             <Menu />
-            <DetailsPanel data={data} loading={loading} />
-            <MainPanel data={data} error={error} loading={loading} />
+            <DetailsPanel data={data} loading={isValidating} />
+            <MainPanel data={data} error={error} loading={isValidating} />
             <Footer />
         </Wrapper>
     );
 }
-
-
 
 export default Dashboard;
 
