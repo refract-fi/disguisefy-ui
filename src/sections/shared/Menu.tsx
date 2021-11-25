@@ -7,12 +7,17 @@ import { useRouter } from 'next/dist/client/router';
 
 const MenuComponent = () => {
     const router = useRouter();
-
+    let id = router.query.id
+    
     return (
         <Menu>
             <Nav>
-                <StyledButton variant="menu" active={router.pathname.includes('assets')}>Assets</StyledButton>
-                <StyledButton variant="menu" active={router.pathname.includes('stats')}>Stats</StyledButton>
+                <Link href={`/${id}/assets`}>
+                    <StyledButton variant="menu" active={router.pathname.includes('assets')}>Assets</StyledButton>
+                </Link>
+                <Link href={`/${id}/stats`}>
+                    <StyledButton variant="menu" active={router.pathname.includes('stats')}>Stats</StyledButton>
+                </Link>
                 {/* <Button variant="menu">Stats</Button> */}
             </Nav>
             <End>
