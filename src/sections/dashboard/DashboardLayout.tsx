@@ -1,25 +1,24 @@
+import useDisguise from "hooks/useDisguise";
+import { useRouter } from "next/dist/client/router";
+import { FC, ReactNode, useEffect, useState } from "react";
+import { Footer, Menu } from "sections/shared";
+import styled from "styled-components";
+import { Grid } from "styles/components";
+import { DetailsPanel } from ".";
+import Content from "./Content";
 
-import axios from 'axios';
-import { Layout } from 'components';
-import useDisguise from 'hooks/useDisguise';
-import useRequest from 'hooks/useRequest';
-import { Router, useRouter } from 'next/dist/client/router';
-import React, { ReactElement, useEffect, useState } from 'react';
-import { MainPanel, DetailsPanel } from 'sections/dashboard';
-import { Footer, Menu } from 'sections/shared';
-import styled from 'styled-components';
-import { FlexCentered, Grid } from 'styles/components';
+interface DashboardLayoutProps {
+    children: ReactNode
+}
 
-const Dashboard = () => {
+const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
 
     const router = useRouter()
-
     const { id } = router.query
-
     const { data, error, isValidating } = useDisguise(id)
-
     const [isFirstValidation, setIsFirstValidation] = useState(true)
-
+    let errorCode = error?.response!.status
+    
     //Remove reload indicator if data was fetched before
     useEffect(() => {
         if(isFirstValidation && !isValidating){
@@ -30,18 +29,18 @@ const Dashboard = () => {
     return (
         <Wrapper>
             <Menu />
-            <DetailsPanel data={data} loading={isFirstValidation && isValidating} />
-            <MainPanel data={data} error={error} loading={isFirstValidation && isValidating} />
+            <DetailsPanel data={data} loading={isValidating && isFirstValidation} />
+            <Content loading={isValidating && isFirstValidation} error={errorCode == 404 || errorCode == 408 || errorCode == 500 || errorCode == 999}>
+                {children}
+            </Content>
             <Footer />
         </Wrapper>
     );
 }
 
-export default Dashboard;
+export default DashboardLayout;
 
 const Wrapper = styled(Grid)`
-    width: 100%;
-    padding: 0px 80px;
     padding-top: 40px;
     grid-template-columns: repeat(12, 1fr);
     margin-bottom: 10px;
@@ -55,6 +54,6 @@ const Wrapper = styled(Grid)`
     `};
     ${({ theme }) => theme.mediaWidth.md`
         padding: 0px 10px;
-        padding-top: 10px;
+        padding-top: 5px;
     `};
 `;

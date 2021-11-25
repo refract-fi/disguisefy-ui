@@ -1,14 +1,18 @@
 import { Button, Logo } from 'components';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Flex, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import Link from 'next/link';
+import { useRouter } from 'next/dist/client/router';
 
 const MenuComponent = () => {
+    const router = useRouter();
+
     return (
         <Menu>
             <Nav>
-                <StyledButton variant="menu">Assets</StyledButton>
+                <StyledButton variant="menu" active={router.pathname.includes('assets')}>Assets</StyledButton>
+                <StyledButton variant="menu" active={router.pathname.includes('stats')}>Stats</StyledButton>
                 {/* <Button variant="menu">Stats</Button> */}
             </Nav>
             <End>
@@ -40,7 +44,18 @@ const Menu = styled(FlexRowSpaceBetween)`
 const End = styled(FlexRowCentered)`
 `
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button) <{ active: boolean }>`
+
+    border-style: solid;
+    border-bottom-color: ${({ theme }) => theme.bg16};
+    ${props => !props.active &&
+        css`
+            border-bottom-color: ${({ theme }) => theme.accent};
+    `};
+    ${props => props.active &&
+        css`
+            border-bottom-color: ${({ theme }) => theme.bg16};
+    `};
     ${({ theme }) => theme.mediaWidth.lg`
         display: none;
     `};

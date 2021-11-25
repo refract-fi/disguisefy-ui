@@ -14,4 +14,13 @@ module.exports = {
         });
         return config;
       },
+    async redirects() {
+      return [
+        {
+          source: '/:id',
+          destination: '/:id/assets',
+          permanent: false
+        }
+      ]
+    }
 };

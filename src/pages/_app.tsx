@@ -1,11 +1,22 @@
+import type {AppProps} from 'next/app'
 import { Layout } from 'components';
 import Head from 'next/head';
+import { ReactNode } from 'react';
 import ThemeProvider from "styles";
 import { GlobalStyle } from "styles/globals";
+import { NextPage } from 'next';
 
-function MyApp({ Component, pageProps }) {
+type Page<P = {}> = NextPage<P> & {
+  getLayout?: (page: ReactNode) => ReactNode;
+};
 
-  const getLayout = Component.getLayout || ((page) => page)
+type Props = AppProps & {
+  Component: Page;
+};
+
+function MyApp({ Component, pageProps }: Props) {
+
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
 
   return getLayout(
     <>
@@ -21,9 +32,7 @@ function MyApp({ Component, pageProps }) {
           }
         </Head>
         <GlobalStyle />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </ThemeProvider>
     </>
   )

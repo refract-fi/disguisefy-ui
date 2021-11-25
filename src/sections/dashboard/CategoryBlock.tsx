@@ -3,13 +3,14 @@ import React, { useEffect } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { FlexRowSpaceBetween } from 'styles/components';
 import { CellRow } from '.';
+
 const CategoryBlockComponent = ({ title, categoryData, assetData, display, preset }) => {
+
     const theme = useTheme();
     const round = (value) => {
         return Math.round((value + Number.EPSILON) * 100) / 100;
     }
     
-    console.log(title)
     return (
         <CategoryBlock display={display} variant="dashboard" color={theme.bg} width="375px" title={title}>
             <FlexRowSpaceBetween width="100%">

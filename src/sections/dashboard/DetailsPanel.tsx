@@ -14,7 +14,6 @@ const DetailsPanelComponent = ({ loading, data }) => {
     const [location, setLocation] = useState<string>();
 
     useEffect(() => {
-
         if (typeof window !== undefined) {
             setLocation(window.location.host)
         } else {
