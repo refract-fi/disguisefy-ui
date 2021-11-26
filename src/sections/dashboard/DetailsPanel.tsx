@@ -96,7 +96,6 @@ const DetailsPanel = styled(FlexCol)`
     border-radius: 14px 0 0 14px;
     border-style: dashed none dashed dashed;
     z-index: 3;
-    min-height: 90px;
     ${({ theme }) => theme.mediaWidth.md`
         border-radius: 14px;
         border-style: dashed;
