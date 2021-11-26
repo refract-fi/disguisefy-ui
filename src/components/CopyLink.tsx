@@ -33,13 +33,13 @@ const CopyLinkComponent: FC<{
                 {
                     variant == 'details' ?
                         <>
-                            <Icon variant={variant} active={tooltipActive} className="copy" src="copy-red.svg" />
-                            <Icon variant={variant} active={tooltipActive} className="checkmark" src="checkmark-green.svg" />
+                            <Icon variant={variant} active={tooltipActive} className="copy" src="/static/copy-red.svg" />
+                            <Icon variant={variant} active={tooltipActive} className="checkmark" src="/static/checkmark-green.svg" />
                         </>
                         :
                         <>
-                            <Icon variant={variant} active={tooltipActive} className="copy" src="copy-red.svg" />
-                            <Icon variant={variant} active={tooltipActive} className="checkmark" src="checkmark.svg" />
+                            <Icon variant={variant} active={tooltipActive} className="copy" src="/static/copy-red.svg" />
+                            <Icon variant={variant} active={tooltipActive} className="checkmark" src="/static/checkmark.svg" />
                         </>
                 }
             </CopyLink>

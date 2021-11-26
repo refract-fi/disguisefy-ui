@@ -35,7 +35,7 @@ const LinkComponent = ({ active, setActive, url, onReset, onExit }) => {
                     <ExternalLinkWrapper>
                         <Link href={url}>
                             <a target="_blank">
-                                <Img src="open-outline.svg" />
+                                <Img src="/static/open-outline.svg" />
                             </a>
                         </Link>
                     </ExternalLinkWrapper>

@@ -9,7 +9,7 @@ const FooterComponent = () => {
             <LinksWrapper>
                 <Links />
             </LinksWrapper>
-            <ZapperLogo src="./powered_by_zap.svg"/>
+            <ZapperLogo src="/static/powered_by_zap.svg"/>
         </Footer>
     );
 }

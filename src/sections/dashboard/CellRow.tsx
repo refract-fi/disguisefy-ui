@@ -26,7 +26,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                                     <Circle>
                                         <Logo
                                             onError={(e: any) => {
-                                                e.target.src = '/no_img.svg'
+                                                e.target.src = '/static/no_img.svg'
                                             }}
                                             src={token.img} />
                                     </Circle>
@@ -36,7 +36,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                                     <Circle variant="small">
                                         <Logo variant="small"
                                             onError={(e: any) => {
-                                                e.target.src = '/no_img.svg'
+                                                e.target.src = '/static/no_img.svg'
                                             }}
                                             src={token.img} />
                                     </Circle>
@@ -50,7 +50,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         <Circle>
                             <Logo
                                 onError={(e: any) => {
-                                    e.target.src = '/no_img.svg'
+                                    e.target.src = '/static/no_img.svg'
                                 }}
                                 src={value.img} />
                         </Circle>
@@ -60,7 +60,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         <Circle>
                             <Logo
                                 onError={(e: any) => {
-                                    e.target.src = '/no_img.svg'
+                                    e.target.src = '/static/no_img.svg'
                                 }}
                                 src={value.img} />
                         </Circle>
@@ -70,7 +70,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         <Circle variant="small">
                             <Logo variant="small"
                                 onError={(e: any) => {
-                                    e.target.src = '/no_img.svg'
+                                    e.target.src = '/static/no_img.svg'
                                 }}
                                 src={value?.protocolImg}
                             />

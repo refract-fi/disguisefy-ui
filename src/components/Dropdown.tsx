@@ -99,7 +99,7 @@ const DropdownComponent: FC<{
                                         {
                                             option == form[objectKey] && (
                                                 <Icon
-                                                    src="checkmark-icon.svg"
+                                                    src="/static/checkmark-icon.svg"
                                                 />
                                             )
                                         }
@@ -112,7 +112,7 @@ const DropdownComponent: FC<{
                                         {
                                             form[objectKey].includes(option) && (
                                                 <Icon
-                                                    src="checkmark-icon.svg"
+                                                    src="/static/checkmark-icon.svg"
                                                 />
                                             )
                                         }
@@ -128,7 +128,7 @@ const DropdownComponent: FC<{
                     <DropdownIcon
 
                         onClick={() => setIsShown(!isShown)}
-                        src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                        src={isShown ? '/static/dropdown-icon-close.svg' : '/static/dropdown-icon-open.svg'}
                     />
                 </IconWrapper>
             </Dropdown>

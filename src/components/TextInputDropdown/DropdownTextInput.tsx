@@ -72,7 +72,7 @@ const DropdownTextInputComponent: FC<{
                             form.address.length !== 1 ? (
                                 <Icon
                                     onClick={() => handleRemoveClick(index)}
-                                    src="remove-icon-red.svg" />
+                                    src="/static/remove-icon-red.svg" />
                             ) : <Icon />
                         }
 
@@ -81,7 +81,7 @@ const DropdownTextInputComponent: FC<{
                                 ((index === 0 && form.address.length > 1) ?
                                 <DropdownIcon
                                     onClick={() => setIsShown(!isShown)}
-                                    src={isShown ? 'dropdown-icon-close.svg' : 'dropdown-icon-open.svg'}
+                                    src={isShown ? '/static/dropdown-icon-close.svg' : '/static/dropdown-icon-open.svg'}
                                 /> :
                                 <DropdownIcon />)
                         }
@@ -90,7 +90,7 @@ const DropdownTextInputComponent: FC<{
                                 ((index === 0 && form.address.length > 1) ?
                                 <DropdownIcon
                                     onClick={() => setIsShown(!isShown)}
-                                    src={isShown ? 'dropdown-icon-close-red.svg' : 'dropdown-icon-open-red.svg'}
+                                    src={isShown ? '/static/dropdown-icon-close-red.svg' : '/static/dropdown-icon-open-red.svg'}
                                 /> :
                                 <DropdownIcon />)
                         }
@@ -102,7 +102,7 @@ const DropdownTextInputComponent: FC<{
                         (index === 0 && form.address.length < 5) && (
                             <AddIcon
                                 onClick={() => handleAddClick()}
-                                src="add-icon-red.svg" />
+                                src="/static/add-icon-red.svg" />
                         )
                     }
                 </AddIconWrapper>

@@ -23,7 +23,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
 
     return (
         <Wrapper>
-            <DisLogo src="disguisefy_logo.svg" />
+            <DisLogo src="/static/disguisefy_logo.svg" />
             <DetailsPanel>
                 {
                     (!loading && data) && (
@@ -37,7 +37,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                             {
                                 data?.disguise?.options.isSnapshot &&
                                 <FlexRowCentered>
-                                    <SnowIcon src="./snow.svg" />
+                                    <SnowIcon src="/static/snow.svg" />
                                     <div>
                                         <FlexRow>
                                             <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>

@@ -9,7 +9,7 @@ const TooltipComponent:FC<{type?: string, content1: string, content2?: string, v
             <a data-tip data-for="info">
                 <InfoIcon
                     variant={variant}
-                    src={type == 'blue' ? "/information-circle-blue.svg" : "/information-circle.svg"} />
+                    src={type == 'blue' ? "/static/information-circle-blue.svg" : "/static/information-circle.svg"} />
             </a>
             <ReactTooltip id="info" place="top" type="dark" effect="solid" multiline={true}>
                 <span>{content1}<br/>{content2}</span>

@@ -14,7 +14,7 @@ const StyledCheckbox = withStyles({
 const AdvancedFormComponent = ({form, setForm, setIsAdvancedActive}) => {
     return (
         <AdvancedForm>
-            <BackButton onClick={() => setIsAdvancedActive(false)} src="/arrow-back.svg" />
+            <BackButton onClick={() => setIsAdvancedActive(false)} src="/static/arrow-back.svg" />
             <CheckboxWrapper margin="1rem 0 0.5rem 0">
                 <StyledCheckbox
                     checked={form.isSnapshot}
