@@ -20,7 +20,6 @@ function MyApp({ Component, pageProps }: Props) {
 
   return getLayout(
     <>
-      <ThemeProvider>
         <Head>
           <title>Disguisefy</title>
           <link rel="stylesheet" href="https://use.typekit.net/ukf1mgq.css" />
@@ -33,7 +32,6 @@ function MyApp({ Component, pageProps }: Props) {
         </Head>
         <GlobalStyle />
         <Component {...pageProps} />
-      </ThemeProvider>
     </>
   )
 }
