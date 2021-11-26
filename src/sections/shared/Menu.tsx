@@ -1,14 +1,14 @@
 import { Button, Logo } from 'components';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Flex, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
+import { Flex, FlexRow, FlexRowCentered, FlexRowSpaceBetween } from 'styles/components';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 
 const MenuComponent = () => {
     const router = useRouter();
     let id = router.query.id
-    
+
     return (
         <Menu>
             <Nav>
@@ -18,14 +18,12 @@ const MenuComponent = () => {
                 <Link href={`/${id}/stats`}>
                     <StyledButton variant="menu" active={router.pathname.includes('stats')}>Stats</StyledButton>
                 </Link>
-                {/* <Button variant="menu">Stats</Button> */}
             </Nav>
-            <End>
+            <EndWrapper>
                 <Link href="/">
                     <Button width="85px" size="small">New</Button>
                 </Link>
-                {/* <Links /> */}
-            </End>
+            </EndWrapper>
         </Menu>
     );
 }
@@ -33,20 +31,21 @@ const MenuComponent = () => {
 export default MenuComponent;
 
 const Menu = styled(FlexRowSpaceBetween)`
-    grid-column: 5/13;
     max-width: 1100px;
     align-items: center;
     padding-right: 15px;
     z-index: 3;
-    ${({ theme }) => theme.mediaWidth.xl`
-        grid-column: 4/13;
-    `};
-    ${({ theme }) => theme.mediaWidth.lg`
-        display: none;
-    `};
+    @media (max-width: 475px){
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 0px;
+    }
 `;
 
-const End = styled(FlexRowCentered)`
+const EndWrapper = styled(FlexRowCentered)`
+    @media (max-width: 475px){
+        display: none;
+    }
 `
 
 const StyledButton = styled(Button) <{ active: boolean }>`
@@ -61,11 +60,19 @@ const StyledButton = styled(Button) <{ active: boolean }>`
         css`
             border-bottom-color: ${({ theme }) => theme.bg16};
     `};
-    ${({ theme }) => theme.mediaWidth.lg`
-        display: none;
-    `};
+    @media (max-width: 475px){
+        flex: 1;
+        margin-right: 0px;
+    }
 `
 
 const Nav = styled.nav`
-
+    width: 100%;
+    display: flex;
+    button:first-child{
+        margin-right: 5px;
+    }
+    button:last-child{
+        margin-left: 5px;
+    }
 `

@@ -57,19 +57,12 @@ const DetailsPanelComponent = ({ loading, data }) => {
                         </div>
                     )
                 }
-
-
                 <Mobile>
                     <Link href="/">
                         <Button width="85px" size="small">New</Button>
                     </Link>
                 </Mobile>
             </DetailsPanel>
-            <LinksWrapper>
-                <Link href="/">
-                    <Button width="85px" size="small">New</Button>
-                </Link>
-            </LinksWrapper>
         </Wrapper>
     );
 }
@@ -79,24 +72,18 @@ export default DetailsPanelComponent;
 
 const Wrapper = styled.div`
     position: relative;
-    grid-column: 1/5;
     justify-self: flex-end;
-    width: 350px;
-    ${({ theme }) => theme.mediaWidth.xl`
-        grid-column: 1/4;
-        width: 300px;
-    `};
+    min-width: 315px;
+    margin-top: 38.59px;
     ${({ theme }) => theme.mediaWidth.lg`
-        justify-self: flex-start;
-        grid-column: 1/13;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        max-width: 1100px;
-        justify-self: center;
+        min-width: 300px;
+    `};
+    ${({ theme }) => theme.mediaWidth.md`
+        margin: 10px 0px;
+        width: 315px;
     `};
     ${({ theme }) => theme.mediaWidth.sm`
-        flex-direction: column;
+        width: 100%;
     `};
 `
 const DetailsPanel = styled(FlexCol)`
@@ -110,18 +97,9 @@ const DetailsPanel = styled(FlexCol)`
     border-style: dashed none dashed dashed;
     z-index: 3;
     min-height: 90px;
-    ${({ theme }) => theme.mediaWidth.lg`
-        bottom: -20px;
-        border-radius: 14px 14px 0 0;
-        border-style: dashed dashed dashed dashed;
-        width: 350px;
-        padding: 10px 20px;
-        padding-bottom: 30px;
-        z-index: 0;
-    `};
     ${({ theme }) => theme.mediaWidth.md`
-        padding: 10px 20px;
-        padding-bottom: 30px;
+        border-radius: 14px;
+        border-style: dashed;
     `};
     ${({ theme }) => theme.mediaWidth.sm`
         order: 2;
@@ -131,11 +109,6 @@ const DetailsPanel = styled(FlexCol)`
         flex-direction: row;
         justify-content: space-between;
         padding: 10px 20px;
-        padding-bottom: 30px;
-    `};
-    ${({ theme }) => theme.mediaWidth.xs`
-        padding: 10px 20px;
-        padding-bottom: 30px;
     `};
 `;
 
@@ -145,9 +118,9 @@ const StyledFlexRowCentered = styled(FlexRowCentered)`
 
 const Mobile = styled.div`
     display: none;
-    ${({ theme }) => theme.mediaWidth.sm`
-    display: block;
-    `};
+    @media (max-width: 475px){
+        display: block;
+    }
 `
 
 const SnowIcon = styled.img`
@@ -162,9 +135,6 @@ const PresetImage = styled.img<{ preset: number }>`
     position:fixed;
     width: 220px;
     bottom: 0px;
-    ${({ theme }) => theme.mediaWidth.lg`
-        display: none;
-    `};
     ${props => props.preset == 20 &&
         css`
         position: relative;
@@ -180,8 +150,8 @@ const DisLogo = styled.img`
     top: -22px;
     left: 40px;
     z-index: 1;
-    ${({ theme }) => theme.mediaWidth.lg`
-    display: none;
+    ${({ theme }) => theme.mediaWidth.md`
+        display: none;
     `};
 `
 

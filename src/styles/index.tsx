@@ -12,7 +12,7 @@ import { Colors } from './styled'
 const MEDIA_WIDTHS = {
   xs: 360,
   sm: 660,
-  md: 810,
+  md: 1024,
   lg: 1200,
   1340: 1340,
   xl: 1500,

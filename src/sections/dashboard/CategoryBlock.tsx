@@ -44,7 +44,12 @@ const CategoryBlock = styled(Block) <{ display?: boolean, title: string }>`
     justify-content: flex-start;
     flex: 1;
     min-width: 31%;
-    /* max-width: 80%; */
-    min-width: 250px;
+    min-width: 300px;
     height: ${props => props.title === 'NFTs' ? 'fit-content' : 'auto'};
+    ${({ theme }) => theme.mediaWidth.sm`
+        min-width: 275px;
+    `};
+    ${({ theme }) => theme.mediaWidth.xs`
+        width: 100%;
+    `};
 `

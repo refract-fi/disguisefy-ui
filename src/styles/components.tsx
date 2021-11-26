@@ -49,10 +49,3 @@ export const FlexRowCentered = styled(FlexRow)`
 export const Grid = styled.div`
 	display: grid;
 `
-
-export const Tablet = styled.div`
-	display: block;
-	${({ theme }) => theme.mediaWidth.sm`
-		display: none;
-	`};
-`

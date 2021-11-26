@@ -30,7 +30,7 @@ const LineChartComponent = ({ data }) => {
     }, [data])
     return (
         <Component>
-            <Text size="1.5rem" margin="0 20px 20px 20px">Asset Distribution</Text>
+            <StyledText size="1.5rem">Asset Distribution</StyledText>
             <LineChart>
                 {
                     data?.wallet > 0.1 &&
@@ -143,7 +143,7 @@ export default LineChartComponent;
 const Component = styled(FlexCol)`
     margin: 40px 30px 20px;
     ${({ theme }) => theme.mediaWidth.md`
-    margin: 25px 10px 0px;
+        margin: 25px 15px 0px;
     `};
 `
 
@@ -151,7 +151,17 @@ const LineChart = styled(Flex)`
     width: 100%;
     padding: 25px 20px;
     position: relative;
+    ${({ theme }) => theme.mediaWidth.sm`
+        padding: 25px 10px;
+    `};
 `;
+
+const StyledText = styled(Text)`
+    margin: 0 20px 20px;
+    ${({ theme }) => theme.mediaWidth.sm`
+        margin: 0 10px 20px;
+    `};
+`
 
 const BorrowedLineWrapper = styled.div<{ width: number }>`
     position: absolute;
