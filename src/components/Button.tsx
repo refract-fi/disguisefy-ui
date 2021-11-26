@@ -81,13 +81,13 @@ const Button = styled.button<StyledButton>`
                 color: ${({ theme }) => theme.textHover};
                 background-color: ${({ theme }) => theme.bg16};
                 border: 1px solid ${({ theme }) => theme.hover};
-                border-bottom: 1px solid ${props => props.active ? props.theme.bg16: props.theme.hover};
+                border-bottom: 1px solid ${(props: any) => props.active ? props.theme.bg16: props.theme.hover};
             }
             &:active{
                 color: ${({ theme }) => theme.accent};
                 background-color: ${({ theme }) => theme.bg16};
                 border: 1px solid ${({ theme }) => theme.active};
-                border-bottom: 1px solid ${props => props.active ? props.theme.bg16: props.theme.active};
+                border-bottom: 1px solid ${(props: any) => props.active ? props.theme.bg16: props.theme.active};
             }
     `}
 
