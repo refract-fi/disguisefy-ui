@@ -96,6 +96,8 @@ const DetailsPanel = styled(FlexCol)`
     border-radius: 14px 0 0 14px;
     border-style: dashed none dashed dashed;
     z-index: 3;
+    min-height: 92px;
+    
     ${({ theme }) => theme.mediaWidth.md`
         border-radius: 14px;
         border-style: dashed;
@@ -108,6 +110,7 @@ const DetailsPanel = styled(FlexCol)`
         flex-direction: row;
         justify-content: space-between;
         padding: 10px 20px;
+        min-height: 75px;
     `};
 `;
 

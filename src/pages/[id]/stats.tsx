@@ -6,6 +6,7 @@ import { FC, ReactElement, useEffect, useState } from "react";
 import { RequestError } from "sections/dashboard";
 import DashboardLayout from "sections/dashboard/DashboardLayout";
 import styled from "styled-components";
+import { assetDistributionValues } from "utils/chartObjects";
 
 interface StatsProps {
 
@@ -36,8 +37,30 @@ const StatsTab = () => {
                             <RequestError error={errorCode} />
                         ) : (
                             <>
-                                    <LineChart
-                                        data={data?.percentages} />
+                                <LineChart
+                                    title={"Network Distribution"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
+                                <LineChart
+                                    title={"Protocol Distribution"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
+                                <LineChart
+                                    title={"Gas Tokens"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
+                                <LineChart
+                                    title={"Gas Spent vs Net Worth"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
+                                <LineChart
+                                    title={"Gas Spent per Network"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
+                                <LineChart
+                                    title={"Transactions per Network"}
+                                    data={data?.percentages}
+                                    values={assetDistributionValues} />
                             </>
                         ))
             }

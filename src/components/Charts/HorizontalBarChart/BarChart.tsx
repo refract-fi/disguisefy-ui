@@ -10,131 +10,49 @@ interface BarChartProps {
 
 const BarChart: FC<BarChartProps> = ({ data }) => {
 
-    const [dataObj, setDataObj] = useState({});
-    const theme = useTheme();
     const round = (value) => {
         return Math.round((value + Number.EPSILON) * 100) / 100;
     }
 
-    const checkDataLength = () => {
-        let obj = {}
-        for (let x in data) {
-            if (data[x] > 0.1) {
-                obj[x] = data[x]
-            }
-        }
-        setDataObj(obj)
-    }
-
-    useEffect(() => {
-        if (data) {
-            checkDataLength()
-        }
-    }, [data])
-
     return (
         <LineChart>
             {
-                data?.wallet > 0.1 &&
-                <LineWrapper
-                    flex={data.wallet}
-                    first={true}
-                    last={Object.values(dataObj).length == 1}
-                    color={theme.i1}
-                    type="top"
-                    name="Wallet"
-                    percent={round(data.wallet)}
-                />
+                data &&
+                Object.entries(data).map((entry, index) => {
+                    let object: any = entry[1]
+                    let hasDebt: boolean = Object.keys(data).includes('debt')
+                    let length: number = Object.keys(data).length
+                    if (object.percentage > 0.1 && entry[0] !== 'debt') {
+                        return (
+                            <LineWrapper
+                                flex={object.percentage}
+                                first={index === 0}
+                                last={(hasDebt && index === length - 2) || (!hasDebt && index === length - 1)}
+                                color={object.color}
+                                percent={round(object.percentage)}
+                                key={index}
+                                name={object.title}
+                                type={'top'}
+                            />
+                        )
+                    }
+                })
             }
             {
-                data?.deposit > 0.1 &&
-                <LineWrapper
-                    flex={data.deposit}
-                    first={Object.values(dataObj).includes('wallet')}
-                    last={!(Object.keys(dataObj).some(item => ['pool', 'staking', 'claimable', 'nft', 'investment'].includes(item)))}
-                    color={theme.i2}
-                    type="top"
-                    name={"Deposits"}
-                    percent={round(data.deposit)}
-                />
-            }
-            {
-                data?.pool > 0.1 &&
-                <LineWrapper
-                    flex={data.pool}
-                    first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit'].includes(item)))}
-                    last={!(Object.keys(dataObj).some(item => ['staking', 'claimable', 'nft', 'investment'].includes(item)))}
-                    color={theme.i3}
-                    type="top"
-                    name={"Liquidity Pools"}
-                    percent={round(data.pool)}
-
-                />
-            }
-            {
-                data?.staking > 0.1 &&
-                <LineWrapper
-                    flex={data.staking}
-                    first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool'].includes(item)))}
-                    last={!(Object.keys(dataObj).some(item => ['claimable', 'nft', 'investment'].includes(item)))}
-                    color={theme.i4}
-                    type="top"
-                    name={"Staking"}
-                    percent={round(data.staking)}
-                />
-            }
-            {
-                data?.claimable > 0.1 &&
-                <LineWrapper
-                    flex={data.claimable}
-                    first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking'].includes(item)))}
-                    last={!(Object.keys(dataObj).some(item => ['nft', 'investment'].includes(item)))}
-                    color={theme.i5}
-                    type="top"
-                    name={"Claimable"}
-                    percent={round(data.claimable)}
-
-                />
-            }
-            {
-                data?.nft > 0.1 &&
-                <LineWrapper
-                    flex={data.nft}
-                    first={!(Object.keys(dataObj).some(item => ['wallet', 'deposit', 'pool', 'staking', 'claimable'].includes(item)))}
-                    last={!(Object.values(dataObj).includes('investment'))}
-                    color={theme.i6}
-                    type="top"
-                    name={"NFTs"}
-                    percent={round(data.nft)}
-                />
-            }
-            {
-                data?.investment > 0.1 &&
-                <LineWrapper
-                    flex={data.investment}
-                    first={Object.values(dataObj).length == 1}
-                    last={true}
-                    color={theme.i7}
-                    type="top"
-                    name={"Investments"}
-                    percent={round(data.investment)}
-                />
-            }
-            {
-                data?.debt > 0.1 && (
+                (data?.debt && data?.debt?.percentage > 0.1) && (
                     <BorrowedLineWrapper
-                        width={Math.abs(data?.debt)}>
+                        width={Math.abs(data?.debt.percentage)}>
                         <Label
                             type="bot"
                             name={"Debt"}
-                            percent={Math.abs(round(data?.debt))}
+                            percent={Math.abs(round(data?.debt.percentage))}
                         />
                         <BracketLine />
                         <BracketBox />
                         <BorrowedLine />
                     </BorrowedLineWrapper>
                 )
-            }
+            } 
         </LineChart>
     );
 }

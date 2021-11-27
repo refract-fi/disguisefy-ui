@@ -7,6 +7,7 @@ import { CategoryBlock, RequestError } from "sections/dashboard";
 import DashboardLayout from "sections/dashboard/DashboardLayout";
 import styled from "styled-components";
 import { Flex } from "styles/components";
+import { assetDistributionValues } from "utils/chartObjects";
 
 interface AssetsProps {
     getLayout?: (page: ReactNode) => ReactNode;
@@ -17,6 +18,7 @@ const AssetsTab = () => {
     const router = useRouter()
     const { id } = router.query
     const { data, error, isValidating } = useDisguise(id)
+    const [structuredData, setStructuredData] = useState<any>()
     const [isFirstValidation, setIsFirstValidation] = useState(true)
     let errorCode = error?.response?.status
     let preset = data?.disguise?.preset
@@ -26,6 +28,20 @@ const AssetsTab = () => {
         if (isFirstValidation && !isValidating) {
             setIsFirstValidation(false)
         }
+    }, [data])
+
+    useEffect(() => {
+        let assetsObject = assetDistributionValues
+        if(data.percentages){
+            for(let [key, value] of Object.entries(data.percentages)){
+                if(value === 0){
+                    delete assetsObject[key]
+                }else {
+                    assetsObject[key].percentage = value
+                }
+            }
+        }
+        setStructuredData(assetsObject)
     }, [data])
 
     return (
@@ -38,7 +54,8 @@ const AssetsTab = () => {
                         ) : (
                             <>
                                 <LineChart
-                                    data={data?.percentages} />
+                                    data={structuredData}
+                                    title={"Asset Distribution"} />
                                 <StyledFlex>
                                     <CategoryBlock
                                         display={data?.percentages?.wallet == 0}

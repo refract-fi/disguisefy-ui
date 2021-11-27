@@ -11,11 +11,16 @@ interface LineWrapperProps {
 }
 
 const LineWrapper: FC<LineWrapperProps> = ({variant, color, title, percentage}) => {
+
+    const round = (value) => {
+        return Math.round((value + Number.EPSILON) * 100) / 100;
+    }
+
     return (
         <Wrapper>
             <TextWrapper>
                 <Text variant="cell">{title}</Text>
-                <Text variant="cell">{percentage?.toFixed(2)}%</Text>
+                <Text variant="cell">{round(percentage)}%</Text>
             </TextWrapper>
             <Line variant={variant}>
                 <ProportionateLine color={color} percentage={percentage} variant={variant}/>

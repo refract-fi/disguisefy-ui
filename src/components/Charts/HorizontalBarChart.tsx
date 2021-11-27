@@ -1,29 +1,28 @@
-import { MobileHorizontalBarChart, Label, Text } from 'components';
-import React, { useEffect, useRef, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
-import { Flex, FlexCol } from 'styles/components';
+import { MobileHorizontalBarChart, Text } from 'components';
+import React from 'react';
+import styled from 'styled-components';
+import { FlexCol } from 'styles/components';
 import BarChart from './HorizontalBarChart/BarChart';
-import LineWrapper from './HorizontalBarChart/LineWrapper';
 
 //Improve the mess below
-const LineChartComponent = ({ data }) => {
+const HorizontalBarChart = ({ data, title, values }) => {
 
     return (
-        <Component>
-            <StyledText size="1.5rem">Asset Distribution</StyledText>
+        <Wrapper>
+            <StyledText size="1.5rem">{title}</StyledText>
             <BarChart 
                 data={data}
             />
             <MobileHorizontalBarChart 
                 data={data}
             />
-        </Component>
+        </Wrapper>
     );
 }
 
-export default LineChartComponent;
+export default HorizontalBarChart;
 
-const Component = styled(FlexCol)`
+const Wrapper = styled(FlexCol)`
     margin: 40px 30px 20px;
     ${({ theme }) => theme.mediaWidth.md`
         margin: 25px 15px 25px;
