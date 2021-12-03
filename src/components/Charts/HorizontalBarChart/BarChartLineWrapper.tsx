@@ -10,7 +10,7 @@ interface LineWrapperProps {
     percentage: number
 }
 
-const LineWrapper: FC<LineWrapperProps> = ({variant, color, title, percentage}) => {
+const LineWrapper: FC<LineWrapperProps> = ({ variant, color, title, percentage }) => {
 
     const round = (value) => {
         return Math.round((value + Number.EPSILON) * 100) / 100;
@@ -22,9 +22,9 @@ const LineWrapper: FC<LineWrapperProps> = ({variant, color, title, percentage}) 
                 <Text variant="cell">{title}</Text>
                 <Text variant="cell">{round(percentage)}%</Text>
             </TextWrapper>
-            <Line variant={variant}>
-                <ProportionateLine color={color} percentage={percentage} variant={variant}/>
-            </Line>
+                <Line variant={variant}>
+                    <ProportionateLine color={color} percentage={percentage} variant={variant} />
+                </Line>
         </Wrapper>
     );
 }
@@ -39,7 +39,7 @@ const TextWrapper = styled(FlexRowSpaceBetween)`
     margin-bottom: 0.5rem;
 `
 
-const Line = styled.div<{variant?: string}>`
+const Line = styled.div<{ variant?: string }>`
     display: flex;
     position: relative;
     justify-content: ${props => props.variant === "debt" ? "flex-end" : "flex-start"};
@@ -47,9 +47,10 @@ const Line = styled.div<{variant?: string}>`
     height: 10px;
     background-color: ${({ theme }) => theme.bg};
     border-radius: 7px;
+    overflow: hidden;
 `;
 
-const ProportionateLine = styled.div<{variant?: string, color: string, percentage: number}>`
+const ProportionateLine = styled.div<{ variant?: string, color: string, percentage: number }>`
     position: absolute;
     width: ${props => props.percentage}%;
     height: 10px;

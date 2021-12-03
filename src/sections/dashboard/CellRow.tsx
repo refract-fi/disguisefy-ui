@@ -19,7 +19,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         </Circle>
                     }
                     {
-                        (value?.tokens?.length >= 1 && value.label !== 'Grouped Assets' && type != 'Staked') &&
+                        (value?.tokens?.length >= 1 && value.label !== 'Grouped Assets' && type != 'Staked' && type != 'Deposits') &&
                         value?.tokens?.map((token, index) => {
                             if (index == 0) {
                                 return (
@@ -28,22 +28,37 @@ const CellRowComponent = ({ value, preset, type }) => {
                                             onError={(e: any) => {
                                                 e.target.src = '/static/no_img.svg'
                                             }}
-                                            src={token.img} />
+                                            src={token.tokenImageUrl} />
                                     </Circle>
                                 )
                             } else if (index == 1) {
                                 return (
                                     <Circle variant="small">
                                         <Logo variant="small"
+                                            src={token.tokenImageUrl}
                                             onError={(e: any) => {
                                                 e.target.src = '/static/no_img.svg'
                                             }}
-                                            src={token.img} />
+                                             />
                                     </Circle>
                                 )
                             }
                         })
-
+                    }
+                    {
+                        (value?.tokens?.length >= 1 && type == 'Deposits' ) &&
+                        value?.tokens?.map((token, index) => {
+                            if (index == 0) {
+                                return (
+                                    <Circle>
+                                        <Logo
+                                            onError={(e: any) => {
+                                                e.target.src = '/static/no_img.svg'
+                                            }}
+                                            src={token.tokenImageUrl} />
+                                    </Circle>
+                                )
+                            }})
                     }
                     {
                         ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets' && type != 'Staked') &&
@@ -56,7 +71,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                         </Circle>
                     }
                     {
-                        ((!value.tokens || value?.tokens?.length == 0) && value.label !== 'Grouped Assets' && type == 'Staked') &&
+                        (value.label !== 'Grouped Assets' && type == 'Staked' && value?.tokens?.length === 0) &&
                         <Circle>
                             <Logo
                                 onError={(e: any) => {
@@ -66,8 +81,40 @@ const CellRowComponent = ({ value, preset, type }) => {
                         </Circle>
                     }
                     {
-                        (value.label !== 'Grouped Assets' && type == "Deposits") &&
+                        (value.label !== 'Grouped Assets' && type == 'Staked' && value?.tokens?.length >= 1) &&
+                        <Circle>
+                            <Logo
+                                onError={(e: any) => {
+                                    e.target.src = '/static/no_img.svg'
+                                }}
+                                src={value.tokens[0].tokenImageUrl} />
+                        </Circle>
+                    }
+                    {
+                        (value.label !== 'Grouped Assets' && type == 'Staked' && value?.tokens?.length >= 2) &&
                         <Circle variant="small">
+                            <Logo
+                            variant="small"
+                                onError={(e: any) => {
+                                    e.target.src = '/static/no_img.svg'
+                                }}
+                                src={value.tokens[1].tokenImageUrl} />
+                        </Circle>
+                    }
+                    {
+                        (value.label !== 'Grouped Assets' && type == "Staked") &&
+                        <Circle variant="protocol">
+                            <Logo variant="small"
+                                onError={(e: any) => {
+                                    e.target.src = '/static/no_img.svg'
+                                }}
+                                src={value?.img}
+                            />
+                        </Circle>
+                    }
+                    {
+                        (value.label !== 'Grouped Assets' && type == "Deposits") &&
+                        <Circle variant="protocol">
                             <Logo variant="small"
                                 onError={(e: any) => {
                                     e.target.src = '/static/no_img.svg'
@@ -89,7 +136,7 @@ const CellRowComponent = ({ value, preset, type }) => {
             </FlexCentered>
             {
                 (value.balance != null && preset == 0) &&
-                <Text variant="cell" weight={value.label == "Grouped Assets" && 'bold'}>{ Math.abs(round(value?.percentage)) } %</Text>
+                <Text variant="cell" weight={value.label == "Grouped Assets" && 'bold'}>{ Math.abs(round(value?.balance)) } $</Text>
             }
             {
                 (value.percentage != null && preset == 10) &&
@@ -120,6 +167,7 @@ const Logo = styled.img<{ variant?: string }>`
             z-index: 2;
             width: 17px;
 	`}
+    
     border-radius: 50%;
 `
 const Circle = styled.div<{ variant?: string }>`
@@ -140,4 +188,16 @@ const Circle = styled.div<{ variant?: string }>`
             width: 17px;
             height: 17px;
 	`}
+    ${(props) =>
+        props.variant == 'protocol' &&
+        css`
+            position: absolute;
+            bottom: -7px;
+            left: -7px;
+            z-index: 2;
+            width: 17px;
+            height: 17px;
+        `
+
+    }
 `

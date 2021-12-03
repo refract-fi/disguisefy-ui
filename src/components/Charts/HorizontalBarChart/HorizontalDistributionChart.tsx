@@ -122,6 +122,9 @@ const BorrowedLineWrapper = styled.div<{ width: number }>`
     top: 35px;
     transform: translate(0, -100%); 
     min-width: 27px;
+    ${({ theme }) => theme.mediaWidth.md`
+        top: 34px;
+    `};
 `
 
 const BorrowedLine = styled.div<{}>`
