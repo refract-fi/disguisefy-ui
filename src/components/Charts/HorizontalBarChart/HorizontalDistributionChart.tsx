@@ -83,7 +83,7 @@ const HorizontalDistributionChart: FC<HorizontalDistributionChartProps> = ({ dat
                 }
 
             </LineChart>
-            {(title === 'Network Distribution' && data) &&
+            {(title === 'Network Distribution' && data && data.other) &&
                 <Note>*{data.other.percentage.toFixed(2)}% of assets are on other networks</Note>
             }
         </>
