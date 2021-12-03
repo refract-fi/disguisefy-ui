@@ -249,6 +249,7 @@ export default function Home() {
           {
             <ErrorText color={"red"}>{(formMsg && !formActive) && formMsg}</ErrorText>
           }
+          <ErrorText variant="subtitle" color="red">We are experiencing technical difficulties, a fix is on the way!</ErrorText>
           {
             helpActive && (
               <Help setHelpActive={setHelpActive} />
