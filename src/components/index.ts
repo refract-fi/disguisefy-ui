@@ -14,7 +14,8 @@ import CopyLink from './CopyLink';
 import Tooltip from './Tooltip';
 import TextInputDropdown from './TextInputDropdown/TextInputDropdown';
 import Dropdown from './Dropdown';
-import MobileHorizontalBarChart from './Charts/HorizontalBarChart/MobileBarChart';
+import BarChart from './Charts/HorizontalBarChart/BarChart';
+import DoughnutChart from './Charts/DoughnutChart';
 
 export {
     Button, 
@@ -35,5 +36,6 @@ export {
     TextInputDropdown, 
     Dropdown, 
     ResetButton,
-    MobileHorizontalBarChart
+    BarChart,
+    DoughnutChart
 };

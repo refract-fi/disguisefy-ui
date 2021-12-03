@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: Props) {
         <Head>
           <title>Disguisefy</title>
           <link rel="stylesheet" href="https://use.typekit.net/ukf1mgq.css" />
-          <link rel="icon" type="image/png" href="/disguisefy_favicon.png" />
+          <link rel="icon" type="image/png" href="/static/disguisefy_favicon.png" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           {
             process.env.NEXT_PUBLIC_ENV == 'prod' && 

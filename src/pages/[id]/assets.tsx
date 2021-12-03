@@ -32,7 +32,7 @@ const AssetsTab = () => {
 
     useEffect(() => {
         let assetsObject = assetDistributionValues
-        if(data.percentages){
+        if(data?.percentages){
             for(let [key, value] of Object.entries(data.percentages)){
                 if(value === 0){
                     delete assetsObject[key]
@@ -42,8 +42,10 @@ const AssetsTab = () => {
             }
         }
         setStructuredData(assetsObject)
+        
     }, [data])
 
+    console.log(data)
     return (
         <>
             {
@@ -55,7 +57,8 @@ const AssetsTab = () => {
                             <>
                                 <LineChart
                                     data={structuredData}
-                                    title={"Asset Distribution"} />
+                                    title={"Asset Distribution"}
+                                    ordered={false} />
                                 <StyledFlex>
                                     <CategoryBlock
                                         display={data?.percentages?.wallet == 0}

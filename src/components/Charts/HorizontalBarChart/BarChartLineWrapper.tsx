@@ -32,11 +32,7 @@ const LineWrapper: FC<LineWrapperProps> = ({variant, color, title, percentage}) 
 export default LineWrapper;
 
 const Wrapper = styled.div`
-    margin: 0.8rem 0;
-    display: none;
-    ${({ theme }) => theme.mediaWidth.sm`
-        display: block;
-    `};
+    margin: 1.3rem 0;
 `
 
 const TextWrapper = styled(FlexRowSpaceBetween)`

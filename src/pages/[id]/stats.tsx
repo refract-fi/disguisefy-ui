@@ -6,6 +6,7 @@ import { FC, ReactElement, useEffect, useState } from "react";
 import { RequestError } from "sections/dashboard";
 import DashboardLayout from "sections/dashboard/DashboardLayout";
 import styled from "styled-components";
+import { FlexRow } from "styles/components";
 import { assetDistributionValues } from "utils/chartObjects";
 
 interface StatsProps {
@@ -27,6 +28,7 @@ const StatsTab = () => {
             setIsFirstValidation(false)
         }
     }, [data])
+    console.log(data)
 
     return (
         <>
@@ -39,16 +41,22 @@ const StatsTab = () => {
                             <>
                                 <LineChart
                                     title={"Network Distribution"}
-                                    data={data?.percentages}
-                                    values={assetDistributionValues} />
-                                <LineChart
-                                    title={"Protocol Distribution"}
-                                    data={data?.percentages}
-                                    values={assetDistributionValues} />
-                                <LineChart
-                                    title={"Gas Tokens"}
-                                    data={data?.percentages}
-                                    values={assetDistributionValues} />
+                                    data={data?.stats.networkPercentages}
+                                    ordered={true} />
+                                <StyledRow>
+                                    <LineChart
+                                        title={"Underlying Gas Token Distribution"}
+                                        data={data?.stats.gasTokenPercentages}
+                                        variant="barchart"
+                                        ordered={true}
+                                    />
+                                    <LineChart
+                                        title={"Protocol Distribution"}
+                                        data={data?.stats.protocolPercentages}
+                                        variant="barchart"
+                                        ordered={true} />
+                                </StyledRow>
+                                {/* 
                                 <LineChart
                                     title={"Gas Spent vs Net Worth"}
                                     data={data?.percentages}
@@ -60,7 +68,7 @@ const StatsTab = () => {
                                 <LineChart
                                     title={"Transactions per Network"}
                                     data={data?.percentages}
-                                    values={assetDistributionValues} />
+                                    values={assetDistributionValues} /> */}
                             </>
                         ))
             }
@@ -79,3 +87,8 @@ StatsTab.getLayout = function getLayout(page: ReactElement) {
         </Layout>
     )
 }
+
+const StyledRow = styled(FlexRow)`
+    width: 100%;
+    flex-wrap: wrap;
+`;
