@@ -51,10 +51,10 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                         <Text margin="0 0 0 0" variant="normal" color="lightgrey">{data && moment.unix(data?.disguise?.generation).format("MMMM Do YYYY, h:mm a")}</Text>
                                     </div>
                                 </FlexRowCentered>}
-                            {
-                                (data?.disguise?.options.chains && data?.disguise?.options.chains !== 'all') &&
+                            {/* {
+                                (data?.disguise?.options.chains && data?.disguise?.options.chains !== ['all']) &&
                                 <Text margin="5px 0 0 0" variant="normal" color="lightgrey">{data?.disguise?.options.chains}</Text>
-                            }
+                            } */}
                         </div>
                     )
                 }

@@ -47,7 +47,7 @@ const BarChartComponent: FC<BarChartProps> = ({ data, variant, ordered }) => {
                 })
             }
             {
-                (data && typeof data["other"] === 'object') &&
+                (data && typeof data["other"] === 'object' && data?.other?.percentage > 0.01) &&
                 Object.entries(data).map((entry, index) => {
                     let object: any = entry[1]
                     if (entry[0] === 'other') {
