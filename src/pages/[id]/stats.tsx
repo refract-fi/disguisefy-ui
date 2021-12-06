@@ -46,7 +46,7 @@ const StatsTab = () => {
                                     />
                                 <StyledRow>
                                     <LineChart
-                                        title={"Underlying Gas Token Distribution"}
+                                        title={"Underlying Token Distribution"}
                                         data={data?.stats.gasTokenPercentages}
                                         variant="barchart"
                                         ordered={true}
