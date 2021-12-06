@@ -27,7 +27,7 @@ const HelpComponent = ({ setHelpActive }) => {
     return (
         <Help>
             <StyledBlock>
-                <ExitButton onClick={() => setHelpActive(false)} src="/exit.svg" />
+                <ExitButton onClick={() => setHelpActive(false)} src="/static/exit.svg" />
                 <Text margin="2px 0 15px 0" variant="subtitle" color="black">What is Disguisefy?</Text>
                 <Text variant="normal" width="100%" color="black" align="justify">Disguisefy allows you to share your portfolio without revealing your address or your net worth. You can select from multiple levels, ranging from low privacy to high privacy:</Text>
                 <br />
@@ -46,16 +46,16 @@ const HelpComponent = ({ setHelpActive }) => {
                 <StyledRow margin="20px 0 0 0">
                     <div>
                         <a target="_blank" href="https://github.com/disguisefy">
-                            <Logo src="github_black.svg" />
+                            <Logo src="/static/github_black.svg" />
                         </a>
                         <a target="_blank" href="https://twitter.com/disguisefy">
-                            <Logo src="twitter_black.svg" marginLeft={true} />
+                            <Logo src="/static/twitter_black.svg" marginLeft={true} />
                         </a>
                         <a target="_blank" href="https://discord.gg/Jn6aZEkvRd">
-                            <Logo src="discord_black.svg" marginLeft={true} />
+                            <Logo src="/static/discord_black.svg" marginLeft={true} />
                         </a>
                     </div>
-                    <ZapperLogo src="zapper.svg" />
+                    <ZapperLogo src="/static/zapper.svg" />
                 </StyledRow>
             </StyledBlock>
         </Help>

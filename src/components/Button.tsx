@@ -7,6 +7,7 @@ type StyledButton = {
     margin?: string
     size?: string
     height?: string
+    active?: boolean
 }
 
 const Button = styled.button<StyledButton>`
@@ -62,7 +63,7 @@ const Button = styled.button<StyledButton>`
             `};
     `}
 
-    ${(props) =>
+    ${(props: any) =>
         props.variant == 'menu' &&
         css`
             position: relative;
@@ -74,19 +75,19 @@ const Button = styled.button<StyledButton>`
             font-weight: normal;
             font-size: 1rem;
             border: 1px solid ${({ theme }) => theme.accent};
-            border-style: solid solid none solid;
+            border-style: solid;
             margin-right: 10px;
             &:hover{
                 color: ${({ theme }) => theme.textHover};
                 background-color: ${({ theme }) => theme.bg16};
                 border: 1px solid ${({ theme }) => theme.hover};
-                border-style: solid solid none solid;
+                border-bottom: 1px solid ${(props: any) => props.active ? props.theme.bg16: props.theme.hover};
             }
             &:active{
                 color: ${({ theme }) => theme.accent};
                 background-color: ${({ theme }) => theme.bg16};
                 border: 1px solid ${({ theme }) => theme.active};
-                border-style: solid solid none solid;
+                border-bottom: 1px solid ${(props: any) => props.active ? props.theme.bg16: props.theme.active};
             }
     `}
 

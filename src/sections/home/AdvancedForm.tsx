@@ -14,7 +14,7 @@ const StyledCheckbox = withStyles({
 const AdvancedFormComponent = ({form, setForm, setIsAdvancedActive}) => {
     return (
         <AdvancedForm>
-            <BackButton onClick={() => setIsAdvancedActive(false)} src="/arrow-back.svg" />
+            <BackButton onClick={() => setIsAdvancedActive(false)} src="/static/arrow-back.svg" />
             <CheckboxWrapper margin="1rem 0 0.5rem 0">
                 <StyledCheckbox
                     checked={form.isSnapshot}
@@ -22,6 +22,7 @@ const AdvancedFormComponent = ({form, setForm, setIsAdvancedActive}) => {
                 />
                 <Text size="1.1rem">One time snapshot with IPFS</Text>
                 <Tooltip
+                    id="IPFS-tooltip"
                     content1="Data is frozen in time at link creation."
                     content2="This data is stored in decentralized storage." />
             </CheckboxWrapper>

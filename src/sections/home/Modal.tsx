@@ -38,8 +38,8 @@ const ModalComponent: FC<ModalComponentProps> = ({
     return (
         <Modal>
             <StyledBlock linkActive={linkActive}>
-                <ResetButton onClick={() => onReset()} src="/reset.svg" />
-                <ExitButton onClick={() => onExit()} src="/remove-icon-red.svg" />
+                <ResetButton onClick={() => onReset()} src="/static/reset.svg" />
+                <ExitButton onClick={() => onExit()} src="/static/remove-icon-red.svg" />
                 {
                     linkActive ? (
                         <LinkComponent

@@ -45,6 +45,8 @@ export interface Colors {
   i7: Color,
 
   input: Color,
+
+  active: boolean
 }
 
 export interface Grids {

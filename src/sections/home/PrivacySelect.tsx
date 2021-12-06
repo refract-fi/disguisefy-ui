@@ -16,22 +16,22 @@ const PrivacySelectComponent = ({ level, form, setForm }) => {
     return (
         <PrivacySelect>
             <LevelButton active={level == 10} level={10} onClick={() => onLevelClick(10)}>
-                <HeroIcon src="irondude.svg" />
+                <HeroIcon src="/static/irondude.svg" />
             </LevelButton>
             <LevelButton active={level == 20} level={20}
                 onClick={() => onLevelClick(20)}
             >
-                <HeroIcon src="spiderguy.svg" />
+                <HeroIcon src="/static/spiderguy.svg" />
             </LevelButton>
             <LevelButton disable={true} active={level == 30} level={30}
                 // onClick={() => onLevelClick(30)}
             >
-                <HeroIcon src="batlover.svg" />
+                <HeroIcon src="/static/batlover.svg" />
             </LevelButton>
             <LevelButton disable={true} active={level == 40} level={40}
                 // onClick={() => onLevelClick(40)}
             >
-                <HeroIcon src="clown.svg" />
+                <HeroIcon src="/static/clown.svg" />
             </LevelButton>
         </PrivacySelect>
     );

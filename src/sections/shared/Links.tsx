@@ -9,13 +9,13 @@ const LinksComponent = () => {
         <>
             <div>
                 <a target="_blank" href="https://github.com/disguisefy">
-                    <Logo src="github.svg" marginLeft={true} />
+                    <Logo src="/static/github.svg" marginLeft={true} />
                 </a>
                 <a target="_blank" href="https://twitter.com/_Jabun">
-                    <Logo src="twitter.svg" marginLeft={true} />
+                    <Logo src="/static/twitter.svg" marginLeft={true} />
                 </a>
                 <a target="_blank" href="https://discord.gg/Jn6aZEkvRd">
-                    <Logo src="discord.svg" marginLeft={true} />
+                    <Logo src="/static/discord.svg" marginLeft={true} />
                 </a>
             </div>
         </>

@@ -1,16 +1,29 @@
+import type {AppProps} from 'next/app'
 import { Layout } from 'components';
 import Head from 'next/head';
+import { ReactNode } from 'react';
 import ThemeProvider from "styles";
 import { GlobalStyle } from "styles/globals";
+import { NextPage } from 'next';
 
-function MyApp({ Component, pageProps }) {
-  return (
+type Page<P = {}> = NextPage<P> & {
+  getLayout?: (page: ReactNode) => ReactNode;
+};
+
+type Props = AppProps & {
+  Component: Page;
+};
+
+function MyApp({ Component, pageProps }: Props) {
+
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
+
+  return getLayout(
     <>
-      <ThemeProvider>
         <Head>
           <title>Disguisefy</title>
           <link rel="stylesheet" href="https://use.typekit.net/ukf1mgq.css" />
-          <link rel="icon" type="image/png" href="/disguisefy_favicon.png" />
+          <link rel="icon" type="image/png" href="/static/disguisefy_favicon.png" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           {
             process.env.NEXT_PUBLIC_ENV == 'prod' && 
@@ -18,10 +31,7 @@ function MyApp({ Component, pageProps }) {
           }
         </Head>
         <GlobalStyle />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+        <Component {...pageProps} />
     </>
   )
 }

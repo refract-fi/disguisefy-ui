@@ -1,5 +1,5 @@
-import { Button, Text, TextInputDropdown } from "components";
-import { useEffect, useState } from "react";
+import { Button, Layout, Text, TextInputDropdown } from "components";
+import { ReactElement, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { FlexCentered, FlexCol, FlexColCentered } from "styles/components";
 import { isAddress } from '@ethersproject/address'
@@ -158,7 +158,7 @@ export default function Home() {
       setAwaitingLink(false)
       return;
     }
-    if(form.address.every((address) => address == "")){
+    if (form.address.every((address) => address == "")) {
       console.log("[ERROR] All address inputs are empty")
       setFormMsg("Please input at least one address")
       setAwaitingLink(false)
@@ -274,7 +274,15 @@ export default function Home() {
           />
         )
       }
-    </>
+      </>
+  )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
   )
 }
 
