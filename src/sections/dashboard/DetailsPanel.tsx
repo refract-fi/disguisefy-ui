@@ -42,6 +42,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                         <FlexRow>
                                             <Text margin="5px 0 0 0" variant="normal" weight="bold" color="lightgrey">One time snapshot taken on:</Text>
                                             <Tooltip
+                                                id="one-time-snapshot"
                                                 type="white"
                                                 variant="dashboard"
                                                 content1="This data was fetched once"

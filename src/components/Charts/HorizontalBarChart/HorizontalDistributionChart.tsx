@@ -48,7 +48,6 @@ const HorizontalDistributionChart: FC<HorizontalDistributionChartProps> = ({ dat
                         let object: any = entry[1]
                         let hasDebt: boolean = Object.keys(data).includes('debt')
                         let hasOther: boolean = Object.keys(data).includes('other')
-                        console.log(hasOther)
                         let length: number = Object.keys(data).length
                         if (object.percentage > 0.1 && entry[0] !== 'debt') {
                             return (

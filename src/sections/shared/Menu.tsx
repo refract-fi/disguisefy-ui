@@ -35,6 +35,7 @@ const Menu = styled(FlexRowSpaceBetween)`
     align-items: center;
     padding-right: 15px;
     z-index: 3;
+    position: relative;
     @media (max-width: 475px){
         flex-direction: column;
         align-items: flex-start;

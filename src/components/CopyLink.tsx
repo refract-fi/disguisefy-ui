@@ -23,7 +23,8 @@ const CopyLinkComponent: FC<{
     return (
         <Wrapper>
             <Tooltip 
-                active={tooltipActive}>
+                active={tooltipActive}
+                id="copylink-id">
                 <Text color="white">
                     Copied!
                 </Text>

@@ -44,8 +44,6 @@ const AssetsTab = () => {
         setStructuredData(assetsObject)
         
     }, [data])
-
-    console.log(data)
     return (
         <>
             {

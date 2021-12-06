@@ -9,9 +9,6 @@ interface BarChartProps {
 }
 
 const BarChartComponent: FC<BarChartProps> = ({ data, variant, ordered }) => {
-    if (data) {
-        console.log(typeof Object.values(data)[0])
-    }
     const theme = useTheme()
     return (
         <Wrapper variant={variant}>

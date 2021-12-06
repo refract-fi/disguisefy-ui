@@ -28,7 +28,6 @@ const StatsTab = () => {
             setIsFirstValidation(false)
         }
     }, [data])
-    console.log(data)
 
     return (
         <>
@@ -42,13 +41,17 @@ const StatsTab = () => {
                                 <LineChart
                                     title={"Network Distribution"}
                                     data={data?.stats.networkPercentages}
-                                    ordered={true} />
+                                    ordered={true}
+                                    comment1="Does not include value of NFTs"
+                                    />
                                 <StyledRow>
                                     <LineChart
                                         title={"Underlying Gas Token Distribution"}
                                         data={data?.stats.gasTokenPercentages}
                                         variant="barchart"
                                         ordered={true}
+                                        comment1="Retrieves all the gas tokens locked "
+                                        comment2="in another asset (LPs, Deposits, etc.)"
                                     />
                                     <LineChart
                                         title={"Protocol Distribution"}
