@@ -52,7 +52,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                     </div>
                                 </FlexRowCentered>}
                             {
-                                data?.disguise?.options.chains &&
+                                (data?.disguise?.options.chains && data?.disguise?.options.chains !== 'all') &&
                                 <Text margin="5px 0 0 0" variant="normal" color="lightgrey">{data?.disguise?.options.chains}</Text>
                             }
                         </div>
