@@ -51,7 +51,7 @@ const StatsTab = () => {
                                         variant="barchart"
                                         ordered={true}
                                         comment1="Retrieves all the gas tokens underlying "
-                                        comment2="in all assets(Wallet, LPs, Deposits, etc.)"
+                                        comment2="in any assets(Wallet, LPs, Deposits, etc.)"
                                     />
                                     <LineChart
                                         title={"Protocol Distribution"}
