@@ -15,7 +15,7 @@ const CellRowComponent = ({ value, preset, type }) => {
                     {
                         value.label == "Grouped Assets" &&
                         <Circle>
-                            <Logo src={"/coins.svg"} />
+                            <Logo src={"/static/coins.svg"} />
                         </Circle>
                     }
                     {
