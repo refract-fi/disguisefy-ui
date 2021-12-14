@@ -10,7 +10,7 @@ interface TextInputProps {
     readonly?: boolean
     onChange?: Function
     loading?: boolean
-    placeholder?: string
+    placeholder?: string | number
     pos?: string
     bgColor?: string
     type?: string
