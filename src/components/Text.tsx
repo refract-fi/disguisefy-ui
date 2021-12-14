@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-type TextProps = {
+interface TextProps {
     margin?: string
     width?: string
     height?: string

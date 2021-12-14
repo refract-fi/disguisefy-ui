@@ -1,18 +1,18 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-type TextInputProps = {
+interface TextInputProps {
     margin?: string
     width?: string
     height?: string
     variant?: string
     align?: string
-    readonly?: any
-    onChange?: any
+    readonly?: boolean
+    onChange?: Function
     loading?: boolean
-    placeholder?: any
-    pos?: any
-    bgColor?: any
+    placeholder?: string
+    pos?: string
+    bgColor?: string
     type?: string
     borderColor?: AnimationPlaybackEvent
 }

@@ -4,7 +4,6 @@ import TextInput from './TextInput';
 import Block from './Block';
 import Text from './Text';
 import Slider from './Slider';
-import DonutChart from './Charts/DonutChart';
 import LineChart from './Charts/HorizontalBarChart';
 import Label from './Charts/Label';
 import { ExitButton, BackButton, ResetButton } from './Button';
@@ -15,7 +14,6 @@ import Tooltip from './Tooltip';
 import TextInputDropdown from './TextInputDropdown/TextInputDropdown';
 import Dropdown from './Dropdown';
 import BarChart from './Charts/HorizontalBarChart/BarChart';
-import DoughnutChart from './Charts/DoughnutChart';
 
 export {
     Button, 
@@ -27,7 +25,6 @@ export {
     ExitButton, 
     Bold, 
     Logo, 
-    DonutChart, 
     LineChart, 
     Label, 
     CopyLink, 
@@ -36,6 +33,5 @@ export {
     TextInputDropdown, 
     Dropdown, 
     ResetButton,
-    BarChart,
-    DoughnutChart
+    BarChart
 };

@@ -2,17 +2,18 @@ import { TextInput } from 'components';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Flex, FlexCentered } from 'styles/components';
+import { IForm } from 'utils/interface';
 
 const DropdownTextInputComponent: FC<{
-    index: any,
-    handleRemoveClick: any,
-    handleAddClick: any,
+    index: number,
+    handleRemoveClick: Function,
+    handleAddClick: Function,
     onChange: any,
-    setIsShown: any,
+    setIsShown: (isShown: boolean) => void,
     isShown: boolean,
     variant?: string,
-    onEnter?: any
-    form: any
+    onEnter?: Function
+    form: IForm
 }> = ({
     index,
     handleRemoveClick,

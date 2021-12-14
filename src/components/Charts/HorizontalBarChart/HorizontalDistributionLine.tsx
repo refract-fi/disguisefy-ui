@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FlexCol } from 'styles/components';
 
-const LineWrapperComponent = ({ flex, first, last, color, type, name, percent }) => {
+const HorizontalDistributionLine = ({ flex, first, last, color, type, name, percent }) => {
     const [isShown, setIsShown] = useState(false);
 
     return (
@@ -31,7 +31,7 @@ const LineWrapperComponent = ({ flex, first, last, color, type, name, percent })
     );
 }
 
-export default LineWrapperComponent;
+export default HorizontalDistributionLine;
 
 
 const LineWrapper = styled(FlexCol) <{ flex: number }>`

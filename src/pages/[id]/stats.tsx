@@ -9,10 +9,6 @@ import styled from "styled-components";
 import { FlexRow } from "styles/components";
 import { assetDistributionValues } from "utils/chartObjects";
 
-interface StatsProps {
-
-}
-
 const StatsTab = () => {
 
     const router = useRouter()

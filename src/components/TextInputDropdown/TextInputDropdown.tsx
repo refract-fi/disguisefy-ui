@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { FlexCol} from 'styles/components';
 import { IForm } from 'utils/interface';
-import DropdownTextInput from './DropdownTextInput';
+import CustomTextInput from './CustomTextInput';
 
 const TextInputDropdownComponent: FC<{ 
     form: IForm, 
@@ -46,7 +46,7 @@ const TextInputDropdownComponent: FC<{
                 form.address.map((item, i) => {
                     if (isShown) {
                         return (
-                            <DropdownTextInput
+                            <CustomTextInput
                                 index={i}
                                 key={`${i}-${variant}`}
                                 form={form}
@@ -62,7 +62,7 @@ const TextInputDropdownComponent: FC<{
                     } else {
                         if(i == 0){
                             return (
-                                <DropdownTextInput
+                                <CustomTextInput
                                 index={i}
                                 key={`${i}-${variant}`}
                                 form={form}

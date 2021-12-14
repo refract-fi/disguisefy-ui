@@ -2,7 +2,15 @@ import React, { FC, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import ReactTooltip from "react-tooltip";
 
-const TooltipComponent:FC<{type?: string, content1: string, content2?: string, variant?: string, id:string}> = ({type, content1, content2, variant, id}) => {
+interface TooltipProps {
+    type?: string, 
+    content1: string, 
+    content2?: string, 
+    variant?: string, 
+    id:string
+}
+
+const TooltipComponent:FC<TooltipProps> = ({type, content1, content2, variant, id}) => {
     const node = useRef();
     return (
         <Tooltip variant={variant}>

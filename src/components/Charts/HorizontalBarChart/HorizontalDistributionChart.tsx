@@ -2,7 +2,7 @@ import { Label, Text } from "components";
 import { FC, useEffect, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { Flex } from "styles/components";
-import HorizontalDistributionLineWrapper from "./HorizontalDistributionLineWrapper";
+import HorizontalDistributionLineWrapper from "./HorizontalDistributionLine";
 
 interface HorizontalDistributionChartProps {
     data: any
