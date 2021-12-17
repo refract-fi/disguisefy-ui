@@ -16,74 +16,50 @@ const marks = [
     },
     {
         value: 40,
-        duration: moment.duration(48, 'h').asSeconds()
-    },
-    {
-        value: 60,
         duration: moment.duration(1, 'w').asSeconds()
     },
     {
+        value: 60,
+        duration: moment.duration(1, 'M').asSeconds()
+    },
+    {
         value: 80,
-        duration: moment.duration(2, 'w').asSeconds()
+        duration: moment.duration(1, 'y').asSeconds()
     },
     {
         value: 100,
-        duration: moment.duration(1, 'M').asSeconds()
+        duration: null
     }
 ];
 
-const StyledSlider = withStyles({
-    root: {
-        color: '#EF4950',
-        height: 4,
-    },
-    thumb: {
-        height: 18,
-        width: 18,
-        backgroundColor: '#fff',
-        border: '2px solid currentColor',
-        marginTop: -7,
-        marginLeft: 0,
-        '&:focus, &:hover, &$active': {
-            boxShadow: 'inherit',
-        },
-    },
-    active: {},
-    valueLabel: {
-        left: 'calc(-50% + 4px)',
-    },
-    track: {
-        height: 4,
-        borderRadius: 4,
-    },
-    rail: {
-        height: 4,
-        borderRadius: 4,
-    },
-    mark: {
-        height: 0,
-        width: 0,
-    },
-})(Slider);
-
-const SliderComponent = ({ duration, form, setForm, durationValue }) => {
+const SliderComponent = ({ duration, form, setForm }) => {
 
     const handleChange = (event: any, newValue: number | number[]) => {
         const index = marks.findIndex(object => object.value === newValue)
-        setForm({ ...form, duration: marks[index].duration })
+        setForm({...form, duration: marks[index].duration})
     };
+
+    console.log(form.duration)
 
     return (
         <SliderWrapper>
             <Text size="1.2rem" margin="0 0 1rem 0">Link Duration</Text>
-            <StyledSlider
-                defaultValue={durationValue}
+            <Slider
+                defaultValue={40}
                 aria-labelledby="discrete-slider"
                 step={20}
                 valueLabelDisplay="off"
                 onChange={handleChange}
+                color={duration ? 'primary' : 'secondary'}
             />
-            <Text weight="bold">{moment.duration(duration, 'seconds').humanize()}</Text>
+            <Text weight="bold">
+                {
+                    duration === null ?
+                    'forever'
+                    :
+                    moment.duration(duration, 'seconds').humanize()
+                }
+                </Text>
         </SliderWrapper>
     );
 }
@@ -92,4 +68,10 @@ export default SliderComponent;
 
 const SliderWrapper = styled.div`
     width: 250px;
+    .MuiSlider-colorPrimary{
+        color: ${({ theme }) => theme.accent};;
+    }
+    .MuiSlider-colorSecondary{
+        color: #49ceef;
+    }
 `;

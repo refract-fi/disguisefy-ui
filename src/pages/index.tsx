@@ -14,7 +14,7 @@ export default function Home() {
   const [form, setForm] = useState<IForm>({
     address: [''],
     name: '',
-    duration: 3600,
+    duration: 604800,
     preset: null,
     type: "All",
     chains: ["All"],
@@ -26,7 +26,6 @@ export default function Home() {
   })
 
   const [formActive, setFormActive] = useState(false)
-  const [durationValue, setDurationValue] = useState(0)
   const [url, setUrl] = useState('')
   const [active, setActive] = useState(false)
   const [formMsg, setFormMsg] = useState(null)
@@ -78,7 +77,7 @@ export default function Home() {
     setForm({
       address: [""],
       name: '',
-      duration: 3600,
+      duration: 604800,
       preset: null,
       type: "All",
       chains: ["All"],
@@ -97,7 +96,7 @@ export default function Home() {
     setForm({
       address: [""],
       name: '',
-      duration: 3600,
+      duration: 604800,
       preset: null,
       type: "All",
       chains: ["All"],
@@ -190,35 +189,6 @@ export default function Home() {
     }
   }
 
-  const getCurrentValue = (duration) => {
-    let value;
-    switch (duration) {
-      case 3600:
-        setDurationValue(0)
-        break;
-      case 86400:
-        setDurationValue(20)
-        break;
-      case 172800:
-        setDurationValue(40)
-        break;
-      case 604800:
-        setDurationValue(60)
-        break;
-      case 1209600:
-        setDurationValue(80)
-        break;
-      case 2592000:
-        setDurationValue(100)
-        break;
-      default:
-        return value
-    }
-  }
-  useEffect(() => {
-    getCurrentValue(form.duration)
-  }, [form])
-
   return (
     <>
       <Wrapper>
@@ -261,7 +231,6 @@ export default function Home() {
           <Modal
             form={form}
             setForm={setForm}
-            durationValue={durationValue}
             onFormSubmit={onFormSubmit}
             awaitingLink={awaitingLink}
             onExit={onExitClick}

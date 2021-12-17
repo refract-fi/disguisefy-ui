@@ -12,7 +12,7 @@ const StyledCheckbox = withStyles({
     }
 })(Checkbox);
 
-const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActive }) => {
+const StandardFormComponent = ({ form, setForm, setIsAdvancedActive }) => {
 
     const dashboard_options = ["All", "DeFi", "NFT"]
     const network_options = ["All", "Arbitrum", "Avalanche", "BSC", "Celo", "Ethereum", "Fantom", "Harmony", "Optimism", "Polygon"]
@@ -53,7 +53,7 @@ const StandardFormComponent = ({ form, setForm, durationValue, setIsAdvancedActi
             </DropdownRow>
             <Text margin="20px 0 15px 0" size="1.2rem">Privacy Level</Text>
             <PrivacySelect level={form.preset} form={form} setForm={setForm} />
-            <Slider durationValue={durationValue} duration={form.duration} form={form} setForm={setForm} />
+            <Slider duration={form.duration} form={form} setForm={setForm} />
             <CheckboxWrapper margin="1rem 0 0.5rem 0">
                 <StyledCheckbox
                     checked={form.isGroupAssetsUnder}

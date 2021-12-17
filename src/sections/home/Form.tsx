@@ -8,10 +8,9 @@ import StandardForm from "./StandardForm";
 interface FormProps {
     form: IForm
     setForm: (form: IForm) => void
-    durationValue: number
 }
 
-const FormComponent: FC<FormProps> = ({ form, setForm, durationValue }) => {
+const FormComponent: FC<FormProps> = ({ form, setForm }) => {
     const [isAdvancedActive, setIsAdvancedActive] = useState(false)
     return (
         <Form>
@@ -27,7 +26,6 @@ const FormComponent: FC<FormProps> = ({ form, setForm, durationValue }) => {
                     <StandardForm
                         form={form}
                         setForm={setForm}
-                        durationValue={durationValue}
                         setIsAdvancedActive={setIsAdvancedActive}
                     />
                 )

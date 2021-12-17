@@ -11,7 +11,6 @@ import LinkComponent from './Link';
 type ModalComponentProps = {
     form: IForm
     setForm: (form: IForm) => void
-    durationValue: number
     onFormSubmit: any
     awaitingLink: boolean
     formMsg: string
@@ -25,7 +24,6 @@ type ModalComponentProps = {
 const ModalComponent: FC<ModalComponentProps> = ({
     form,
     setForm,
-    durationValue,
     onFormSubmit,
     awaitingLink,
     formMsg,
@@ -52,7 +50,6 @@ const ModalComponent: FC<ModalComponentProps> = ({
                     ) : (
                         <>
                             <Form
-                                durationValue={durationValue}
                                 form={form}
                                 setForm={setForm}
                             />
