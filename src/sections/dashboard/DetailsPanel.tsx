@@ -33,7 +33,10 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                 <Text color={theme.accent} variant="normal">{location}/{data?.disguise?.url}</Text>
                                 <CopyLink variant="details" host={location} url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
-                            <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
+                            {
+                                !data?.disguise?.options.isSnapshot &&
+                                <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
+                            }
                             {
                                 data?.disguise?.options.isSnapshot &&
                                 <FlexRowCentered>
