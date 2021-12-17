@@ -2,6 +2,7 @@ import { Label, Text } from "components";
 import { FC, useEffect, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { Flex } from "styles/components";
+import { round } from "utils/round";
 import HorizontalDistributionLineWrapper from "./HorizontalDistributionLine";
 
 interface HorizontalDistributionChartProps {
@@ -12,10 +13,6 @@ interface HorizontalDistributionChartProps {
 }
 
 const HorizontalDistributionChart: FC<HorizontalDistributionChartProps> = ({ data, variant, ordered, title }) => {
-
-    const round = (value) => {
-        return Math.round((value + Number.EPSILON) * 100) / 100;
-    }
 
     return (
         <>

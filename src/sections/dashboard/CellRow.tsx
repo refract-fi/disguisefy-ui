@@ -2,10 +2,7 @@ import { Text } from 'components';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { FlexCentered, FlexRowSpaceBetween } from 'styles/components';
-
-const round = (value) => {
-    return Math.round((value + Number.EPSILON) * 100) / 100;
-}
+import { round } from 'utils/round';
 
 const CellRowComponent = ({ value, preset, type }) => {
     return (

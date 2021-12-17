@@ -2,6 +2,7 @@ import { Text } from "components";
 import { FC } from "react";
 import styled from "styled-components";
 import { FlexRowSpaceBetween } from "styles/components";
+import { round } from "utils/round";
 
 interface LineWrapperProps {
     variant?: string
@@ -11,10 +12,6 @@ interface LineWrapperProps {
 }
 
 const LineWrapper: FC<LineWrapperProps> = ({ variant, color, title, percentage }) => {
-
-    const round = (value) => {
-        return Math.round((value + Number.EPSILON) * 100) / 100;
-    }
 
     return (
         <Wrapper>
