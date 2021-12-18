@@ -79,7 +79,7 @@ const StandardFormComponent = ({ form, setForm, setIsAdvancedActive }) => {
                 <Text size="1.1rem">Ignore NFT assets</Text>
             </CheckboxWrapper>
             <AdvancedSettingsBlock>
-                <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>⇠Advanced Settings</StyledText>
+                {/* <StyledText onClick={() => setIsAdvancedActive(true)} underline={true}>⇠Advanced Settings</StyledText> */}
             </AdvancedSettingsBlock>
         </StandardForm>
     );

@@ -9,23 +9,21 @@ interface HorizontalBarChartProps {
     title: string,
     variant?: string,
     ordered?: boolean
-    comment1?: string
-    comment2?: string
+    comment?: string
 }
 
 //Improve the mess below
-const HorizontalBarChart: FC<HorizontalBarChartProps> = ({ data, title, variant, ordered, comment1, comment2 }) => {
+const HorizontalBarChart: FC<HorizontalBarChartProps> = ({ data, title, variant, ordered, comment }) => {
     return (
         <Wrapper variant={variant}>
             <FlexRow>
                 <StyledText size="1.5rem" variant={variant}>{title}</StyledText>
                 {
-                    comment1 &&
+                    comment &&
                     <Tooltip
                         type="white"
                         variant="dashboard"
-                        content1={comment1}
-                        content2={comment2}
+                        content={`${comment}`}
                         id={title}
                     />
                 }

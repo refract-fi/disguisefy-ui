@@ -38,7 +38,7 @@ const StatsTab = () => {
                                     title={"Network Distribution"}
                                     data={data?.stats.networkPercentages}
                                     ordered={true}
-                                    comment1="Does not include value of NFTs"
+                                    comment="Does not include value of NFTs"
                                     />
                                 <StyledRow>
                                     <LineChart
@@ -46,8 +46,7 @@ const StatsTab = () => {
                                         data={data?.stats.gasTokenPercentages}
                                         variant="barchart"
                                         ordered={true}
-                                        comment1="Retrieves all the gas tokens underlying "
-                                        comment2="in any assets(Wallet, LPs, Deposits, etc.)"
+                                        comment="Retrieves all the gas tokens underlying in any assets (Wallet, LPs, Deposits, etc.)"
                                     />
                                     <LineChart
                                         title={"Protocol Distribution"}

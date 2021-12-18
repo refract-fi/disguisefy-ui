@@ -21,6 +21,8 @@ const DetailsPanelComponent = ({ loading, data }) => {
         }
     })
 
+    console.log(data?.disguise?.expiration)
+
     return (
         <Wrapper>
             <DisLogo src="/static/disguisefy_logo.svg" />
@@ -34,7 +36,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                 <CopyLink variant="details" host={location} url={`${data?.disguise?.url}`} />
                             </StyledFlexRowCentered>
                             {
-                                !data?.disguise?.options.isSnapshot &&
+                                (!data?.disguise?.options.isSnapshot && data?.disguise?.expiration !== null) &&
                                 <Text margin="5px 0 0 0" variant="normal" color="lightgrey">Expires {data && moment.unix(data?.disguise?.expiration).format("MMMM Do YYYY, h:mm a")}</Text>
                             }
                             {
@@ -48,8 +50,7 @@ const DetailsPanelComponent = ({ loading, data }) => {
                                                 id="one-time-snapshot"
                                                 type="white"
                                                 variant="dashboard"
-                                                content1="This data was fetched once"
-                                                content2="at the time shown below." />
+                                                content="This data was fetched once at the time shown below."/>
                                         </FlexRow>
                                         <Text margin="0 0 0 0" variant="normal" color="lightgrey">{data && moment.unix(data?.disguise?.generation).format("MMMM Do YYYY, h:mm a")}</Text>
                                     </div>

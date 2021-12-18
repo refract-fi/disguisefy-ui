@@ -4,13 +4,12 @@ import ReactTooltip from "react-tooltip";
 
 interface TooltipProps {
     type?: string, 
-    content1: string, 
-    content2?: string, 
+    content: string, 
     variant?: string, 
     id:string
 }
 
-const TooltipComponent:FC<TooltipProps> = ({type, content1, content2, variant, id}) => {
+const TooltipComponent:FC<TooltipProps> = ({type, content, variant, id}) => {
     const node = useRef();
     return (
         <Tooltip variant={variant}>
@@ -20,7 +19,7 @@ const TooltipComponent:FC<TooltipProps> = ({type, content1, content2, variant, i
                     src={type == 'blue' ? "/static/information-circle-blue.svg" : "/static/information-circle.svg"} />
             </a>
             <ReactTooltip className="react-tooltip-style" id={id} place="top" type="dark" effect="solid" multiline={true}>
-                <span>{content1}<br/>{content2}</span>
+                <span>{content}</span>
             </ReactTooltip>
         </Tooltip>
     );
@@ -29,12 +28,17 @@ const TooltipComponent:FC<TooltipProps> = ({type, content1, content2, variant, i
 export default TooltipComponent;
 
 const Tooltip = styled.div<{variant?: string}>`
-    top: -8px;
+    top: -4px;
+    right: -4px;
+    position: relative;
     ${props => props.variant == "dashboard" &&
         css`
             top: 0px;
         `
     };
+    .react-tooltip-style{
+        width: 220px;
+    }
 `;
 
 const InfoIcon = styled.img<{variant?: string}>`

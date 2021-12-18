@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core';
-import { Text } from 'components';
+import { Text, Tooltip } from 'components';
 import moment from 'moment';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FlexRow, FlexRowCentered } from 'styles/components';
 
 const marks = [
@@ -37,13 +37,15 @@ const SliderComponent = ({ duration, form, setForm }) => {
 
     const handleChange = (event: any, newValue: number | number[]) => {
         const index = marks.findIndex(object => object.value === newValue)
-        setForm({...form, duration: marks[index].duration})
+        if(index === 5){
+            setForm({ ...form, duration: marks[index].duration, isSnapshot: true })
+        } else {
+            setForm({ ...form, duration: marks[index].duration, isSnapshot: false })
+        }
     };
 
-    console.log(form.duration)
-
     return (
-        <SliderWrapper isSnapshot={form.isSnapshot}>
+        <SliderWrapper isSnapshot={form.isSnapshot} duration={duration}>
             <Text size="1.2rem" margin="0 0 1rem 0">Link Duration</Text>
             <Slider
                 defaultValue={40}
@@ -56,44 +58,62 @@ const SliderComponent = ({ duration, form, setForm }) => {
             <Text weight="bold">
                 {
                     duration === null ?
-                    'forever'
-                    :
-                    moment.duration(duration, 'seconds').humanize()
-                }
-                </Text>
-            {/* {
-                form.isSnapshot ?
-                    <FlexRowCentered>
-                        <SnowIcon src="/static/snow.svg" />
-                        <Text variant="normal" weight="bold" color="lightblue">Links hosted on IPFS can't be deleted and last forever.</Text>
-                    </FlexRowCentered>
-                    :
-                    <>
-                        <StyledSlider
-                            defaultValue={durationValue}
-                            aria-labelledby="discrete-slider"
-                            step={20}
-                            valueLabelDisplay="off"
-                            onChange={handleChange}
-                        />
-                        <Text weight="bold">{moment.duration(duration, 'seconds').humanize()}</Text>
-                    </>
-            } */}
+                        <>
+                            <FlexRow>
+                                <Text variant="large">
+                                    forever
+                                </Text>
+                                <Tooltip id="ipfs-tooltip" content="Trustless way to generate a link. You address is never stored anywhere. Beware, link can never be deleted!" />
+                            </FlexRow>
+                            <br />
+                            <FlexRow>
+                                <Text variant="normal">
+                                    Portfolio data is taken once at link creation and stored in decentralized storage
+                                </Text>
+                            </FlexRow>
+                        </>
+                        :
+                        <>
+                                <Text variant="large">
+                                    {moment.duration(duration, 'seconds').humanize()}
+                                </Text>
+                            <br />
 
+                            <Text variant="normal">
+                                Portfolio data is real-time and stored in an encrypted centralized database
+                            </Text>
+                        </>
+                }
+            </Text>
         </SliderWrapper>
     );
 }
 
 export default SliderComponent;
 
-const SliderWrapper = styled.div<{isSnapshot: boolean}>`
-    width: ${props => props.isSnapshot ? '100%' : '250px'};
+const SliderWrapper = styled.div<{ isSnapshot: boolean, duration: number }>`
+    width: 300px;
+    ${({ theme }) => theme.mediaWidth.sm`
+        width: 250px;
+
+    `};
     .MuiSlider-colorPrimary{
         color: ${({ theme }) => theme.accent};;
     }
     .MuiSlider-colorSecondary{
         color: #49ceef;
     }
+    ${props => props.duration === 604800 &&
+        css`
+            .MuiSlider-track{
+                width: 40% !important;
+            }
+            .MuiSlider-thumb{
+                left: 40% !important;
+            }
+        `
+    };
+    
 `;
 const SnowIcon = styled.img`
     width: 25px;
