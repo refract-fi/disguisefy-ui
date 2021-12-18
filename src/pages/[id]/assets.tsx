@@ -34,7 +34,7 @@ const AssetsTab = () => {
         let assetsObject = assetDistributionValues
         if(data?.percentages){
             for(let [key, value] of Object.entries(data.percentages)){
-                if(value === 0){
+                if(value === 0 || value < 0.1){
                     delete assetsObject[key]
                 }else {
                     assetsObject[key].percentage = value

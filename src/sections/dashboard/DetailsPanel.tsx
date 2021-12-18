@@ -21,8 +21,6 @@ const DetailsPanelComponent = ({ loading, data }) => {
         }
     })
 
-    console.log(data?.disguise?.expiration)
-
     return (
         <Wrapper>
             <DisLogo src="/static/disguisefy_logo.svg" />
