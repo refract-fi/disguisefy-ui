@@ -13,9 +13,6 @@ interface HorizontalDistributionChartProps {
 }
 
 const HorizontalDistributionChart: FC<HorizontalDistributionChartProps> = ({ data, variant, ordered, title }) => {
-
-    console.log(data)
-
     return (
         <>
             <LineChart variant={variant}>

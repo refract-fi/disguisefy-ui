@@ -11,7 +11,7 @@ const LinksComponent = () => {
                 <a target="_blank" href="https://github.com/disguisefy">
                     <Logo src="/static/github.svg" marginLeft={true} />
                 </a>
-                <a target="_blank" href="https://twitter.com/_Jabun">
+                <a target="_blank" href="https://twitter.com/disguisefy">
                     <Logo src="/static/twitter.svg" marginLeft={true} />
                 </a>
                 <a target="_blank" href="https://discord.gg/Jn6aZEkvRd">
