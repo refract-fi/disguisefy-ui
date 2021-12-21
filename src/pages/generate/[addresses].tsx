@@ -16,4 +16,4 @@ const Generate = () => {
     );
 }
 
-export default Generate;3
+export default Generate;
