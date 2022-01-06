@@ -11,8 +11,10 @@ export default function handler(req, res) {
         'x-api-key': API_KEY
       }
     };
+
     try {
       if (req.method == 'POST') {
+
         let response = await axios.post(`${API_URL}/disguises/generate`, req.body, options);
         let disguises = response.data;
         res.status(200).json(disguises);
