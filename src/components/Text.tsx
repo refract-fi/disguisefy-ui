@@ -13,6 +13,7 @@ interface TextProps {
     underline?: boolean
     position?: "relative" | "absolute"
     top?: string
+    lineHeight?: string
 }
 
 const Text = styled.p<TextProps>`
@@ -25,6 +26,7 @@ const Text = styled.p<TextProps>`
     text-decoration: ${props => props.underline && 'underline'};
     position: ${props => props.position && props.position};
     top: ${props => props.top && props.top};
+    line-height: ${props => props.lineHeight && props.lineHeight};
     ${(props) =>
         props.variant == 'title' &&
         css`
